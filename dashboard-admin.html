@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 대시보드 - ONDY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #F9FAFB;
+            color: #111827;
+        }
+        .sidebar {
+            background: white;
+            border-right: 1px solid #E5E7EB;
+            box-shadow: 2px 0 4px rgba(0,0,0,0.02);
+        }
+        .sidebar-item {
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border-left: 4px solid transparent;
+        }
+        .sidebar-item:hover {
+            background-color: #F3F4F6;
+            border-left-color: #f59e0b;
+        }
+        .sidebar-item.active {
+            background-color: #EEF2FF;
+            border-left-color: #4f46e5;
+            color: #4f46e5;
+        }
+        .main-content {
+            background-color: #F9FAFB;
+        }
+        .dashboard-card {
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .dashboard-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            color: white;
+        }
+        .stat-card.accent {
+            background: linear-gradient(135deg, #f59e0b, #f97316);
+        }
+        .stat-card.success {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+        .stat-card.warning {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+        .stat-card.danger {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+        .primary-button {
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            transition: all 0.3s ease;
+        }
+        .primary-button:hover {
+            background: linear-gradient(135deg, #4338ca, #4f46e5);
+            transform: translateY(-1px);
+        }
+        .accent-button {
+            background: linear-gradient(135deg, #f59e0b, #f97316);
+            transition: all 0.3s ease;
+        }
+        .accent-button:hover {
+            background: linear-gradient(135deg, #d97706, #ea580c);
+            transform: translateY(-1px);
+        }
+        .danger-button {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            transition: all 0.3s ease;
+        }
+        .danger-button:hover {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            transform: translateY(-1px);
+        }
+        .table-row:hover {
+            background-color: #F8FAFC;
+        }
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        .status-active { background: #D1FAE5; color: #065F46; }
+        .status-inactive { background: #FEE2E2; color: #991B1B; }
+        .status-pending { background: #FEF3C7; color: #92400E; }
+        .status-approved { background: #DBEAFE; color: #1E40AF; }
+        .status-published { background: #D1FAE5; color: #065F46; }
+        .status-draft { background: #F3F4F6; color: #374151; }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.show {
+            display: flex;
+        }
+        .form-input {
+            transition: all 0.2s ease;
+            border: 1px solid #D1D5DB;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+        .user-type-university { border-left: 4px solid #4f46e5; }
+        .user-type-agency { border-left: 4px solid #10b981; }
+        .user-type-admin { border-left: 4px solid #f59e0b; }
+    </style>
+</head>
+<body class="min-h-screen flex">
+
+    <!-- Sidebar -->
+    <div class="sidebar w-64 h-screen sticky top-0">
+        <!-- Logo -->
+        <div class="p-6 border-b border-gray-200">
+            <div class="flex items-center space-x-2">
+                <svg class="h-8 w-auto text-amber-500" viewBox="0 0 44 54" fill="currentColor">
+                    <path d="M22 0C12.059 0 4 8.059 4 18C4 26.28 9.625 33.125 17.5 35.5V36C14.149 36 10.992 37.06 8.5 38.883V42.25C12.723 39.547 17.167 38 22 38C26.833 38 31.277 39.547 35.5 42.25V38.883C33.008 37.06 29.851 36 26.5 36V35.5C34.375 33.125 40 26.28 40 18C40 8.059 31.941 0 22 0ZM22 30C15.373 30 10 24.627 10 18C10 11.373 15.373 6 22 6C28.627 6 34 11.373 34 18C34 24.627 28.627 30 22 30Z"/>
+                    <path d="M15.5 44.5L22 51L28.5 44.5L22 38L15.5 44.5Z"/>
+                </svg>
+                <span class="text-xl font-bold text-indigo-800">ONDY</span>
+            </div>
+            <div class="mt-2">
+                <p class="text-sm text-gray-600">시스템 관리자</p>
+                <p class="text-sm font-medium text-gray-900">관리자</p>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="p-4">
+            <div class="space-y-1">
+                <div class="sidebar-item active p-3 rounded-lg flex items-center" onclick="showSection('dashboard')">
+                    <i class="fas fa-tachometer-alt mr-3 w-5"></i>
+                    <span>대시보드</span>
+                </div>
+                <div class="sidebar-item p-3 rounded-lg flex items-center" onclick="showSection('users')">
+                    <i class="fas fa-users mr-3 w-5"></i>
+                    <span>회원 관리</span>
+                </div>
+                <div class="sidebar-item p-3 rounded-lg flex items-center" onclick="showSection('content')">
+                    <i class="fas fa-edit mr-3 w-5"></i>
+                    <span>콘텐츠 관리</span>
+                </div>
+                <div class="sidebar-item p-3 rounded-lg flex items-center" onclick="showSection('universities')">
+                    <i class="fas fa-university mr-3 w-5"></i>
+                    <span>대학 정보 관리</span>
+                </div>
+                <div class="sidebar-item p-3 rounded-lg flex items-center" onclick="showSection('applications')">
+                    <i class="fas fa-file-alt mr-3 w-5"></i>
+                    <span>지원 현황</span>
+                </div>
+                <div class="sidebar-item p-3 rounded-lg flex items-center" onclick="showSection('statistics')">
+                    <i class="fas fa-chart-bar mr-3 w-5"></i>
+                    <span>통계 분석</span>
+                </div>
+                <div class="sidebar-item p-3 rounded-lg flex items-center" onclick="showSection('system')">
+                    <i class="fas fa-cog mr-3 w-5"></i>
+                    <span>시스템 설정</span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- User Menu -->
+        <div class="absolute bottom-0 w-64 p-4 border-t border-gray-200">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                        <i class="fas fa-shield-halved text-purple-600 text-sm"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium">관리자</p>
+                        <p class="text-xs text-gray-500">시스템 관리</p>
+                    </div>
+                </div>
+                <a href="index.html" class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content flex-1 overflow-auto">
+        <!-- Header -->
+        <header class="bg-white border-b border-gray-200 px-6 py-4">
+            <div class="flex items-center justify-between">
+                <h1 class="text-2xl font-bold text-gray-900">관리자 대시보드</h1>
+                <div class="flex items-center space-x-4">
+                    <button class="p-2 text-gray-400 hover:text-gray-600 relative">
+                        <i class="fas fa-bell"></i>
+                        <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">3</span>
+                    </button>
+                    <button class="primary-button px-4 py-2 text-white text-sm rounded-lg font-medium" onclick="openContentModal()">
+                        <i class="fas fa-plus mr-2"></i>새 콘텐츠
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Section -->
+        <div id="dashboard" class="content-section active p-6">
+            <!-- System Overview Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="dashboard-card stat-card p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm opacity-90">총 회원 수</p>
+                            <p class="text-3xl font-bold mt-1">234</p>
+                            <p class="text-sm opacity-75 mt-1">+12 이번 주</p>
+                        </div>
+                        <i class="fas fa-users text-2xl opacity-75"></i>
+                    </div>
+                </div>
+                <div class="dashboard-card stat-card success p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm opacity-90">활성 대학</p>
+                            <p class="text-3xl font-bold mt-1">45</p>
+                            <p class="text-sm opacity-75 mt-1">등록된 대학</p>
+                        </div>
+                        <i class="fas fa-university text-2xl opacity-75"></i>
+                    </div>
+                </div>
+                <div class="dashboard-card stat-card accent p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm opacity-90">유학원 수</p>
+                            <p class="text-3xl font-bold mt-1">89</p>
+                            <p class="text-sm opacity-75 mt-1">파트너 유학원</p>
+                        </div>
+                        <i class="fas fa-building text-2xl opacity-75"></i>
+                    </div>
+                </div>
+                <div class="dashboard-card stat-card warning p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm opacity-90">총 지원 건수</p>
+                            <p class="text-3xl font-bold mt-1">1,567</p>
+                            <p class="text-sm opacity-75 mt-1">이번 학기</p>
+                        </div>
+                        <i class="fas fa-paper-plane text-2xl opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions & Alerts -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div class="dashboard-card p-6">
+                    <h3 class="text-lg font-semibold mb-4">빠른 작업</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <button class="p-4 border border-gray-200 rounded-lg hover:border-indigo-300 text-center" onclick="openContentModal()">
+                            <i class="fas fa-plus text-2xl text-indigo-500 mb-2"></i>
+                            <p class="text-sm font-medium">콘텐츠 추가</p>
+                        </button>
+                        <button class="p-4 border border-gray-200 rounded-lg hover:border-emerald-300 text-center" onclick="showSection('users')">
+                            <i class="fas fa-user-check text-2xl text-emerald-500 mb-2"></i>
+                            <p class="text-sm font-medium">회원 승인</p>
+                        </button>
+                        <button class="p-4 border border-gray-200 rounded-lg hover:border-amber-300 text-center" onclick="showSection('statistics')">
+                            <i class="fas fa-chart-line text-2xl text-amber-500 mb-2"></i>
+                            <p class="text-sm font-medium">통계 보기</p>
+                        </button>
+                        <button class="p-4 border border-gray-200 rounded-lg hover:border-purple-300 text-center" onclick="showSection('system')">
+                            <i class="fas fa-cogs text-2xl text-purple-500 mb-2"></i>
+                            <p class="text-sm font-medium">시스템 설정</p>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="dashboard-card p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold">알림</h3>
+                        <span class="text-sm text-red-600 bg-red-100 px-2 py-1 rounded">3개 신규</span>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-start space-x-3 p-3 bg-red-50 border border-red-200 rounded-lg">
+                            <i class="fas fa-exclamation-triangle text-red-500 mt-1"></i>
+                            <div>
+                                <p class="text-sm font-medium">가입 승인 대기</p>
+                                <p class="text-xs text-gray-600">5개의 신규 회원가입이 승인을 기다리고 있습니다.</p>
+                                <p class="text-xs text-gray-500 mt-1">30분 전</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3 p-3 bg-amber-50 border border-amber-200 rounded-lg">
+                            <i class="fas fa-clock text-amber-500 mt-1"></i>
+                            <div>
+                                <p class="text-sm font-medium">시스템 백업 필요</p>
+                                <p class="text-xs text-gray-600">마지막 백업 후 7일이 경과했습니다.</p>
+                                <p class="text-xs text-gray-500 mt-1">1시간 전</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                            <i class="fas fa-info-circle text-blue-500 mt-1"></i>
+                            <div>
+                                <p class="text-sm font-medium">월간 리포트 준비</p>
+                                <p class="text-xs text-gray-600">7월 월간 활동 리포트가 생성되었습니다.</p>
+                                <p class="text-xs text-gray-500 mt-1">2시간 전</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="dashboard-card p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold">최근 활동</h3>
+                    <a href="#" class="text-indigo-600 text-sm hover:underline">전체보기</a>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-4 py-2 border-b border-gray-100">
+                        <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-check text-green-600 text-sm"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium">글로벌유학원 계정 승인</p>
+                            <p class="text-xs text-gray-500">관리자에 의해 승인됨 • 15분 전</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4 py-2 border-b border-gray-100">
+                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-edit text-blue-600 text-sm"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium">유학 가이드 콘텐츠 업데이트</p>
+                            <p class="text-xs text-gray-500">TOPIK 시험 정보 페이지 수정 • 1시간 전</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4 py-2">
+                        <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-university text-purple-600 text-sm"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium">새 대학 정보 등록</p>
+                            <p class="text-xs text-gray-500">한양대학교 정보가 등록됨 • 2시간 전</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Users Section -->
+        <div id="users" class="content-section p-6">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h2 class="text-xl font-bold mb-2">회원 관리</h2>
+                    <p class="text-gray-600">플랫폼에 가입한 모든 회원을 관리하고 승인할 수 있습니다.</p>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <select class="form-input px-3 py-2 text-sm rounded-lg">
+                        <option>모든 사용자</option>
+                        <option>대학 담당자</option>
+                        <option>유학원 담당자</option>
+                        <option>관리자</option>
+                    </select>
+                    <select class="form-input px-3 py-2 text-sm rounded-lg">
+                        <option>모든 상태</option>
+                        <option>활성</option>
+                        <option>승인 대기</option>
+                        <option>비활성</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Pending Approvals -->
+            <div class="dashboard-card p-6 mb-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold">승인 대기 중</h3>
+                    <span class="text-sm bg-red-100 text-red-600 px-3 py-1 rounded-full">5건</span>
+                </div>
+                <div class="space-y-3">
+                    <div class="user-type-agency flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-building text-emerald-600"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium">코리아드림유학원</p>
+                                <p class="text-sm text-gray-500">이상민 (이메일: contact@korreadream.com)</p>
+                                <p class="text-xs text-gray-400">가입일: 2024.07.20</p>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="px-3 py-1 text-sm bg-green-600 text-white rounded-lg hover:bg-green-700">승인</button>
+                            <button class="px-3 py-1 text-sm bg-red-600 text-white rounded-lg hover:bg-red-700">거부</button>
+                        </div>
+                    </div>
+                    <div class="user-type-university flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-university text-indigo-600"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium">경희대학교</p>
+                                <p class="text-sm text-gray-500">박민정 (이메일: intl@khu.ac.kr)</p>
+                                <p class="text-xs text-gray-400">가입일: 2024.07.19</p>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="px-3 py-1 text-sm bg-green-600 text-white rounded-lg hover:bg-green-700">승인</button>
+                            <button class="px-3 py-1 text-sm bg-red-600 text-white rounded-lg hover:bg-red-700">거부</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- All Users Table -->
+            <div class="dashboard-card overflow-hidden">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <h3 class="text-lg font-semibold">전체 회원 목록</h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">사용자</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">유형</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">기관</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">가입일</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">상태</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">액션</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr class="table-row">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-700 font-medium text-sm">김</div>
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium">김담당자</p>
+                                            <p class="text-sm text-gray-500">intl@snu.ac.kr</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="text-sm text-indigo-600">대학 담당자</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">서울대학교</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2024.06.15</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="status-badge status-active">활성</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                    <button class="text-indigo-600 hover:text-indigo-900 mr-3">편집</button>
+                                    <button class="text-red-600 hover:text-red-900">비활성화</button>
+                                </td>
+                            </tr>
+                            <tr class="table-row">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-700 font-medium text-sm">이</div>
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium">이담당자</p>
+                                            <p class="text-sm text-gray-500">contact@global.com</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="text-sm text-emerald-600">유학원 담당자</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">글로벌유학원</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2024.06.20</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="status-badge status-active">활성</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                    <button class="text-indigo-600 hover:text-indigo-900 mr-3">편집</button>
+                                    <button class="text-red-600 hover:text-red-900">비활성화</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Section -->
+        <div id="content" class="content-section p-6">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h2 class="text-xl font-bold mb-2">콘텐츠 관리</h2>
+                    <p class="text-gray-600">공개 영역에 표시되는 모든 콘텐츠를 관리할 수 있습니다.</p>
+                </div>
+                <button class="primary-button px-4 py-2 text-white rounded-lg font-medium" onclick="openContentModal()">
+                    <i class="fas fa-plus mr-2"></i>새 콘텐츠 작성
+                </button>
+            </div>
+
+            <!-- Content Categories -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="dashboard-card p-6 text-center">
+                    <i class="fas fa-graduation-cap text-3xl text-indigo-500 mb-4"></i>
+                    <h3 class="font-semibold text-lg mb-2">유학 가이드</h3>
+                    <p class="text-sm text-gray-600 mb-4">유학 준비 가이드 및 정보</p>
+                    <div class="text-2xl font-bold text-indigo-600">24개</div>
+                    <button class="mt-3 text-sm px-4 py-2 border border-indigo-300 text-indigo-600 rounded-lg hover:bg-indigo-50">관리</button>
+                </div>
+                <div class="dashboard-card p-6 text-center">
+                    <i class="fas fa-newspaper text-3xl text-emerald-500 mb-4"></i>
+                    <h3 class="font-semibold text-lg mb-2">뉴스 & 공지</h3>
+                    <p class="text-sm text-gray-600 mb-4">최신 뉴스 및 공지사항</p>
+                    <div class="text-2xl font-bold text-emerald-600">18개</div>
+                    <button class="mt-3 text-sm px-4 py-2 border border-emerald-300 text-emerald-600 rounded-lg hover:bg-emerald-50">관리</button>
+                </div>
+                <div class="dashboard-card p-6 text-center">
+                    <i class="fas fa-award text-3xl text-amber-500 mb-4"></i>
+                    <h3 class="font-semibold text-lg mb-2">장학금 정보</h3>
+                    <p class="text-sm text-gray-600 mb-4">장학금 및 지원 프로그램</p>
+                    <div class="text-2xl font-bold text-amber-600">12개</div>
+                    <button class="mt-3 text-sm px-4 py-2 border border-amber-300 text-amber-600 rounded-lg hover:bg-amber-50">관리</button>
+                </div>
+            </div>
+
+            <!-- Recent Content -->
+            <div class="dashboard-card p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold">최근 콘텐츠</h3>
+                    <div class="flex space-x-2">
+                        <select class="form-input px-3 py-2 text-sm rounded-lg">
+                            <option>모든 카테고리</option>
+                            <option>유학 가이드</option>
+                            <option>뉴스</option>
+                            <option>공지사항</option>
+                            <option>장학금</option>
+                        </select>
+                        <button class="primary-button px-4 py-2 text-white text-sm rounded-lg">필터</button>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">제목</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">카테고리</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">작성자</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">작성일</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">상태</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">액션</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr class="table-row">
+                                <td class="px-4 py-4">
+                                    <div>
+                                        <p class="text-sm font-medium">2025학년도 GKS 장학생 모집 안내</p>
+                                        <p class="text-xs text-gray-500">정부초청장학생 프로그램 상세 안내</p>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap">
+                                    <span class="text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded">장학금</span>
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm">관리자</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">2024.07.15</td>
+                                <td class="px-4 py-4 whitespace-nowrap">
+                                    <span class="status-badge status-published">게시됨</span>
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm">
+                                    <button class="text-indigo-600 hover:text-indigo-900 mr-2">편집</button>
+                                    <button class="text-red-600 hover:text-red-900">삭제</button>
+                                </td>
+                            </tr>
+                            <tr class="table-row">
+                                <td class="px-4 py-4">
+                                    <div>
+                                        <p class="text-sm font-medium">TOPIK 시험 준비 가이드</p>
+                                        <p class="text-xs text-gray-500">한국어능력시험 준비 방법 및 팁</p>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap">
+                                    <span class="text-xs bg-indigo-100 text-indigo-800 px-2 py-1 rounded">유학가이드</span>
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm">관리자</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">2024.07.12</td>
+                                <td class="px-4 py-4 whitespace-nowrap">
+                                    <span class="status-badge status-draft">임시저장</span>
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm">
+                                    <button class="text-indigo-600 hover:text-indigo-900 mr-2">편집</button>
+                                    <button class="text-green-600 hover:text-green-900 mr-2">게시</button>
+                                    <button class="text-red-600 hover:text-red-900">삭제</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Universities Section -->
+        <div id="universities" class="content-section p-6">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h2 class="text-xl font-bold mb-2">대학 정보 관리</h2>
+                    <p class="text-gray-600">등록된 대학들의 정보를 관리하고 승인할 수 있습니다.</p>
+                </div>
+                <button class="primary-button px-4 py-2 text-white rounded-lg font-medium">
+                    <i class="fas fa-plus mr-2"></i>새 대학 등록
+                </button>
+            </div>
+
+            <!-- University Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div class="dashboard-card p-6 border-l-4 border-l-indigo-500">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-600">등록된 대학</p>
+                            <p class="text-2xl font-bold text-indigo-600">45개</p>
+                        </div>
+                        <i class="fas fa-university text-2xl text-indigo-500"></i>
+                    </div>
+                </div>
+                <div class="dashboard-card p-6 border-l-4 border-l-green-500">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-600">활성 공고</p>
+                            <p class="text-2xl font-bold text-green-600">23개</p>
+                        </div>
+                        <i class="fas fa-bullhorn text-2xl text-green-500"></i>
+                    </div>
+                </div>
+                <div class="dashboard-card p-6 border-l-4 border-l-amber-500">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-600">승인 대기</p>
+                            <p class="text-2xl font-bold text-amber-600">3개</p>
+                        </div>
+                        <i class="fas fa-clock text-2xl text-amber-500"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Universities Table -->
+            <div class="dashboard-card overflow-hidden">
+                <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+                    <h3 class="text-lg font-semibold">대학 목록</h3>
+                    <div class="flex space-x-2">
+                        <input type="text" placeholder="대학명 검색..." class="form-input px-3 py-2 text-sm rounded-lg w-48">
+                        <select class="form-input px-3 py-2 text-sm rounded-lg">
+                            <option>모든 지역</option>
+                            <option>서울</option>
+                            <option>경기</option>
+                            <option>부산</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">대학</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">지역</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">담당자</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">활성 공고</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">상태</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">액션</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr class="table-row">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center font-bold text-indigo-700 text-sm">서</div>
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium">서울대학교</p>
+                                            <p class="text-xs text-gray-500">Seoul National University</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">서울</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">김담당자</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">2개</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="status-badge status-active">활성</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                    <button class="text-indigo-600 hover:text-indigo-900 mr-3">편집</button>
+                                    <button class="text-gray-600 hover:text-gray-900">설정</button>
+                                </td>
+                            </tr>
+                            <tr class="table-row">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-emerald-100 rounded-lg flex items-center justify-center font-bold text-emerald-700 text-sm">연</div>
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium">연세대학교</p>
+                                            <p class="text-xs text-gray-500">Yonsei University</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">서울</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">박담당자</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">3개</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="status-badge status-active">활성</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                    <button class="text-indigo-600 hover:text-indigo-900 mr-3">편집</button>
+                                    <button class="text-gray-600 hover:text-gray-900">설정</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Applications Section -->
+        <div id="applications" class="content-section p-6">
+            <div class="mb-6">
+                <h2 class="text-xl font-bold mb-2">지원 현황</h2>
+                <p class="text-gray-600">전체 플랫폼의 지원 현황을 통합적으로 관리할 수 있습니다.</p>
+            </div>
+
+            <!-- Application Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                <div class="dashboard-card p-6 text-center">
+                    <i class="fas fa-paper-plane text-2xl text-blue-500 mb-2"></i>
+                    <p class="text-2xl font-bold text-blue-600">1,567</p>
+                    <p class="text-sm text-gray-600">총 지원 건수</p>
+                </div>
+                <div class="dashboard-card p-6 text-center">
+                    <i class="fas fa-clock text-2xl text-amber-500 mb-2"></i>
+                    <p class="text-2xl font-bold text-amber-600">234</p>
+                    <p class="text-sm text-gray-600">심사 중</p>
+                </div>
+                <div class="dashboard-card p-6 text-center">
+                    <i class="fas fa-check-circle text-2xl text-green-500 mb-2"></i>
+                    <p class="text-2xl font-bold text-green-600">1,123</p>
+                    <p class="text-sm text-gray-600">합격</p>
+                </div>
+                <div class="dashboard-card p-6 text-center">
+                    <i class="fas fa-times-circle text-2xl text-red-500 mb-2"></i>
+                    <p class="text-2xl font-bold text-red-600">210</p>
+                    <p class="text-sm text-gray-600">불합격</p>
+                </div>
+            </div>
+
+            <!-- Recent Applications -->
+            <div class="dashboard-card p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold">최근 지원 현황</h3>
+                    <div class="flex space-x-2">
+                        <select class="form-input px-3 py-2 text-sm rounded-lg">
+                            <option>최근 7일</option>
+                            <option>최근 30일</option>
+                            <option>전체 기간</option>
+                        </select>
+                        <button class="primary-button px-4 py-2 text-white text-sm rounded-lg">내보내기</button>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">지원자</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">대학</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">유학원</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">지원일</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">상태</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr class="table-row">
+                                <td class="px-4 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-medium text-sm">김</div>
+                                        <span class="ml-3 text-sm">김민수</span>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm">서울대학교</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm">글로벌유학원</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">2024.07.15</td>
+                                <td class="px-4 py-4 whitespace-nowrap">
+                                    <span class="status-badge status-approved">합격</span>
+                                </td>
+                            </tr>
+                            <tr class="table-row">
+                                <td class="px-4 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center text-green-700 font-medium text-sm">이</div>
+                                        <span class="ml-3 text-sm">이지은</span>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm">연세대학교</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm">코리아드림</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">2024.07.14</td>
+                                <td class="px-4 py-4 whitespace-nowrap">
+                                    <span class="status-badge status-pending">심사중</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Section -->
+        <div id="statistics" class="content-section p-6">
+            <div class="mb-6">
+                <h2 class="text-xl font-bold mb-2">통계 분석</h2>
+                <p class="text-gray-600">플랫폼의 전체적인 사용 현황과 성과를 분석할 수 있습니다.</p>
+            </div>
+
+            <!-- Key Metrics -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="dashboard-card p-6 text-center">
+                    <div class="text-3xl font-bold text-indigo-600 mb-2">73%</div>
+                    <p class="text-sm text-gray-600">전체 합격률</p>
+                    <p class="text-xs text-green-600 mt-1">↑ 5% 지난 달 대비</p>
+                </div>
+                <div class="dashboard-card p-6 text-center">
+                    <div class="text-3xl font-bold text-emerald-600 mb-2">45</div>
+                    <p class="text-sm text-gray-600">활성 대학</p>
+                    <p class="text-xs text-blue-600 mt-1">→ 변동 없음</p>
+                </div>
+                <div class="dashboard-card p-6 text-center">
+                    <div class="text-3xl font-bold text-amber-600 mb-2">89</div>
+                    <p class="text-sm text-gray-600">파트너 유학원</p>
+                    <p class="text-xs text-green-600 mt-1">↑ 8개 신규</p>
+                </div>
+                <div class="dashboard-card p-6 text-center">
+                    <div class="text-3xl font-bold text-purple-600 mb-2">4.8</div>
+                    <p class="text-sm text-gray-600">평균 만족도</p>
+                    <p class="text-xs text-green-600 mt-1">↑ 0.2 개선</p>
+                </div>
+            </div>
+
+            <!-- Charts Placeholder -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="dashboard-card p-6">
+                    <h3 class="text-lg font-semibold mb-4">월별 지원 현황</h3>
+                    <div class="h-64 bg-gray-50 rounded-lg flex items-center justify-center">
+                        <p class="text-gray-500">차트 영역 (Chart.js 또는 기타 차트 라이브러리 연동)</p>
+                    </div>
+                </div>
+                <div class="dashboard-card p-6">
+                    <h3 class="text-lg font-semibold mb-4">대학별 인기도</h3>
+                    <div class="h-64 bg-gray-50 rounded-lg flex items-center justify-center">
+                        <p class="text-gray-500">차트 영역 (Chart.js 또는 기타 차트 라이브러리 연동)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Section -->
+        <div id="system" class="content-section p-6">
+            <div class="mb-6">
+                <h2 class="text-xl font-bold mb-2">시스템 설정</h2>
+                <p class="text-gray-600">플랫폼의 기본 설정과 시스템 관리 기능입니다.</p>
+            </div>
+
+            <!-- System Settings -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="dashboard-card p-6">
+                    <h3 class="text-lg font-semibold mb-4">일반 설정</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">플랫폼 이름</label>
+                            <input type="text" value="ONDY" class="form-input w-full px-4 py-3 rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">관리자 이메일</label>
+                            <input type="email" value="admin@ondy.com" class="form-input w-full px-4 py-3 rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">시스템 상태</label>
+                            <select class="form-input w-full px-4 py-3 rounded-lg">
+                                <option>정상 운영</option>
+                                <option>점검 중</option>
+                                <option>제한적 서비스</option>
+                            </select>
+                        </div>
+                        <button class="primary-button w-full py-3 text-white rounded-lg">설정 저장</button>
+                    </div>
+                </div>
+
+                <div class="dashboard-card p-6">
+                    <h3 class="text-lg font-semibold mb-4">시스템 관리</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                            <div>
+                                <p class="font-medium">데이터베이스 백업</p>
+                                <p class="text-sm text-gray-500">마지막 백업: 2024.07.20 02:00</p>
+                            </div>
+                            <button class="accent-button px-4 py-2 text-white text-sm rounded-lg">백업 실행</button>
+                        </div>
+                        <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                            <div>
+                                <p class="font-medium">시스템 로그</p>
+                                <p class="text-sm text-gray-500">최근 활동 및 오류 로그 확인</p>
+                            </div>
+                            <button class="primary-button px-4 py-2 text-white text-sm rounded-lg">로그 보기</button>
+                        </div>
+                        <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                            <div>
+                                <p class="font-medium">캐시 정리</p>
+                                <p class="text-sm text-gray-500">시스템 성능 최적화</p>
+                            </div>
+                            <button class="danger-button px-4 py-2 text-white text-sm rounded-lg">캐시 삭제</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content Modal -->
+    <div id="contentModal" class="modal">
+        <div class="bg-white rounded-lg shadow-xl max-w-3xl w-full mx-4 max-h-screen overflow-y-auto">
+            <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+                <h3 class="text-lg font-semibold">새 콘텐츠 작성</h3>
+                <button onclick="closeContentModal()" class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-6">
+                <form class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">카테고리</label>
+                            <select class="form-input w-full px-4 py-3 rounded-lg">
+                                <option>카테고리를 선택하세요</option>
+                                <option>유학 가이드</option>
+                                <option>뉴스</option>
+                                <option>공지사항</option>
+                                <option>장학금</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">상태</label>
+                            <select class="form-input w-full px-4 py-3 rounded-lg">
+                                <option>임시저장</option>
+                                <option>게시</option>
+                                <option>예약게시</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">제목</label>
+                        <input type="text" placeholder="콘텐츠 제목을 입력하세요" class="form-input w-full px-4 py-3 rounded-lg">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">요약</label>
+                        <input type="text" placeholder="콘텐츠 요약을 입력하세요" class="form-input w-full px-4 py-3 rounded-lg">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">내용</label>
+                        <textarea rows="8" class="form-input w-full px-4 py-3 rounded-lg" placeholder="콘텐츠 내용을 입력하세요..."></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">태그</label>
+                        <input type="text" placeholder="태그를 입력하세요 (쉼표로 구분)" class="form-input w-full px-4 py-3 rounded-lg">
+                    </div>
+                    <div class="flex justify-end space-x-3 pt-4">
+                        <button type="button" onclick="closeContentModal()" class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50">취소</button>
+                        <button type="button" class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50">임시저장</button>
+                        <button type="submit" class="primary-button px-6 py-2 text-white rounded-lg">게시</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Section Navigation
+        function showSection(sectionId) {
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.sidebar-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            document.getElementById(sectionId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // Modal Functions
+        function openContentModal() {
+            document.getElementById('contentModal').classList.add('show');
+        }
+
+        function closeContentModal() {
+            document.getElementById('contentModal').classList.remove('show');
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize any required functionality
+        });
+    </script>
+
+</body>
+</html> 

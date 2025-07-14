@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>유학원 담당자 대시보드 - ONDY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #F9FAFB;
+            color: #111827;
+        }
+        .sidebar {
+            background: white;
+            border-right: 1px solid #E5E7EB;
+            box-shadow: 2px 0 4px rgba(0,0,0,0.02);
+        }
+        .sidebar-item {
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border-left: 4px solid transparent;
+        }
+        .sidebar-item:hover {
+            background-color: #F3F4F6;
+            border-left-color: #f59e0b;
+        }
+        .sidebar-item.active {
+            background-color: #EEF2FF;
+            border-left-color: #4f46e5;
+            color: #4f46e5;
+        }
+        .main-content {
+            background-color: #F9FAFB;
+        }
+        .dashboard-card {
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .dashboard-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+        .stat-card.accent {
+            background: linear-gradient(135deg, #f59e0b, #f97316);
+        }
+        .stat-card.primary {
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+        }
+        .stat-card.info {
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+        }
+        .primary-button {
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            transition: all 0.3s ease;
+        }
+        .primary-button:hover {
+            background: linear-gradient(135deg, #4338ca, #4f46e5);
+            transform: translateY(-1px);
+        }
+        .accent-button {
+            background: linear-gradient(135deg, #f59e0b, #f97316);
+            transition: all 0.3s ease;
+        }
+        .accent-button:hover {
+            background: linear-gradient(135deg, #d97706, #ea580c);
+            transform: translateY(-1px);
+        }
+        .success-button {
+            background: linear-gradient(135deg, #10b981, #059669);
+            transition: all 0.3s ease;
+        }
+        .success-button:hover {
+            background: linear-gradient(135deg, #047857, #065f46);
+            transform: translateY(-1px);
+        }
+        .table-row:hover {
+            background-color: #F8FAFC;
+        }
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        .status-draft { background: #F3F4F6; color: #374151; }
+        .status-submitted { background: #DBEAFE; color: #1E40AF; }
+        .status-accepted { background: #D1FAE5; color: #065F46; }
+        .status-rejected { background: #FEE2E2; color: #991B1B; }
+        .status-waiting { background: #FEF3C7; color: #92400E; }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.show {
+            display: flex;
+        }
+        .form-input {
+            transition: all 0.2s ease;
+            border: 1px solid #D1D5DB;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+        .university-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .university-card:hover {
+            border-color: #f59e0b;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.1);
+        }
+        .university-card.selected {
+            border-color: #4f46e5;
+            background-color: #F8FAFC;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.1);
+        }
+        .student-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid #E5E7EB;
+        }
+        .student-card:hover {
+            border-color: #f59e0b;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.1);
+        }
+        .student-card.selected {
+            border-color: #4f46e5;
+            background-color: #F8FAFC;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex">
+
+    <!-- Sidebar -->
+    <div class="sidebar w-64 h-screen sticky top-0">
+        <!-- Logo -->
+        <div class="p-6 border-b border-gray-200">
+            <div class="flex items-center space-x-2">
+                <svg class="h-8 w-auto text-amber-500" viewBox="0 0 44 54" fill="currentColor">
+                    <path d="M22 0C12.059 0 4 8.059 4 18C4 26.28 9.625 33.125 17.5 35.5V36C14.149 36 10.992 37.06 8.5 38.883V42.25C12.723 39.547 17.167 38 22 38C26.833 38 31.277 39.547 35.5 42.25V38.883C33.008 37.06 29.851 36 26.5 36V35.5C34.375 33.125 40 26.28 40 18C40 8.059 31.941 0 22 0ZM22 30C15.373 30 10 24.627 10 18C10 11.373 15.373 6 22 6C28.627 6 34 11.373 34 18C34 24.627 28.627 30 22 30Z"/>
+                    <path d="M15.5 44.5L22 51L28.5 44.5L22 38L15.5 44.5Z"/>
+                </svg>
+                <span class="text-xl font-bold text-indigo-800">ONDY</span>
+            </div>
+            <div class="mt-2">
+                <p class="text-sm text-gray-600">유학원 담당자</p>
+                <p class="text-sm font-medium text-gray-900">글로벌유학원</p>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="p-4">
+            <div class="space-y-1">
+                <div class="sidebar-item active p-3 rounded-lg flex items-center" onclick="showSection('dashboard')">
+                    <i class="fas fa-chart-line mr-3 w-5"></i>
+                    <span>대시보드</span>
+                </div>
+                <div class="sidebar-item p-3 rounded-lg flex items-center" onclick="showSection('students')">
+                    <i class="fas fa-user-graduate mr-3 w-5"></i>
+                    <span>학생 관리</span>
+                </div>
+                <div class="sidebar-item p-3 rounded-lg flex items-center" onclick="showSection('applications')">
+                    <i class="fas fa-paper-plane mr-3 w-5"></i>
+                    <span>지원 관리</span>
+                </div>
+                <div class="sidebar-item p-3 rounded-lg flex items-center" onclick="showSection('results')">
+                    <i class="fas fa-trophy mr-3 w-5"></i>
+                    <span>합격/불합격 관리</span>
+                </div>
+                <div class="sidebar-item p-3 rounded-lg flex items-center" onclick="showSection('universities')">
+                    <i class="fas fa-university mr-3 w-5"></i>
+                    <span>대학 정보</span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- User Menu -->
+        <div class="absolute bottom-0 w-64 p-4 border-t border-gray-200">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user text-emerald-600 text-sm"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium">이담당자</p>
+                        <p class="text-xs text-gray-500">상담팀</p>
+                    </div>
+                </div>
+                <a href="index.html" class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content flex-1 overflow-auto">
+        <!-- Header -->
+        <header class="bg-white border-b border-gray-200 px-6 py-4">
+            <div class="flex items-center justify-between">
+                <h1 class="text-2xl font-bold text-gray-900">유학원 담당자 대시보드</h1>
+                <div class="flex items-center space-x-4">
+                    <button class="p-2 text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    <button class="primary-button px-4 py-2 text-white text-sm rounded-lg font-medium" onclick="openStudentModal()">
+                        <i class="fas fa-plus mr-2"></i>학생 등록
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Section -->
+        <div id="dashboard" class="content-section active p-6">
+            <!-- Statistics Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="dashboard-card stat-card p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm opacity-90">관리 중인 학생</p>
+                            <p class="text-3xl font-bold mt-1">127</p>
+                            <p class="text-sm opacity-75 mt-1">+15 이번 달</p>
+                        </div>
+                        <i class="fas fa-user-graduate text-2xl opacity-75"></i>
+                    </div>
+                </div>
+                <div class="dashboard-card stat-card accent p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm opacity-90">지원 중인 학생</p>
+                            <p class="text-3xl font-bold mt-1">45</p>
+                            <p class="text-sm opacity-75 mt-1">8개 대학</p>
+                        </div>
+                        <i class="fas fa-paper-plane text-2xl opacity-75"></i>
+                    </div>
+                </div>
+                <div class="dashboard-card stat-card primary p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm opacity-90">합격자 수</p>
+                            <p class="text-3xl font-bold mt-1">89</p>
+                            <p class="text-sm opacity-75 mt-1">합격률 73%</p>
+                        </div>
+                        <i class="fas fa-trophy text-2xl opacity-75"></i>
+                    </div>
+                </div>
+                <div class="dashboard-card stat-card info p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm opacity-90">대기 중인 결과</p>
+                            <p class="text-3xl font-bold mt-1">23</p>
+                            <p class="text-sm opacity-75 mt-1">결과 대기</p>
+                        </div>
+                        <i class="fas fa-clock text-2xl opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions & Recent Activity -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div class="dashboard-card p-6">
+                    <h3 class="text-lg font-semibold mb-4">빠른 작업</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <button class="p-4 border border-gray-200 rounded-lg hover:border-indigo-300 text-center" onclick="openStudentModal()">
+                            <i class="fas fa-user-plus text-2xl text-indigo-500 mb-2"></i>
+                            <p class="text-sm font-medium">학생 등록</p>
+                        </button>
+                        <button class="p-4 border border-gray-200 rounded-lg hover:border-emerald-300 text-center" onclick="showSection('applications')">
+                            <i class="fas fa-paper-plane text-2xl text-emerald-500 mb-2"></i>
+                            <p class="text-sm font-medium">대학 지원</p>
+                        </button>
+                        <button class="p-4 border border-gray-200 rounded-lg hover:border-amber-300 text-center" onclick="showSection('results')">
+                            <i class="fas fa-chart-bar text-2xl text-amber-500 mb-2"></i>
+                            <p class="text-sm font-medium">결과 확인</p>
+                        </button>
+                        <button class="p-4 border border-gray-200 rounded-lg hover:border-purple-300 text-center" onclick="showSection('universities')">
+                            <i class="fas fa-search text-2xl text-purple-500 mb-2"></i>
+                            <p class="text-sm font-medium">대학 검색</p>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="dashboard-card p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold">최근 활동</h3>
+                        <a href="#" class="text-indigo-600 text-sm hover:underline">전체보기</a>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-3 py-2 border-b border-gray-100">
+                            <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-green-600 text-sm"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm font-medium">김민수 - 서울대 합격 통지</p>
+                                <p class="text-xs text-gray-500">30분 전</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3 py-2 border-b border-gray-100">
+                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-paper-plane text-blue-600 text-sm"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm font-medium">이지은 - 연세대 지원 완료</p>
+                                <p class="text-xs text-gray-500">1시간 전</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3 py-2">
+                            <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-user-plus text-purple-600 text-sm"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm font-medium">박준호 - 새 학생 등록</p>
+                                <p class="text-xs text-gray-500">2시간 전</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Application Status Overview -->
+            <div class="dashboard-card p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold">대학별 지원 현황</h3>
+                    <a href="#" class="text-indigo-600 text-sm hover:underline" onclick="showSection('applications')">상세보기</a>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <h4 class="font-medium">서울대학교</h4>
+                            <span class="text-sm text-green-600">합격률 85%</span>
+                        </div>
+                        <div class="text-sm text-gray-600 space-y-1">
+                            <div class="flex justify-between">
+                                <span>지원자:</span>
+                                <span>20명</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>합격:</span>
+                                <span class="text-green-600">17명</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>불합격:</span>
+                                <span class="text-red-600">3명</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <h4 class="font-medium">연세대학교</h4>
+                            <span class="text-sm text-blue-600">합격률 70%</span>
+                        </div>
+                        <div class="text-sm text-gray-600 space-y-1">
+                            <div class="flex justify-between">
+                                <span>지원자:</span>
+                                <span>15명</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>합격:</span>
+                                <span class="text-green-600">11명</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>불합격:</span>
+                                <span class="text-red-600">4명</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <h4 class="font-medium">고려대학교</h4>
+                            <span class="text-sm text-amber-600">심사중</span>
+                        </div>
+                        <div class="text-sm text-gray-600 space-y-1">
+                            <div class="flex justify-between">
+                                <span>지원자:</span>
+                                <span>10명</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>합격:</span>
+                                <span class="text-green-600">6명</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>대기:</span>
+                                <span class="text-amber-600">4명</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Students Section -->
+        <div id="students" class="content-section p-6">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h2 class="text-xl font-bold mb-2">학생 관리</h2>
+                    <p class="text-gray-600">등록된 학생들의 정보를 관리하고 지원 현황을 확인할 수 있습니다.</p>
+                </div>
+                <button class="primary-button px-4 py-2 text-white rounded-lg font-medium" onclick="openStudentModal()">
+                    <i class="fas fa-plus mr-2"></i>새 학생 등록
+                </button>
+            </div>
+
+            <!-- Search and Filter -->
+            <div class="dashboard-card p-4 mb-6">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <input type="text" placeholder="학생 이름 검색..." class="form-input px-4 py-2 text-sm rounded-lg w-64">
+                        <select class="form-input px-3 py-2 text-sm rounded-lg">
+                            <option>모든 상태</option>
+                            <option>준비중</option>
+                            <option>지원중</option>
+                            <option>합격</option>
+                            <option>불합격</option>
+                        </select>
+                    </div>
+                    <div class="text-sm text-gray-500">총 127명</div>
+                </div>
+            </div>
+
+            <!-- Students Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="dashboard-card p-6">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-bold">김</div>
+                        <div>
+                            <h3 class="font-semibold">김민수</h3>
+                            <p class="text-sm text-gray-500">중국 | 23세</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">전공:</span>
+                            <span>컴퓨터공학</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">TOPIK:</span>
+                            <span>5급</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">상태:</span>
+                            <span class="status-badge status-accepted">합격</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex space-x-2">
+                        <button class="flex-1 text-sm px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">편집</button>
+                        <button class="flex-1 text-sm px-3 py-2 primary-button text-white rounded-lg">지원</button>
+                    </div>
+                </div>
+
+                <div class="dashboard-card p-6">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-700 font-bold">이</div>
+                        <div>
+                            <h3 class="font-semibold">이지은</h3>
+                            <p class="text-sm text-gray-500">베트남 | 22세</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">전공:</span>
+                            <span>경영학</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">TOPIK:</span>
+                            <span>4급</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">상태:</span>
+                            <span class="status-badge status-submitted">지원중</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex space-x-2">
+                        <button class="flex-1 text-sm px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">편집</button>
+                        <button class="flex-1 text-sm px-3 py-2 accent-button text-white rounded-lg">추가지원</button>
+                    </div>
+                </div>
+
+                <div class="dashboard-card p-6">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center text-purple-700 font-bold">박</div>
+                        <div>
+                            <h3 class="font-semibold">박준호</h3>
+                            <p class="text-sm text-gray-500">태국 | 24세</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">전공:</span>
+                            <span>국제관계학</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">TOPIK:</span>
+                            <span>6급</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">상태:</span>
+                            <span class="status-badge status-draft">준비중</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex space-x-2">
+                        <button class="flex-1 text-sm px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">편집</button>
+                        <button class="flex-1 text-sm px-3 py-2 success-button text-white rounded-lg">지원시작</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Applications Section -->
+        <div id="applications" class="content-section p-6">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h2 class="text-xl font-bold mb-2">지원 관리</h2>
+                    <p class="text-gray-600">학생들을 여러 대학에 동시에 지원시키고 진행 상황을 관리할 수 있습니다.</p>
+                </div>
+                <button class="primary-button px-4 py-2 text-white rounded-lg font-medium" onclick="openBatchApplicationModal()">
+                    <i class="fas fa-paper-plane mr-2"></i>일괄 지원
+                </button>
+            </div>
+
+            <!-- Current Applications -->
+            <div class="dashboard-card p-6 mb-6">
+                <h3 class="text-lg font-semibold mb-4">진행 중인 지원</h3>
+                <div class="space-y-4">
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <div>
+                                <h4 class="font-medium">서울대학교 - 2025년 1학기</h4>
+                                <p class="text-sm text-gray-500">컴퓨터공학과, 경영학과</p>
+                            </div>
+                            <span class="status-badge status-submitted">지원중 (5명)</span>
+                        </div>
+                        <div class="grid grid-cols-5 gap-3">
+                            <div class="text-center">
+                                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-medium text-sm mx-auto mb-1">김</div>
+                                <p class="text-xs">김민수</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center text-green-700 font-medium text-sm mx-auto mb-1">이</div>
+                                <p class="text-xs">이지은</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center text-purple-700 font-medium text-sm mx-auto mb-1">박</div>
+                                <p class="text-xs">박준호</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center text-amber-700 font-medium text-sm mx-auto mb-1">최</div>
+                                <p class="text-xs">최유진</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center text-red-700 font-medium text-sm mx-auto mb-1">정</div>
+                                <p class="text-xs">정민혁</p>
+                            </div>
+                        </div>
+                        <div class="mt-3 flex justify-between items-center text-sm">
+                            <span class="text-gray-500">마감: 2024.12.31</span>
+                            <button class="text-indigo-600 hover:underline">상세보기</button>
+                        </div>
+                    </div>
+
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <div>
+                                <h4 class="font-medium">연세대학교 - 교환학생</h4>
+                                <p class="text-sm text-gray-500">전 학과</p>
+                            </div>
+                            <span class="status-badge status-waiting">심사중 (3명)</span>
+                        </div>
+                        <div class="grid grid-cols-3 gap-3">
+                            <div class="text-center">
+                                <div class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-700 font-medium text-sm mx-auto mb-1">강</div>
+                                <p class="text-xs">강서연</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-8 h-8 bg-teal-100 rounded-full flex items-center justify-center text-teal-700 font-medium text-sm mx-auto mb-1">윤</div>
+                                <p class="text-xs">윤태호</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-8 h-8 bg-pink-100 rounded-full flex items-center justify-center text-pink-700 font-medium text-sm mx-auto mb-1">조</div>
+                                <p class="text-xs">조은비</p>
+                            </div>
+                        </div>
+                        <div class="mt-3 flex justify-between items-center text-sm">
+                            <span class="text-gray-500">마감: 2024.08.15</span>
+                            <button class="text-indigo-600 hover:underline">상세보기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Application History -->
+            <div class="dashboard-card p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold">지원 내역</h3>
+                    <select class="form-input px-3 py-2 text-sm rounded-lg">
+                        <option>최근 6개월</option>
+                        <option>전체 기간</option>
+                    </select>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">학생</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">대학</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">전공</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">지원일</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">상태</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr class="table-row">
+                                <td class="px-4 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-medium text-sm">김</div>
+                                        <span class="ml-3 text-sm font-medium">김민수</span>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm">서울대학교</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm">컴퓨터공학과</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">2024.07.15</td>
+                                <td class="px-4 py-4 whitespace-nowrap">
+                                    <span class="status-badge status-accepted">합격</span>
+                                </td>
+                            </tr>
+                            <tr class="table-row">
+                                <td class="px-4 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center text-green-700 font-medium text-sm">이</div>
+                                        <span class="ml-3 text-sm font-medium">이지은</span>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm">연세대학교</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm">경영학과</td>
+                                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">2024.07.12</td>
+                                <td class="px-4 py-4 whitespace-nowrap">
+                                    <span class="status-badge status-submitted">심사중</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="results" class="content-section p-6">
+            <div class="mb-6">
+                <h2 class="text-xl font-bold mb-2">합격/불합격 관리</h2>
+                <p class="text-gray-600">학생들의 최종 합격 및 불합격 결과를 관리할 수 있습니다.</p>
+            </div>
+
+            <!-- Results Summary -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="dashboard-card p-6 border-l-4 border-l-green-500">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-600">최종 합격</p>
+                            <p class="text-2xl font-bold text-green-600">89명</p>
+                        </div>
+                        <i class="fas fa-graduation-cap text-2xl text-green-500"></i>
+                    </div>
+                </div>
+                <div class="dashboard-card p-6 border-l-4 border-l-red-500">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-600">불합격</p>
+                            <p class="text-2xl font-bold text-red-600">23명</p>
+                        </div>
+                        <i class="fas fa-times-circle text-2xl text-red-500"></i>
+                    </div>
+                </div>
+                <div class="dashboard-card p-6 border-l-4 border-l-amber-500">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-600">결과 대기</p>
+                            <p class="text-2xl font-bold text-amber-600">15명</p>
+                        </div>
+                        <i class="fas fa-hourglass-half text-2xl text-amber-500"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Tabs -->
+            <div class="dashboard-card">
+                <div class="border-b border-gray-200">
+                    <nav class="flex space-x-8 px-6">
+                        <button class="py-4 border-b-2 border-green-500 text-green-600 font-medium text-sm" onclick="showResultTab('accepted')">
+                            합격자 (89)
+                        </button>
+                        <button class="py-4 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium text-sm" onclick="showResultTab('rejected')">
+                            불합격자 (23)
+                        </button>
+                        <button class="py-4 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium text-sm" onclick="showResultTab('pending')">
+                            대기중 (15)
+                        </button>
+                    </nav>
+                </div>
+
+                <!-- Accepted Results -->
+                <div id="accepted-results" class="result-tab p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="border border-green-200 bg-green-50 rounded-lg p-4">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-700 font-bold">김</div>
+                                <div>
+                                    <h4 class="font-medium">김민수</h4>
+                                    <p class="text-sm text-gray-600">서울대학교 컴퓨터공학과</p>
+                                </div>
+                            </div>
+                            <div class="text-sm space-y-1">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">합격일:</span>
+                                    <span>2024.07.20</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">장학금:</span>
+                                    <span class="text-green-600">50% 지원</span>
+                                </div>
+                            </div>
+                            <button class="w-full mt-3 text-sm px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
+                                상세보기
+                            </button>
+                        </div>
+
+                        <div class="border border-green-200 bg-green-50 rounded-lg p-4">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-700 font-bold">이</div>
+                                <div>
+                                    <h4 class="font-medium">이지은</h4>
+                                    <p class="text-sm text-gray-600">연세대학교 경영학과</p>
+                                </div>
+                            </div>
+                            <div class="text-sm space-y-1">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">합격일:</span>
+                                    <span>2024.07.18</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">장학금:</span>
+                                    <span class="text-green-600">30% 지원</span>
+                                </div>
+                            </div>
+                            <button class="w-full mt-3 text-sm px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
+                                상세보기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rejected Results -->
+                <div id="rejected-results" class="result-tab p-6" style="display: none;">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="border border-red-200 bg-red-50 rounded-lg p-4">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center text-red-700 font-bold">황</div>
+                                <div>
+                                    <h4 class="font-medium">황수진</h4>
+                                    <p class="text-sm text-gray-600">고려대학교 국제관계학과</p>
+                                </div>
+                            </div>
+                            <div class="text-sm space-y-1">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">불합격일:</span>
+                                    <span>2024.07.16</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">사유:</span>
+                                    <span>서류 미비</span>
+                                </div>
+                            </div>
+                            <button class="w-full mt-3 text-sm px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+                                재지원
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pending Results -->
+                <div id="pending-results" class="result-tab p-6" style="display: none;">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="border border-amber-200 bg-amber-50 rounded-lg p-4">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center text-amber-700 font-bold">박</div>
+                                <div>
+                                    <h4 class="font-medium">박준호</h4>
+                                    <p class="text-sm text-gray-600">카이스트 전산학과</p>
+                                </div>
+                            </div>
+                            <div class="text-sm space-y-1">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">지원일:</span>
+                                    <span>2024.07.10</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">상태:</span>
+                                    <span class="text-amber-600">서류심사중</span>
+                                </div>
+                            </div>
+                            <button class="w-full mt-3 text-sm px-3 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700">
+                                진행상황
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Universities Section -->
+        <div id="universities" class="content-section p-6">
+            <div class="mb-6">
+                <h2 class="text-xl font-bold mb-2">대학 정보</h2>
+                <p class="text-gray-600">지원 가능한 대학들의 정보를 확인하고 학생들을 지원시킬 수 있습니다.</p>
+            </div>
+
+            <!-- Search and Filter -->
+            <div class="dashboard-card p-4 mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <input type="text" placeholder="대학명 검색..." class="form-input px-4 py-2 text-sm rounded-lg">
+                    <select class="form-input px-3 py-2 text-sm rounded-lg">
+                        <option>모든 지역</option>
+                        <option>서울</option>
+                        <option>경기</option>
+                        <option>부산</option>
+                        <option>대전</option>
+                    </select>
+                    <select class="form-input px-3 py-2 text-sm rounded-lg">
+                        <option>모든 전공</option>
+                        <option>컴퓨터공학</option>
+                        <option>경영학</option>
+                        <option>국제관계학</option>
+                        <option>한국어문학</option>
+                    </select>
+                    <button class="primary-button px-4 py-2 text-white rounded-lg">검색</button>
+                </div>
+            </div>
+
+            <!-- Universities Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="dashboard-card p-6 university-card">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center font-bold text-indigo-700">서</div>
+                        <div>
+                            <h3 class="font-semibold">서울대학교</h3>
+                            <p class="text-sm text-gray-500">서울</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2 text-sm mb-4">
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">모집 중인 공고:</span>
+                            <span class="text-green-600">2개</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">합격률:</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">TOPIK 요구:</span>
+                            <span>4급 이상</span>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button class="flex-1 text-sm px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">상세보기</button>
+                        <button class="flex-1 text-sm px-3 py-2 primary-button text-white rounded-lg">지원하기</button>
+                    </div>
+                </div>
+
+                <div class="dashboard-card p-6 university-card">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center font-bold text-emerald-700">연</div>
+                        <div>
+                            <h3 class="font-semibold">연세대학교</h3>
+                            <p class="text-sm text-gray-500">서울</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2 text-sm mb-4">
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">모집 중인 공고:</span>
+                            <span class="text-green-600">3개</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">합격률:</span>
+                            <span>70%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">TOPIK 요구:</span>
+                            <span>5급 이상</span>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button class="flex-1 text-sm px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">상세보기</button>
+                        <button class="flex-1 text-sm px-3 py-2 primary-button text-white rounded-lg">지원하기</button>
+                    </div>
+                </div>
+
+                <div class="dashboard-card p-6 university-card">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center font-bold text-blue-700">고</div>
+                        <div>
+                            <h3 class="font-semibold">고려대학교</h3>
+                            <p class="text-sm text-gray-500">서울</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2 text-sm mb-4">
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">모집 중인 공고:</span>
+                            <span class="text-amber-600">1개</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">합격률:</span>
+                            <span>65%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">TOPIK 요구:</span>
+                            <span>4급 이상</span>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button class="flex-1 text-sm px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">상세보기</button>
+                        <button class="flex-1 text-sm px-3 py-2 primary-button text-white rounded-lg">지원하기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Student Registration Modal -->
+    <div id="studentModal" class="modal">
+        <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-screen overflow-y-auto">
+            <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+                <h3 class="text-lg font-semibold">새 학생 등록</h3>
+                <button onclick="closeStudentModal()" class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-6">
+                <form class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">성명</label>
+                            <input type="text" placeholder="홍길동" class="form-input w-full px-4 py-3 rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">국적</label>
+                            <select class="form-input w-full px-4 py-3 rounded-lg">
+                                <option>국적을 선택하세요</option>
+                                <option>중국</option>
+                                <option>베트남</option>
+                                <option>태국</option>
+                                <option>인도네시아</option>
+                                <option>기타</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">생년월일</label>
+                            <input type="date" class="form-input w-full px-4 py-3 rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">성별</label>
+                            <select class="form-input w-full px-4 py-3 rounded-lg">
+                                <option>성별을 선택하세요</option>
+                                <option>남성</option>
+                                <option>여성</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">연락처</label>
+                        <input type="tel" placeholder="+86 138-0013-8000" class="form-input w-full px-4 py-3 rounded-lg">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">이메일</label>
+                        <input type="email" placeholder="student@email.com" class="form-input w-full px-4 py-3 rounded-lg">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">희망 전공</label>
+                            <select class="form-input w-full px-4 py-3 rounded-lg">
+                                <option>전공을 선택하세요</option>
+                                <option>컴퓨터공학</option>
+                                <option>경영학</option>
+                                <option>국제관계학</option>
+                                <option>한국어문학</option>
+                                <option>기타</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">TOPIK 급수</label>
+                            <select class="form-input w-full px-4 py-3 rounded-lg">
+                                <option>급수를 선택하세요</option>
+                                <option>1급</option>
+                                <option>2급</option>
+                                <option>3급</option>
+                                <option>4급</option>
+                                <option>5급</option>
+                                <option>6급</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">학력 사항</label>
+                        <textarea rows="3" class="form-input w-full px-4 py-3 rounded-lg" placeholder="최종 학력 및 성적 정보를 입력하세요..."></textarea>
+                    </div>
+                    <div class="flex justify-end space-x-3 pt-4">
+                        <button type="button" onclick="closeStudentModal()" class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50">취소</button>
+                        <button type="submit" class="primary-button px-6 py-2 text-white rounded-lg">등록</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Batch Application Modal -->
+    <div id="batchApplicationModal" class="modal">
+        <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full mx-4 max-h-screen overflow-y-auto">
+            <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+                <h3 class="text-lg font-semibold">일괄 지원</h3>
+                <button onclick="closeBatchApplicationModal()" class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- University Selection -->
+                    <div>
+                        <h4 class="font-medium mb-4">대학 및 전형 선택</h4>
+                        <div class="space-y-3 max-h-64 overflow-y-auto">
+                            <div class="university-card border rounded-lg p-4" onclick="selectUniversity(this)">
+                                <div class="flex items-center space-x-3">
+                                    <input type="radio" name="university" class="text-indigo-600">
+                                    <div class="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center font-bold text-indigo-700 text-sm">서</div>
+                                    <div>
+                                        <p class="font-medium">서울대학교</p>
+                                        <p class="text-sm text-gray-500">2025년 1학기 신입생 모집</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="university-card border rounded-lg p-4" onclick="selectUniversity(this)">
+                                <div class="flex items-center space-x-3">
+                                    <input type="radio" name="university" class="text-indigo-600">
+                                    <div class="w-8 h-8 bg-emerald-100 rounded-lg flex items-center justify-center font-bold text-emerald-700 text-sm">연</div>
+                                    <div>
+                                        <p class="font-medium">연세대학교</p>
+                                        <p class="text-sm text-gray-500">교환학생 프로그램</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Student Selection -->
+                    <div>
+                        <h4 class="font-medium mb-4">지원 학생 선택</h4>
+                        <div class="space-y-3 max-h-64 overflow-y-auto">
+                            <div class="student-card rounded-lg p-3" onclick="toggleStudent(this)">
+                                <div class="flex items-center space-x-3">
+                                    <input type="checkbox" class="text-indigo-600">
+                                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center font-bold text-blue-700 text-sm">김</div>
+                                    <div>
+                                        <p class="font-medium text-sm">김민수</p>
+                                        <p class="text-xs text-gray-500">컴퓨터공학 지망 | TOPIK 5급</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="student-card rounded-lg p-3" onclick="toggleStudent(this)">
+                                <div class="flex items-center space-x-3">
+                                    <input type="checkbox" class="text-indigo-600">
+                                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center font-bold text-green-700 text-sm">이</div>
+                                    <div>
+                                        <p class="font-medium text-sm">이지은</p>
+                                        <p class="text-xs text-gray-500">경영학 지망 | TOPIK 4급</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="student-card rounded-lg p-3" onclick="toggleStudent(this)">
+                                <div class="flex items-center space-x-3">
+                                    <input type="checkbox" class="text-indigo-600">
+                                    <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center font-bold text-purple-700 text-sm">박</div>
+                                    <div>
+                                        <p class="font-medium text-sm">박준호</p>
+                                        <p class="text-xs text-gray-500">국제관계학 지망 | TOPIK 6급</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 pt-6 border-t border-gray-200">
+                    <div class="flex justify-between items-center">
+                        <div class="text-sm text-gray-600">
+                            <span id="selectedStudentsCount">0명 선택됨</span>
+                        </div>
+                        <div class="flex space-x-3">
+                            <button type="button" onclick="closeBatchApplicationModal()" class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50">취소</button>
+                            <button type="button" onclick="submitBatchApplication()" class="primary-button px-6 py-2 text-white rounded-lg">일괄 지원</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Section Navigation
+        function showSection(sectionId) {
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.sidebar-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            document.getElementById(sectionId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // Modal Functions
+        function openStudentModal() {
+            document.getElementById('studentModal').classList.add('show');
+        }
+
+        function closeStudentModal() {
+            document.getElementById('studentModal').classList.remove('show');
+        }
+
+        function openBatchApplicationModal() {
+            document.getElementById('batchApplicationModal').classList.add('show');
+        }
+
+        function closeBatchApplicationModal() {
+            document.getElementById('batchApplicationModal').classList.remove('show');
+        }
+
+        // Results Tab Functions
+        function showResultTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.result-tab').forEach(tab => {
+                tab.style.display = 'none';
+            });
+            
+            // Remove active state from all tab buttons
+            document.querySelectorAll('nav button').forEach(button => {
+                button.classList.remove('border-green-500', 'text-green-600', 'border-red-500', 'text-red-600', 'border-amber-500', 'text-amber-600');
+                button.classList.add('border-transparent', 'text-gray-500');
+            });
+            
+            // Show selected tab
+            const selectedTab = document.getElementById(tabName + '-results');
+            if (selectedTab) {
+                selectedTab.style.display = 'block';
+            }
+            
+            // Add active state to clicked button
+            const colors = {
+                'accepted': ['border-green-500', 'text-green-600'],
+                'rejected': ['border-red-500', 'text-red-600'],
+                'pending': ['border-amber-500', 'text-amber-600']
+            };
+            
+            if (colors[tabName]) {
+                event.currentTarget.classList.remove('border-transparent', 'text-gray-500');
+                event.currentTarget.classList.add(...colors[tabName]);
+            }
+        }
+
+        // Batch Application Functions
+        function selectUniversity(element) {
+            document.querySelectorAll('.university-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            element.classList.add('selected');
+            element.querySelector('input[type="radio"]').checked = true;
+        }
+
+        function toggleStudent(element) {
+            const checkbox = element.querySelector('input[type="checkbox"]');
+            checkbox.checked = !checkbox.checked;
+            
+            if (checkbox.checked) {
+                element.classList.add('selected');
+            } else {
+                element.classList.remove('selected');
+            }
+            
+            updateSelectedStudentsCount();
+        }
+
+        function updateSelectedStudentsCount() {
+            const count = document.querySelectorAll('#batchApplicationModal input[type="checkbox"]:checked').length;
+            document.getElementById('selectedStudentsCount').textContent = `${count}명 선택됨`;
+        }
+
+        function submitBatchApplication() {
+            const selectedUniversity = document.querySelector('#batchApplicationModal input[type="radio"]:checked');
+            const selectedStudents = document.querySelectorAll('#batchApplicationModal input[type="checkbox"]:checked').length;
+            
+            if (!selectedUniversity) {
+                alert('대학과 전형을 선택해주세요.');
+                return;
+            }
+            
+            if (selectedStudents === 0) {
+                alert('지원할 학생을 선택해주세요.');
+                return;
+            }
+            
+            if (confirm(`${selectedStudents}명의 학생을 선택된 대학에 일괄 지원하시겠습니까?`)) {
+                alert(`${selectedStudents}명의 학생이 성공적으로 지원되었습니다.`);
+                closeBatchApplicationModal();
+            }
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize any required functionality
+        });
+    </script>
+
+</body>
+</html> 
