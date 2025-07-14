@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연세대학교 - 대학 정보 | ONDY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Pretendard', sans-serif; }
+        .main-header { box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <header class="main-header bg-white sticky top-0 z-50">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-end items-center h-10 border-b border-gray-100 text-xs text-gray-600 space-x-4">
+                <a href="login.html" class="hover:underline">로그인</a>
+                <a href="signup.html" class="hover:underline">회원가입</a>
+                <a href="sitemap.html" class="hover:underline">사이트맵</a>
+            </div>
+            <div class="flex justify-between items-center h-24">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <svg class="h-9 w-auto text-amber-500" viewBox="0 0 44 54" fill="currentColor">
+                        <path d="M22 0C12.059 0 4 8.059 4 18C4 26.28 9.625 33.125 17.5 35.5V36C14.149 36 10.992 37.06 8.5 38.883V42.25C12.723 39.547 17.167 38 22 38C26.833 38 31.277 39.547 35.5 42.25V38.883C33.008 37.06 29.851 36 26.5 36V35.5C34.375 33.125 40 26.28 40 18C40 8.059 31.941 0 22 0ZM22 30C15.373 30 10 24.627 10 18C10 11.373 15.373 6 22 6C28.627 6 34 11.373 34 18C34 24.627 28.627 30 22 30Z"/>
+                        <path d="M15.5 44.5L22 51L28.5 44.5L22 38L15.5 44.5Z"/>
+                    </svg>
+                    <span class="text-3xl font-bold text-indigo-800">ONDY</span>
+                </a>
+                <nav class="hidden lg:flex items-center space-x-12">
+                    <a href="study-guide.html" class="text-gray-600 hover:text-indigo-600 font-medium">유학가이드</a>
+                    <a href="universities.html" class="text-gray-600 hover:text-indigo-600 font-medium">대학/전공 정보</a>
+                    <a href="scholarships.html" class="text-gray-600 hover:text-indigo-600 font-medium">장학금</a>
+                    <a href="online-application.html" class="text-gray-600 hover:text-indigo-600 font-medium">온라인 지원</a>
+                    <a href="community.html" class="text-gray-600 hover:text-indigo-600 font-medium">커뮤니티</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-8">
+        <!-- University Header -->
+        <div class="bg-white rounded-lg shadow-sm border p-8 mb-6">
+            <div class="flex flex-col md:flex-row items-start gap-6">
+                <div class="w-32 h-32 bg-rose-100 rounded-lg flex items-center justify-center">
+                    <span class="text-4xl font-bold text-rose-700">연세대</span>
+                </div>
+                <div class="flex-1">
+                    <h1 class="text-3xl font-bold text-gray-900 mb-2">연세대학교</h1>
+                    <p class="text-gray-600 mb-4">Yonsei University</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm">사립대학</span>
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">종합대학</span>
+                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">글로벌</span>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                        <div>
+                            <span class="text-gray-500">설립년도</span>
+                            <p class="font-semibold">1885년</p>
+                        </div>
+                        <div>
+                            <span class="text-gray-500">위치</span>
+                            <p class="font-semibold">서울 서대문구</p>
+                        </div>
+                        <div>
+                            <span class="text-gray-500">학생수</span>
+                            <p class="font-semibold">35,000명</p>
+                        </div>
+                        <div>
+                            <span class="text-gray-500">외국인학생</span>
+                            <p class="font-semibold">5,800명</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Information -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <div class="bg-white p-6 rounded-lg shadow-sm border">
+                <h3 class="font-semibold text-gray-800 mb-3">📚 입학 요건</h3>
+                <ul class="space-y-2 text-gray-600">
+                    <li>• TOPIK 3급 이상</li>
+                    <li>• 영어: TOEFL 79+ / IELTS 6.0+</li>
+                    <li>• 고등학교 졸업증명서</li>
+                    <li>• 추천서 2부</li>
+                </ul>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm border">
+                <h3 class="font-semibold text-gray-800 mb-3">💰 학비 정보</h3>
+                <ul class="space-y-2 text-gray-600">
+                    <li>• 입학금: 1,000,000원</li>
+                    <li>• 등록금: 학기당 4,200,000원</li>
+                    <li>• 기숙사: 월 420,000원</li>
+                    <li>• 생활비: 월 900,000원</li>
+                </ul>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm border">
+                <h3 class="font-semibold text-gray-800 mb-3">🏆 장학금</h3>
+                <ul class="space-y-2 text-gray-600">
+                    <li>• 글로벌인재장학금</li>
+                    <li>• Yonsei Eagle 장학금</li>
+                    <li>• 국제교육원 장학금</li>
+                    <li>• 성적우수장학금</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Special Programs -->
+        <div class="bg-white rounded-lg shadow-sm border p-8 mb-6">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">특별 프로그램</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-semibold text-rose-800 mb-3">Underwood International College (UIC)</h3>
+                    <p class="text-gray-600 mb-3">100% 영어로 진행되는 리버럴 아츠 교육</p>
+                    <ul class="space-y-1 text-gray-600">
+                        <li>• 글로벌 융합학부</li>
+                        <li>• 국제관계학과</li>
+                        <li>• 경제학부</li>
+                        <li>• 정치외교학과</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-blue-800 mb-3">Global MBA</h3>
+                    <p class="text-gray-600 mb-3">영어 기반 국제 경영학 석사 과정</p>
+                    <ul class="space-y-1 text-gray-600">
+                        <li>• 1년 과정</li>
+                        <li>• 100% 영어 수업</li>
+                        <li>• 국제 교환 프로그램</li>
+                        <li>• 글로벌 인턴십</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <a href="online-application.html" class="inline-block bg-rose-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-rose-700 transition-colors mr-4">
+                지원하기
+            </a>
+            <a href="universities.html" class="inline-block bg-gray-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-700 transition-colors">
+                목록으로
+            </a>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-300 mt-12">
+        <div class="container mx-auto px-6 py-8">
+            <div class="text-center">
+                <p class="text-sm">&copy; ONDY Inc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html> 

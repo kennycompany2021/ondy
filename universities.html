@@ -45,6 +45,37 @@
             background-color: #4f46e5;
             color: white;
         }
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            z-index: 1000;
+            padding: 8px 0;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            border-bottom: none !important;
+        }
+        .dropdown-content a:hover {
+            background-color: #f3f4f6;
+            color: #4f46e5;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -70,6 +101,13 @@
                     <a href="universities.html" class="active">대학/전공 정보</a>
                     <a href="scholarships.html">장학금</a>
                     <a href="online-application.html">온라인 지원</a>
+                    <div class="dropdown">
+                        <a href="#">소식</a>
+                        <div class="dropdown-content">
+                            <a href="notices.html">공지사항</a>
+                            <a href="news.html">유학뉴스</a>
+                        </div>
+                    </div>
                     <a href="community.html">커뮤니티</a>
                 </nav>
             </div>
@@ -193,9 +231,9 @@
                         <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">의학</span>
                         <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">인문</span>
                     </div>
-                    <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
+                    <a href="university-detail-1.html" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 block text-center">
                         상세보기
-                    </button>
+                    </a>
                 </div>
 
                 <!-- University Card 2 -->
@@ -233,9 +271,9 @@
                         <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">공학</span>
                         <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">국제학</span>
                     </div>
-                    <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
+                    <a href="university-detail-2.html" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 block text-center">
                         상세보기
-                    </button>
+                    </a>
                 </div>
 
                 <!-- University Card 3 -->
@@ -273,9 +311,9 @@
                         <span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded-full">정치</span>
                         <span class="px-2 py-1 bg-pink-100 text-pink-800 text-xs rounded-full">미디어</span>
                     </div>
-                    <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
+                    <a href="university-detail-5.html" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 block text-center">
                         상세보기
-                    </button>
+                    </a>
                 </div>
 
                 <!-- University Card 4 -->
@@ -313,9 +351,9 @@
                         <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">과학</span>
                         <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">IT</span>
                     </div>
-                    <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
+                    <a href="university-detail-4.html" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 block text-center">
                         상세보기
-                    </button>
+                    </a>
                 </div>
 
                 <!-- University Card 5 -->
@@ -353,9 +391,9 @@
                         <span class="px-2 py-1 bg-teal-100 text-teal-800 text-xs rounded-full">환경</span>
                         <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">공학</span>
                     </div>
-                    <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
+                    <a href="university-detail-3.html" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 block text-center">
                         상세보기
-                    </button>
+                    </a>
                 </div>
 
                 <!-- University Card 6 -->
@@ -393,9 +431,9 @@
                         <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">공학</span>
                         <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">건축</span>
                     </div>
-                    <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
+                    <a href="university-detail-6.html" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 block text-center">
                         상세보기
-                    </button>
+                    </a>
                 </div>
             </div>
 

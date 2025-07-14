@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카이스트 - 대학 정보 | ONDY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Pretendard', sans-serif; }
+        .main-header { box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <header class="main-header bg-white sticky top-0 z-50">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-end items-center h-10 border-b border-gray-100 text-xs text-gray-600 space-x-4">
+                <a href="login.html" class="hover:underline">로그인</a>
+                <a href="signup.html" class="hover:underline">회원가입</a>
+                <a href="sitemap.html" class="hover:underline">사이트맵</a>
+            </div>
+            <div class="flex justify-between items-center h-24">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <svg class="h-9 w-auto text-amber-500" viewBox="0 0 44 54" fill="currentColor">
+                        <path d="M22 0C12.059 0 4 8.059 4 18C4 26.28 9.625 33.125 17.5 35.5V36C14.149 36 10.992 37.06 8.5 38.883V42.25C12.723 39.547 17.167 38 22 38C26.833 38 31.277 39.547 35.5 42.25V38.883C33.008 37.06 29.851 36 26.5 36V35.5C34.375 33.125 40 26.28 40 18C40 8.059 31.941 0 22 0ZM22 30C15.373 30 10 24.627 10 18C10 11.373 15.373 6 22 6C28.627 6 34 11.373 34 18C34 24.627 28.627 30 22 30Z"/>
+                        <path d="M15.5 44.5L22 51L28.5 44.5L22 38L15.5 44.5Z"/>
+                    </svg>
+                    <span class="text-3xl font-bold text-indigo-800">ONDY</span>
+                </a>
+                <nav class="hidden lg:flex items-center space-x-12">
+                    <a href="study-guide.html" class="text-gray-600 hover:text-indigo-600 font-medium">유학가이드</a>
+                    <a href="universities.html" class="text-gray-600 hover:text-indigo-600 font-medium">대학/전공 정보</a>
+                    <a href="scholarships.html" class="text-gray-600 hover:text-indigo-600 font-medium">장학금</a>
+                    <a href="online-application.html" class="text-gray-600 hover:text-indigo-600 font-medium">온라인 지원</a>
+                    <a href="community.html" class="text-gray-600 hover:text-indigo-600 font-medium">커뮤니티</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-8">
+        <!-- University Header -->
+        <div class="bg-white rounded-lg shadow-sm border p-8 mb-6">
+            <div class="flex flex-col md:flex-row items-start gap-6">
+                <div class="w-32 h-32 bg-emerald-100 rounded-lg flex items-center justify-center">
+                    <span class="text-3xl font-bold text-emerald-700">KAIST</span>
+                </div>
+                <div class="flex-1">
+                    <h1 class="text-3xl font-bold text-gray-900 mb-2">카이스트 (KAIST)</h1>
+                    <p class="text-gray-600 mb-4">Korea Advanced Institute of Science and Technology</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-sm">특수대학</span>
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">이공계특화</span>
+                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">연구중심</span>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                        <div>
+                            <span class="text-gray-500">설립년도</span>
+                            <p class="font-semibold">1971년</p>
+                        </div>
+                        <div>
+                            <span class="text-gray-500">위치</span>
+                            <p class="font-semibold">대전광역시</p>
+                        </div>
+                        <div>
+                            <span class="text-gray-500">학생수</span>
+                            <p class="font-semibold">10,500명</p>
+                        </div>
+                        <div>
+                            <span class="text-gray-500">외국인학생</span>
+                            <p class="font-semibold">2,100명</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Information -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <div class="bg-white p-6 rounded-lg shadow-sm border">
+                <h3 class="font-semibold text-gray-800 mb-3">📚 입학 요건</h3>
+                <ul class="space-y-2 text-gray-600">
+                    <li>• 영어: TOEFL 83+ / IELTS 6.5+</li>
+                    <li>• 한국어: TOPIK 3급 권장</li>
+                    <li>• 학사학위 (대학원)</li>
+                    <li>• 연구계획서</li>
+                </ul>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm border">
+                <h3 class="font-semibold text-gray-800 mb-3">💰 학비 정보</h3>
+                <ul class="space-y-2 text-gray-600">
+                    <li>• 등록금: 무료 (전액 지원)</li>
+                    <li>• 생활비 지원: 월 350,000원</li>
+                    <li>• 기숙사: 월 150,000원</li>
+                    <li>• 연구비 지원</li>
+                </ul>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm border">
+                <h3 class="font-semibold text-gray-800 mb-3">🏆 특별 혜택</h3>
+                <ul class="space-y-2 text-gray-600">
+                    <li>• 등록금 100% 면제</li>
+                    <li>• 생활비 지원</li>
+                    <li>• 연구 장려금</li>
+                    <li>• 국제 학회 참가 지원</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Research Excellence -->
+        <div class="bg-white rounded-lg shadow-sm border p-8 mb-6">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">연구 분야</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-semibold text-emerald-800 mb-3">주요 학과</h3>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-emerald-50 rounded">
+                            <h4 class="font-medium">전산학부</h4>
+                            <p class="text-sm text-gray-600">AI, 소프트웨어, 데이터사이언스</p>
+                        </div>
+                        <div class="p-3 bg-blue-50 rounded">
+                            <h4 class="font-medium">전기및전자공학부</h4>
+                            <p class="text-sm text-gray-600">반도체, 통신, 에너지</p>
+                        </div>
+                        <div class="p-3 bg-purple-50 rounded">
+                            <h4 class="font-medium">기계공학과</h4>
+                            <p class="text-sm text-gray-600">로봇공학, 항공우주</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-blue-800 mb-3">연구 성과</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center p-3 bg-blue-50 rounded">
+                            <span>SCI 논문 수</span>
+                            <span class="font-bold text-blue-600">연간 3,500편</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-green-50 rounded">
+                            <span>특허 출원</span>
+                            <span class="font-bold text-green-600">연간 800건</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-purple-50 rounded">
+                            <span>기술이전 수입</span>
+                            <span class="font-bold text-purple-600">200억원</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Global Rankings -->
+        <div class="bg-gradient-to-r from-emerald-50 to-blue-50 rounded-lg p-8 mb-6">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">세계 대학 순위</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div>
+                    <div class="text-3xl font-bold text-emerald-600 mb-2">#41</div>
+                    <div class="text-sm text-emerald-800">QS 세계대학 순위</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-blue-600 mb-2">#56</div>
+                    <div class="text-sm text-blue-800">THE 세계대학 순위</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-purple-600 mb-2">#1</div>
+                    <div class="text-sm text-purple-800">아시아 이공계 대학</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <a href="online-application.html" class="inline-block bg-emerald-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-emerald-700 transition-colors mr-4">
+                지원하기
+            </a>
+            <a href="universities.html" class="inline-block bg-gray-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-700 transition-colors">
+                목록으로
+            </a>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-300 mt-12">
+        <div class="container mx-auto px-6 py-8">
+            <div class="text-center">
+                <p class="text-sm">&copy; ONDY Inc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html> 

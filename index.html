@@ -49,6 +49,74 @@
             color: #4f46e5;
             border-bottom-color: #4f46e5;
         }
+        .notice-tab {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .notice-tab:hover {
+            color: #4f46e5;
+        }
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .search-suggestions {
+            display: none;
+            animation: fadeInUp 0.3s ease;
+        }
+        .search-suggestions.show {
+            display: block;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            z-index: 1000;
+            padding: 8px 0;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            border-bottom: none !important;
+        }
+        .dropdown-content a:hover {
+            background-color: #f3f4f6;
+            color: #4f46e5;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -56,13 +124,13 @@
     <!-- Header -->
     <header class="main-header bg-white sticky top-0 z-50">
         <div class="container mx-auto px-6">
-                            <div class="flex justify-end items-center h-10 border-b border-gray-100 text-xs header-top-nav space-x-4">
-                    <a href="login.html" class="hover:underline">로그인</a>
-                    <a href="signup.html" class="hover:underline">회원가입</a>
-                    <a href="sitemap.html" class="hover:underline">사이트맵</a>
-                </div>
+            <div class="flex justify-end items-center h-10 border-b border-gray-100 text-xs header-top-nav space-x-4">
+                <a href="login.html" class="hover:underline">로그인</a>
+                <a href="signup.html" class="hover:underline">회원가입</a>
+                <a href="sitemap.html" class="hover:underline">사이트맵</a>
+            </div>
             <div class="flex justify-between items-center h-24">
-                <a href="#" class="flex items-center space-x-2">
+                <a href="index.html" class="flex items-center space-x-2">
                     <svg class="h-9 w-auto text-amber-500" viewBox="0 0 44 54" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path d="M22 0C12.059 0 4 8.059 4 18C4 26.28 9.625 33.125 17.5 35.5V36C14.149 36 10.992 37.06 8.5 38.883V42.25C12.723 39.547 17.167 38 22 38C26.833 38 31.277 39.547 35.5 42.25V38.883C33.008 37.06 29.851 36 26.5 36V35.5C34.375 33.125 40 26.28 40 18C40 8.059 31.941 0 22 0ZM22 30C15.373 30 10 24.627 10 18C10 11.373 15.373 6 22 6C28.627 6 34 11.373 34 18C34 24.627 28.627 30 22 30Z"/>
                         <path d="M15.5 44.5L22 51L28.5 44.5L22 38L15.5 44.5Z"/>
@@ -74,24 +142,75 @@
                     <a href="universities.html">대학/전공 정보</a>
                     <a href="scholarships.html">장학금</a>
                     <a href="online-application.html">온라인 지원</a>
+                    <div class="dropdown">
+                        <a href="#">소식</a>
+                        <div class="dropdown-content">
+                            <a href="notices.html">공지사항</a>
+                            <a href="news.html">유학뉴스</a>
+                        </div>
+                    </div>
                     <a href="community.html">커뮤니티</a>
                 </nav>
+                <!-- Mobile menu button -->
+                <button class="lg:hidden text-gray-600 hover:text-gray-900" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars fa-lg"></i>
+                </button>
             </div>
         </div>
+        
+        <!-- Mobile Navigation -->
+        <div id="mobileMenu" class="mobile-menu fixed inset-y-0 left-0 w-80 bg-white shadow-xl lg:hidden z-50">
+            <div class="flex items-center justify-between p-6 border-b">
+                <div class="flex items-center space-x-2">
+                    <svg class="h-8 w-auto text-amber-500" viewBox="0 0 44 54" fill="currentColor">
+                        <path d="M22 0C12.059 0 4 8.059 4 18C4 26.28 9.625 33.125 17.5 35.5V36C14.149 36 10.992 37.06 8.5 38.883V42.25C12.723 39.547 17.167 38 22 38C26.833 38 31.277 39.547 35.5 42.25V38.883C33.008 37.06 29.851 36 26.5 36V35.5C34.375 33.125 40 26.28 40 18C40 8.059 31.941 0 22 0ZM22 30C15.373 30 10 24.627 10 18C10 11.373 15.373 6 22 6C28.627 6 34 11.373 34 18C34 24.627 28.627 30 22 30Z"/>
+                        <path d="M15.5 44.5L22 51L28.5 44.5L22 38L15.5 44.5Z"/>
+                    </svg>
+                    <span class="text-2xl font-bold text-indigo-800">ONDY</span>
+                </div>
+                <button onclick="toggleMobileMenu()" class="text-gray-600">
+                    <i class="fas fa-times fa-lg"></i>
+                </button>
+            </div>
+            <nav class="p-6">
+                <a href="study-guide.html" class="block py-3 text-lg font-semibold text-gray-800 border-b border-gray-100">유학가이드</a>
+                <a href="universities.html" class="block py-3 text-lg font-semibold text-gray-800 border-b border-gray-100">대학/전공 정보</a>
+                <a href="scholarships.html" class="block py-3 text-lg font-semibold text-gray-800 border-b border-gray-100">장학금</a>
+                <a href="online-application.html" class="block py-3 text-lg font-semibold text-gray-800 border-b border-gray-100">온라인 지원</a>
+                <a href="community.html" class="block py-3 text-lg font-semibold text-gray-800">커뮤니티</a>
+            </nav>
+            <div class="border-t p-6">
+                <a href="login.html" class="block py-2 text-indigo-600 font-medium">로그인</a>
+                <a href="signup.html" class="block py-2 text-indigo-600 font-medium">회원가입</a>
+            </div>
+        </div>
+        
+        <!-- Mobile menu overlay -->
+        <div id="mobileOverlay" class="hidden fixed inset-0 bg-black bg-opacity-50 lg:hidden z-40" onclick="toggleMobileMenu()"></div>
     </header>
 
     <!-- Main Content -->
     <main>
         <!-- Hero Section -->
-        <section class="hero-section h-[500px] flex items-center justify-center">
+        <section class="hero-section h-[500px] flex items-center justify-center relative">
             <div class="container mx-auto px-6 text-center text-white">
                 <h1 class="text-4xl md:text-5xl font-bold leading-tight">대한민국 유학, ONDY와 함께</h1>
                 <p class="text-lg md:text-xl opacity-90 mt-4 mb-8">가장 정확하고 신뢰할 수 있는 정보로 여러분의 성공적인 유학을 돕습니다.</p>
-                <div class="search-box max-w-2xl mx-auto bg-white rounded-full p-2 flex items-center">
-                    <input type="text" placeholder="대학, 전공, 지역 등 궁금한 정보를 검색해보세요." class="w-full bg-transparent text-gray-700 text-lg py-3 px-6 focus:outline-none">
-                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white rounded-full w-12 h-12 flex-shrink-0 flex items-center justify-center">
+                <div class="search-box max-w-2xl mx-auto bg-white rounded-full p-2 flex items-center relative">
+                    <input type="text" id="searchInput" placeholder="대학, 전공, 지역 등 궁금한 정보를 검색해보세요." class="w-full bg-transparent text-gray-700 text-lg py-3 px-6 focus:outline-none" autocomplete="off">
+                    <button onclick="performSearch()" class="bg-indigo-600 hover:bg-indigo-700 text-white rounded-full w-12 h-12 flex-shrink-0 flex items-center justify-center">
                         <i class="fa-solid fa-magnifying-glass fa-lg"></i>
                     </button>
+                    <!-- Search suggestions -->
+                    <div id="searchSuggestions" class="search-suggestions absolute top-full left-0 right-0 bg-white rounded-lg shadow-lg mt-2 overflow-hidden z-10">
+                        <div class="p-2">
+                            <div class="text-sm text-gray-500 px-3 py-2">인기 검색어</div>
+                            <a href="universities.html?search=서울대학교" class="block px-3 py-2 hover:bg-gray-50 text-gray-700">서울대학교</a>
+                            <a href="universities.html?search=연세대학교" class="block px-3 py-2 hover:bg-gray-50 text-gray-700">연세대학교</a>
+                            <a href="universities.html?search=컴퓨터공학" class="block px-3 py-2 hover:bg-gray-50 text-gray-700">컴퓨터공학</a>
+                            <a href="scholarships.html?search=GKS" class="block px-3 py-2 hover:bg-gray-50 text-gray-700">GKS 장학금</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -129,44 +248,83 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <div>
                     <div class="flex items-center border-b-2 border-gray-200 mb-4">
-                        <button class="notice-tab text-lg py-2 px-1 mr-6 border-b-2 active">공지사항</button>
-                        <button class="notice-tab text-lg py-2 px-1 border-b-2 border-transparent text-gray-400">유학 뉴스</button>
+                        <button class="notice-tab text-lg py-2 px-1 mr-6 border-b-2 active" onclick="switchTab('notice')">공지사항</button>
+                        <button class="notice-tab text-lg py-2 px-1 border-b-2 border-transparent text-gray-400" onclick="switchTab('news')">유학 뉴스</button>
                     </div>
-                    <ul class="space-y-3">
-                        <li class="flex justify-between items-center"><a href="#" class="hover:underline truncate pr-4">2025학년도 GKS 외국인 우수자비 장학생 모집 안내</a><span class="text-gray-400 text-sm flex-shrink-0">2024.07.15</span></li>
-                        <li class="flex justify-between items-center"><a href="#" class="hover:underline truncate pr-4">온라인 유학박람회 개최 (7.20~7.25)</a><span class="text-gray-400 text-sm flex-shrink-0">2024.07.10</span></li>
-                        <li class="flex justify-between items-center"><a href="#" class="hover:underline truncate pr-4">한국어능력시험(TOPIK) 하반기 접수 일정</a><span class="text-gray-400 text-sm flex-shrink-0">2024.07.08</span></li>
-                        <li class="flex justify-between items-center"><a href="#" class="hover:underline truncate pr-4">외국인 유학생 기숙사 신청 관련 공지</a><span class="text-gray-400 text-sm flex-shrink-0">2024.07.05</span></li>
-                    </ul>
+                    
+                    <!-- 공지사항 탭 내용 -->
+                    <div id="noticeContent" class="tab-content active">
+                        <ul class="space-y-3">
+                            <li class="flex justify-between items-center">
+                                <a href="notice-1.html" class="hover:underline truncate pr-4">2025학년도 GKS 외국인 우수자비 장학생 모집 안내</a>
+                                <span class="text-gray-400 text-sm flex-shrink-0">2024.07.15</span>
+                            </li>
+                            <li class="flex justify-between items-center">
+                                <a href="notice-2.html" class="hover:underline truncate pr-4">온라인 유학박람회 개최 (7.20~7.25)</a>
+                                <span class="text-gray-400 text-sm flex-shrink-0">2024.07.10</span>
+                            </li>
+                            <li class="flex justify-between items-center">
+                                <a href="notice-3.html" class="hover:underline truncate pr-4">한국어능력시험(TOPIK) 하반기 접수 일정</a>
+                                <span class="text-gray-400 text-sm flex-shrink-0">2024.07.08</span>
+                            </li>
+                            <li class="flex justify-between items-center">
+                                <a href="notice-4.html" class="hover:underline truncate pr-4">외국인 유학생 기숙사 신청 관련 공지</a>
+                                <span class="text-gray-400 text-sm flex-shrink-0">2024.07.05</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- 유학뉴스 탭 내용 -->
+                    <div id="newsContent" class="tab-content">
+                        <ul class="space-y-3">
+                            <li class="flex justify-between items-center">
+                                <a href="news-1.html" class="hover:underline truncate pr-4">한국 대학교 국제 프로그램 확대, 외국인 유학생 유치 강화</a>
+                                <span class="text-gray-400 text-sm flex-shrink-0">2024.07.14</span>
+                            </li>
+                            <li class="flex justify-between items-center">
+                                <a href="news-2.html" class="hover:underline truncate pr-4">AI·반도체 분야 석박사 과정 외국인 유학생 장학금 신설</a>
+                                <span class="text-gray-400 text-sm flex-shrink-0">2024.07.12</span>
+                            </li>
+                            <li class="flex justify-between items-center">
+                                <a href="news-3.html" class="hover:underline truncate pr-4">2024년 하반기 K-유학박람회, 아시아 5개국에서 개최</a>
+                                <span class="text-gray-400 text-sm flex-shrink-0">2024.07.09</span>
+                            </li>
+                            <li class="flex justify-between items-center">
+                                <a href="news-4.html" class="hover:underline truncate pr-4">외국인 유학생 취업 지원 프로그램 확대, 비자 연장 절차 간소화</a>
+                                <span class="text-gray-400 text-sm flex-shrink-0">2024.07.06</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
+                
                 <div>
                     <h3 class="text-xl font-bold border-b-2 border-gray-200 pb-2 mb-4">ONDY 추천 대학</h3>
                     <div class="grid grid-cols-2 gap-4">
-                        <a href="universities.html" class="flex items-center bg-white p-3 rounded-lg border hover:border-indigo-400">
-                            <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center font-bold text-indigo-700 mr-3">K</div>
+                        <a href="university-detail-1.html" class="flex items-center bg-white p-3 rounded-lg border hover:border-indigo-400 transition-colors">
+                            <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center font-bold text-indigo-700 mr-3">서</div>
                             <div>
-                                <p class="font-semibold">한국대학교</p>
+                                <p class="font-semibold">서울대학교</p>
                                 <p class="text-xs text-gray-500">서울</p>
                             </div>
                         </a>
-                        <a href="universities.html" class="flex items-center bg-white p-3 rounded-lg border hover:border-indigo-400">
-                            <div class="w-12 h-12 bg-rose-100 rounded-lg flex items-center justify-center font-bold text-rose-700 mr-3">A</div>
+                        <a href="university-detail-2.html" class="flex items-center bg-white p-3 rounded-lg border hover:border-indigo-400 transition-colors">
+                            <div class="w-12 h-12 bg-rose-100 rounded-lg flex items-center justify-center font-bold text-rose-700 mr-3">연</div>
                             <div>
-                                <p class="font-semibold">아트대학교</p>
+                                <p class="font-semibold">연세대학교</p>
+                                <p class="text-xs text-gray-500">서울</p>
+                            </div>
+                        </a>
+                        <a href="university-detail-3.html" class="flex items-center bg-white p-3 rounded-lg border hover:border-indigo-400 transition-colors">
+                            <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center font-bold text-amber-700 mr-3">부</div>
+                            <div>
+                                <p class="font-semibold">부산대학교</p>
                                 <p class="text-xs text-gray-500">부산</p>
                             </div>
                         </a>
-                        <a href="universities.html" class="flex items-center bg-white p-3 rounded-lg border hover:border-indigo-400">
-                            <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center font-bold text-amber-700 mr-3">B</div>
+                        <a href="university-detail-4.html" class="flex items-center bg-white p-3 rounded-lg border hover:border-indigo-400 transition-colors">
+                            <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center font-bold text-emerald-700 mr-3">카</div>
                             <div>
-                                <p class="font-semibold">비즈니스대학교</p>
-                                <p class="text-xs text-gray-500">서울</p>
-                            </div>
-                        </a>
-                        <a href="universities.html" class="flex items-center bg-white p-3 rounded-lg border hover:border-indigo-400">
-                            <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center font-bold text-emerald-700 mr-3">G</div>
-                            <div>
-                                <p class="font-semibold">글로벌과기원</p>
+                                <p class="font-semibold">카이스트</p>
                                 <p class="text-xs text-gray-500">대전</p>
                             </div>
                         </a>
@@ -199,6 +357,83 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // 모바일 메뉴 토글
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const overlay = document.getElementById('mobileOverlay');
+            
+            mobileMenu.classList.toggle('open');
+            overlay.classList.toggle('hidden');
+        }
+
+        // 탭 전환 기능
+        function switchTab(tabType) {
+            // 모든 탭 버튼에서 active 클래스 제거
+            document.querySelectorAll('.notice-tab').forEach(tab => {
+                tab.classList.remove('active');
+                tab.classList.add('text-gray-400');
+            });
+            
+            // 모든 탭 콘텐츠 숨기기
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // 선택된 탭 활성화
+            if (tabType === 'notice') {
+                document.querySelector('button[onclick="switchTab(\'notice\')"]').classList.add('active');
+                document.querySelector('button[onclick="switchTab(\'notice\')"]').classList.remove('text-gray-400');
+                document.getElementById('noticeContent').classList.add('active');
+            } else if (tabType === 'news') {
+                document.querySelector('button[onclick="switchTab(\'news\')"]').classList.add('active');
+                document.querySelector('button[onclick="switchTab(\'news\')"]').classList.remove('text-gray-400');
+                document.getElementById('newsContent').classList.add('active');
+            }
+        }
+
+        // 검색 기능
+        function performSearch() {
+            const searchTerm = document.getElementById('searchInput').value.trim();
+            if (searchTerm) {
+                // 검색어에 따라 적절한 페이지로 이동
+                if (searchTerm.includes('대학') || searchTerm.includes('학교')) {
+                    window.location.href = `universities.html?search=${encodeURIComponent(searchTerm)}`;
+                } else if (searchTerm.includes('장학') || searchTerm.includes('GKS')) {
+                    window.location.href = `scholarships.html?search=${encodeURIComponent(searchTerm)}`;
+                } else {
+                    window.location.href = `universities.html?search=${encodeURIComponent(searchTerm)}`;
+                }
+            }
+        }
+
+        // 엔터키로 검색
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        // 검색 제안 표시/숨기기
+        document.getElementById('searchInput').addEventListener('focus', function() {
+            document.getElementById('searchSuggestions').classList.add('show');
+        });
+
+        document.getElementById('searchInput').addEventListener('blur', function() {
+            // 클릭할 시간을 주기 위해 약간의 지연
+            setTimeout(() => {
+                document.getElementById('searchSuggestions').classList.remove('show');
+            }, 200);
+        });
+
+        // 문서 클릭 시 검색 제안 숨기기
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.search-box')) {
+                document.getElementById('searchSuggestions').classList.remove('show');
+            }
+        });
+    </script>
 
 </body>
 </html>
