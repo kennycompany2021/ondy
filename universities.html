@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대학/전공 정보 - ONDY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #ffffff;
+            color: #333333;
+        }
+        .main-header {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .header-top-nav a {
+            color: #555;
+        }
+        .main-nav a {
+            transition: color 0.2s ease, border-color 0.2s ease;
+            padding: 24px 0;
+            border-bottom: 4px solid transparent;
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: #111827;
+        }
+        .main-nav a:hover, .main-nav a.active {
+            color: #4f46e5;
+            border-bottom-color: #4f46e5;
+        }
+        .university-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .university-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .filter-tag {
+            transition: all 0.2s ease;
+        }
+        .filter-tag.active {
+            background-color: #4f46e5;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header -->
+    <header class="main-header bg-white sticky top-0 z-50">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-end items-center h-10 border-b border-gray-100 text-xs header-top-nav space-x-4">
+                <a href="login.html" class="hover:underline">로그인</a>
+                <a href="signup.html" class="hover:underline">회원가입</a>
+                <a href="sitemap.html" class="hover:underline">사이트맵</a>
+            </div>
+            <div class="flex justify-between items-center h-24">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <svg class="h-9 w-auto text-amber-500" viewBox="0 0 44 54" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 0C12.059 0 4 8.059 4 18C4 26.28 9.625 33.125 17.5 35.5V36C14.149 36 10.992 37.06 8.5 38.883V42.25C12.723 39.547 17.167 38 22 38C26.833 38 31.277 39.547 35.5 42.25V38.883C33.008 37.06 29.851 36 26.5 36V35.5C34.375 33.125 40 26.28 40 18C40 8.059 31.941 0 22 0ZM22 30C15.373 30 10 24.627 10 18C10 11.373 15.373 6 22 6C28.627 6 34 11.373 34 18C34 24.627 28.627 30 22 30Z"/>
+                        <path d="M15.5 44.5L22 51L28.5 44.5L22 38L15.5 44.5Z"/>
+                    </svg>
+                    <span class="text-3xl font-bold text-indigo-800">ONDY</span>
+                </a>
+                <nav class="hidden lg:flex items-center space-x-12 h-full main-nav">
+                    <a href="study-guide.html">유학가이드</a>
+                    <a href="universities.html" class="active">대학/전공 정보</a>
+                    <a href="scholarships.html">장학금</a>
+                    <a href="online-application.html">온라인 지원</a>
+                    <a href="community.html">커뮤니티</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-600 text-white py-16">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">대학/전공 정보</h1>
+                <p class="text-xl opacity-90 mb-8">전국 주요 대학의 상세 정보를 확인하고 나에게 맞는 대학을 찾아보세요</p>
+                
+                <!-- Search Box -->
+                <div class="max-w-2xl mx-auto bg-white rounded-full p-2 flex items-center">
+                    <input type="text" placeholder="대학명, 전공, 지역을 검색해보세요" class="w-full bg-transparent text-gray-700 text-lg py-3 px-6 focus:outline-none">
+                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white rounded-full w-12 h-12 flex-shrink-0 flex items-center justify-center">
+                        <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filter Section -->
+        <section class="container mx-auto px-6 py-8">
+            <div class="bg-white rounded-lg shadow-sm p-6 mb-8">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">필터</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">지역</label>
+                        <div class="flex flex-wrap gap-2">
+                            <button class="filter-tag px-3 py-1 text-sm border border-gray-300 rounded-full hover:bg-gray-100" onclick="toggleFilter(this)">서울</button>
+                            <button class="filter-tag px-3 py-1 text-sm border border-gray-300 rounded-full hover:bg-gray-100" onclick="toggleFilter(this)">경기</button>
+                            <button class="filter-tag px-3 py-1 text-sm border border-gray-300 rounded-full hover:bg-gray-100" onclick="toggleFilter(this)">부산</button>
+                            <button class="filter-tag px-3 py-1 text-sm border border-gray-300 rounded-full hover:bg-gray-100" onclick="toggleFilter(this)">대구</button>
+                            <button class="filter-tag px-3 py-1 text-sm border border-gray-300 rounded-full hover:bg-gray-100" onclick="toggleFilter(this)">대전</button>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">대학 유형</label>
+                        <div class="flex flex-wrap gap-2">
+                            <button class="filter-tag px-3 py-1 text-sm border border-gray-300 rounded-full hover:bg-gray-100" onclick="toggleFilter(this)">국립</button>
+                            <button class="filter-tag px-3 py-1 text-sm border border-gray-300 rounded-full hover:bg-gray-100" onclick="toggleFilter(this)">사립</button>
+                            <button class="filter-tag px-3 py-1 text-sm border border-gray-300 rounded-full hover:bg-gray-100" onclick="toggleFilter(this)">전문대</button>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">전공 분야</label>
+                        <div class="flex flex-wrap gap-2">
+                            <button class="filter-tag px-3 py-1 text-sm border border-gray-300 rounded-full hover:bg-gray-100" onclick="toggleFilter(this)">공학</button>
+                            <button class="filter-tag px-3 py-1 text-sm border border-gray-300 rounded-full hover:bg-gray-100" onclick="toggleFilter(this)">경영</button>
+                            <button class="filter-tag px-3 py-1 text-sm border border-gray-300 rounded-full hover:bg-gray-100" onclick="toggleFilter(this)">인문</button>
+                            <button class="filter-tag px-3 py-1 text-sm border border-gray-300 rounded-full hover:bg-gray-100" onclick="toggleFilter(this)">예술</button>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">정렬</label>
+                        <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <option>추천순</option>
+                            <option>가나다순</option>
+                            <option>지역순</option>
+                            <option>학비순</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- University Grid -->
+        <section class="container mx-auto px-6 pb-16">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">검색 결과 <span class="text-indigo-600">48</span>개</h2>
+                <div class="flex items-center space-x-4">
+                    <button class="p-2 border border-gray-300 rounded-lg">
+                        <i class="fa-solid fa-list"></i>
+                    </button>
+                    <button class="p-2 border border-gray-300 rounded-lg bg-indigo-600 text-white">
+                        <i class="fa-solid fa-grid-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- University Card 1 -->
+                <div class="university-card bg-white rounded-xl p-6 border shadow-sm">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-16 h-16 bg-indigo-100 rounded-lg flex items-center justify-center">
+                            <span class="text-2xl font-bold text-indigo-600">서</span>
+                        </div>
+                        <div class="flex space-x-1">
+                            <i class="fa-solid fa-star text-yellow-400"></i>
+                            <i class="fa-solid fa-star text-yellow-400"></i>
+                            <i class="fa-solid fa-star text-yellow-400"></i>
+                            <i class="fa-solid fa-star text-yellow-400"></i>
+                            <i class="fa-solid fa-star text-gray-200"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">서울대학교</h3>
+                    <p class="text-gray-600 mb-3">서울특별시 관악구</p>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">학비</span>
+                            <span class="font-semibold">420만원/년</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">TOPIK 요구</span>
+                            <span class="font-semibold">4급 이상</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">영어과정</span>
+                            <span class="text-green-600 font-semibold">지원</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">공학</span>
+                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">의학</span>
+                        <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">인문</span>
+                    </div>
+                    <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
+                        상세보기
+                    </button>
+                </div>
+
+                <!-- University Card 2 -->
+                <div class="university-card bg-white rounded-xl p-6 border shadow-sm">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-16 h-16 bg-emerald-100 rounded-lg flex items-center justify-center">
+                            <span class="text-2xl font-bold text-emerald-600">연</span>
+                        </div>
+                        <div class="flex space-x-1">
+                            <i class="fa-solid fa-star text-yellow-400"></i>
+                            <i class="fa-solid fa-star text-yellow-400"></i>
+                            <i class="fa-solid fa-star text-yellow-400"></i>
+                            <i class="fa-solid fa-star text-yellow-400"></i>
+                            <i class="fa-solid fa-star text-yellow-400"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">연세대학교</h3>
+                    <p class="text-gray-600 mb-3">서울특별시 서대문구</p>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">학비</span>
+                            <span class="font-semibold">680만원/년</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">TOPIK 요구</span>
+                            <span class="font-semibold">5급 이상</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">영어과정</span>
+                            <span class="text-green-600 font-semibold">지원</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">경영</span>
+                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">공학</span>
+                        <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">국제학</span>
+                    </div>
+                    <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
+                        상세보기
+                    </button>
+                </div>
+
+                <!-- University Card 3 -->
+                <div class="university-card bg-white rounded-xl p-6 border shadow-sm">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-16 h-16 bg-rose-100 rounded-lg flex items-center justify-center">
+                            <span class="text-2xl font-bold text-rose-600">고</span>
+                        </div>
+                        <div class="flex space-x-1">
+                            <i class="fa-solid fa-star text-yellow-400"></i>
+                            <i class="fa-solid fa-star text-yellow-400"></i>
+                            <i class="fa-solid fa-star text-yellow-400"></i>
+                            <i class="fa-solid fa-star text-yellow-400"></i>
+                            <i class="fa-solid fa-star text-gray-200"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">고려대학교</h3>
+                    <p class="text-gray-600 mb-3">서울특별시 성북구</p>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">학비</span>
+                            <span class="font-semibold">650만원/년</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">TOPIK 요구</span>
+                            <span class="font-semibold">4급 이상</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">영어과정</span>
+                            <span class="text-green-600 font-semibold">지원</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">법학</span>
+                        <span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded-full">정치</span>
+                        <span class="px-2 py-1 bg-pink-100 text-pink-800 text-xs rounded-full">미디어</span>
+                    </div>
+                    <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
+                        상세보기
+                    </button>
+                </div>
+
+                <!-- University Card 4 -->
+                <div class="university-card bg-white rounded-xl p-6 border shadow-sm">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-16 h-16 bg-amber-100 rounded-lg flex items-center justify-center">
+                            <span class="text-2xl font-bold text-amber-600">K</span>
+                        </div>
+                        <div class="flex space-x-1">
+                            <i class="fa-solid fa-star text-yellow-400"></i>
+                            <i class="fa-solid fa-star text-yellow-400"></i>
+                            <i class="fa-solid fa-star text-yellow-400"></i>
+                            <i class="fa-solid fa-star text-yellow-400"></i>
+                            <i class="fa-solid fa-star text-gray-200"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">KAIST</h3>
+                    <p class="text-gray-600 mb-3">대전광역시 유성구</p>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">학비</span>
+                            <span class="font-semibold">450만원/년</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">TOPIK 요구</span>
+                            <span class="font-semibold">3급 이상</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">영어과정</span>
+                            <span class="text-green-600 font-semibold">지원</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">공학</span>
+                        <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">과학</span>
+                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">IT</span>
+                    </div>
+                    <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
+                        상세보기
+                    </button>
+                </div>
+
+                <!-- University Card 5 -->
+                <div class="university-card bg-white rounded-xl p-6 border shadow-sm">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-16 h-16 bg-green-100 rounded-lg flex items-center justify-center">
+                            <span class="text-2xl font-bold text-green-600">부</span>
+                        </div>
+                        <div class="flex space-x-1">
+                            <i class="fa-solid fa-star text-yellow-400"></i>
+                            <i class="fa-solid fa-star text-yellow-400"></i>
+                            <i class="fa-solid fa-star text-yellow-400"></i>
+                            <i class="fa-solid fa-star text-yellow-400"></i>
+                            <i class="fa-solid fa-star text-gray-200"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">부산대학교</h3>
+                    <p class="text-gray-600 mb-3">부산광역시 금정구</p>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">학비</span>
+                            <span class="font-semibold">380만원/년</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">TOPIK 요구</span>
+                            <span class="font-semibold">4급 이상</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">영어과정</span>
+                            <span class="text-blue-600 font-semibold">일부</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-cyan-100 text-cyan-800 text-xs rounded-full">해양</span>
+                        <span class="px-2 py-1 bg-teal-100 text-teal-800 text-xs rounded-full">환경</span>
+                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">공학</span>
+                    </div>
+                    <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
+                        상세보기
+                    </button>
+                </div>
+
+                <!-- University Card 6 -->
+                <div class="university-card bg-white rounded-xl p-6 border shadow-sm">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-16 h-16 bg-purple-100 rounded-lg flex items-center justify-center">
+                            <span class="text-2xl font-bold text-purple-600">한</span>
+                        </div>
+                        <div class="flex space-x-1">
+                            <i class="fa-solid fa-star text-yellow-400"></i>
+                            <i class="fa-solid fa-star text-yellow-400"></i>
+                            <i class="fa-solid fa-star text-yellow-400"></i>
+                            <i class="fa-solid fa-star text-yellow-400"></i>
+                            <i class="fa-solid fa-star text-gray-200"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">한양대학교</h3>
+                    <p class="text-gray-600 mb-3">서울특별시 성동구</p>
+                    <div class="space-y-2 mb-4">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">학비</span>
+                            <span class="font-semibold">720만원/년</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">TOPIK 요구</span>
+                            <span class="font-semibold">4급 이상</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">영어과정</span>
+                            <span class="text-green-600 font-semibold">지원</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">경영</span>
+                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">공학</span>
+                        <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">건축</span>
+                    </div>
+                    <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
+                        상세보기
+                    </button>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex justify-center mt-12">
+                <div class="flex space-x-2">
+                    <button class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-100">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <button class="px-3 py-2 bg-indigo-600 text-white rounded-lg">1</button>
+                    <button class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-100">2</button>
+                    <button class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-100">3</button>
+                    <button class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-100">4</button>
+                    <button class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-100">5</button>
+                    <button class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-100">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-16">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold mb-4">원하는 대학을 찾으셨나요?</h2>
+                <p class="text-xl opacity-90 mb-8">지금 바로 온라인으로 지원하거나 더 자세한 정보를 확인해보세요</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="online-application.html" class="bg-white text-indigo-600 font-semibold py-3 px-8 rounded-lg hover:bg-gray-100 transition duration-200">
+                        온라인 지원하기
+                    </a>
+                    <a href="study-guide.html" class="bg-transparent border-2 border-white text-white font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-indigo-600 transition duration-200">
+                        유학가이드 보기
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300">
+        <div class="container mx-auto px-6 py-12">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8 pb-8 border-b border-gray-700">
+                <div class="flex space-x-6 text-sm font-medium">
+                    <a href="#" class="hover:text-white">회사소개</a>
+                    <a href="#" class="hover:text-white">이용약관</a>
+                    <a href="#" class="hover:text-white font-bold text-white">개인정보처리방침</a>
+                    <a href="#" class="hover:text-white">고객센터</a>
+                </div>
+                <div class="flex space-x-4 text-gray-400 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white"><i class="fab fa-youtube fa-lg"></i></a>
+                    <a href="#" class="hover:text-white"><i class="fab fa-instagram fa-lg"></i></a>
+                    <a href="#" class="hover:text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+                </div>
+            </div>
+            <div class="text-sm text-gray-400 text-center md:text-left">
+                <p>(주)온디 | 대표: OOO | 사업자등록번호: 123-45-67890 | 통신판매업신고: 2024-서울강남-00000</p>
+                <p>주소: 서울특별시 강남구 테헤란로 123, 45층 | 이메일: contact@ondy.com | 고객센터: 1588-0000</p>
+                <p class="mt-4">&copy; ONDY Inc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleFilter(element) {
+            element.classList.toggle('active');
+        }
+    </script>
+
+</body>
+</html> 

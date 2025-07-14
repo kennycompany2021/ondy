@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONDY - 대한민국 유학 공식 포털</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #ffffff;
+            color: #333333;
+        }
+        .main-header {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .header-top-nav a {
+            color: #555;
+        }
+        .main-nav a {
+            transition: color 0.2s ease, border-color 0.2s ease;
+            padding: 24px 0;
+            border-bottom: 4px solid transparent;
+            font-weight: 700;
+            font-size: 1.125rem; /* text-lg */
+            color: #111827; /* gray-900 */
+        }
+        .main-nav a:hover, .main-nav a.active {
+            color: #4f46e5; /* indigo-600 */
+            border-bottom-color: #4f46e5;
+        }
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070&auto=format&fit=crop') center center/cover no-repeat;
+        }
+        .search-box {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .info-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+        }
+        .notice-tab.active {
+            font-weight: 700;
+            color: #4f46e5;
+            border-bottom-color: #4f46e5;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header -->
+    <header class="main-header bg-white sticky top-0 z-50">
+        <div class="container mx-auto px-6">
+                            <div class="flex justify-end items-center h-10 border-b border-gray-100 text-xs header-top-nav space-x-4">
+                    <a href="login.html" class="hover:underline">로그인</a>
+                    <a href="signup.html" class="hover:underline">회원가입</a>
+                    <a href="sitemap.html" class="hover:underline">사이트맵</a>
+                </div>
+            <div class="flex justify-between items-center h-24">
+                <a href="#" class="flex items-center space-x-2">
+                    <svg class="h-9 w-auto text-amber-500" viewBox="0 0 44 54" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 0C12.059 0 4 8.059 4 18C4 26.28 9.625 33.125 17.5 35.5V36C14.149 36 10.992 37.06 8.5 38.883V42.25C12.723 39.547 17.167 38 22 38C26.833 38 31.277 39.547 35.5 42.25V38.883C33.008 37.06 29.851 36 26.5 36V35.5C34.375 33.125 40 26.28 40 18C40 8.059 31.941 0 22 0ZM22 30C15.373 30 10 24.627 10 18C10 11.373 15.373 6 22 6C28.627 6 34 11.373 34 18C34 24.627 28.627 30 22 30Z"/>
+                        <path d="M15.5 44.5L22 51L28.5 44.5L22 38L15.5 44.5Z"/>
+                    </svg>
+                    <span class="text-3xl font-bold text-indigo-800">ONDY</span>
+                </a>
+                <nav class="hidden lg:flex items-center space-x-12 h-full main-nav">
+                    <a href="study-guide.html" class="active">유학가이드</a>
+                    <a href="universities.html">대학/전공 정보</a>
+                    <a href="scholarships.html">장학금</a>
+                    <a href="online-application.html">온라인 지원</a>
+                    <a href="community.html">커뮤니티</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section h-[500px] flex items-center justify-center">
+            <div class="container mx-auto px-6 text-center text-white">
+                <h1 class="text-4xl md:text-5xl font-bold leading-tight">대한민국 유학, ONDY와 함께</h1>
+                <p class="text-lg md:text-xl opacity-90 mt-4 mb-8">가장 정확하고 신뢰할 수 있는 정보로 여러분의 성공적인 유학을 돕습니다.</p>
+                <div class="search-box max-w-2xl mx-auto bg-white rounded-full p-2 flex items-center">
+                    <input type="text" placeholder="대학, 전공, 지역 등 궁금한 정보를 검색해보세요." class="w-full bg-transparent text-gray-700 text-lg py-3 px-6 focus:outline-none">
+                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white rounded-full w-12 h-12 flex-shrink-0 flex items-center justify-center">
+                        <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Services -->
+        <section class="bg-gray-50 -mt-16 relative z-10">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <a href="online-application.html" class="info-card bg-white p-6 rounded-lg text-center border">
+                        <i class="fa-solid fa-graduation-cap fa-2x text-indigo-500 mb-3"></i>
+                        <h3 class="font-semibold text-lg">온라인 지원</h3>
+                        <p class="text-sm text-gray-500">간편하게 지원서 작성</p>
+                    </a>
+                    <a href="universities.html" class="info-card bg-white p-6 rounded-lg text-center border">
+                        <i class="fa-solid fa-school fa-2x text-rose-500 mb-3"></i>
+                        <h3 class="font-semibold text-lg">대학 정보</h3>
+                        <p class="text-sm text-gray-500">전국 대학 리스트</p>
+                    </a>
+                    <a href="scholarships.html" class="info-card bg-white p-6 rounded-lg text-center border">
+                        <i class="fa-solid fa-award fa-2x text-amber-500 mb-3"></i>
+                        <h3 class="font-semibold text-lg">장학금 정보</h3>
+                        <p class="text-sm text-gray-500">정부/대학 장학금</p>
+                    </a>
+                    <a href="success-stories.html" class="info-card bg-white p-6 rounded-lg text-center border">
+                        <i class="fa-solid fa-comments fa-2x text-emerald-500 mb-3"></i>
+                        <h3 class="font-semibold text-lg">유학 성공기</h3>
+                        <p class="text-sm text-gray-500">선배들의 생생한 후기</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Notice & News Section -->
+        <section class="container mx-auto px-6 py-20">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <div class="flex items-center border-b-2 border-gray-200 mb-4">
+                        <button class="notice-tab text-lg py-2 px-1 mr-6 border-b-2 active">공지사항</button>
+                        <button class="notice-tab text-lg py-2 px-1 border-b-2 border-transparent text-gray-400">유학 뉴스</button>
+                    </div>
+                    <ul class="space-y-3">
+                        <li class="flex justify-between items-center"><a href="#" class="hover:underline truncate pr-4">2025학년도 GKS 외국인 우수자비 장학생 모집 안내</a><span class="text-gray-400 text-sm flex-shrink-0">2024.07.15</span></li>
+                        <li class="flex justify-between items-center"><a href="#" class="hover:underline truncate pr-4">온라인 유학박람회 개최 (7.20~7.25)</a><span class="text-gray-400 text-sm flex-shrink-0">2024.07.10</span></li>
+                        <li class="flex justify-between items-center"><a href="#" class="hover:underline truncate pr-4">한국어능력시험(TOPIK) 하반기 접수 일정</a><span class="text-gray-400 text-sm flex-shrink-0">2024.07.08</span></li>
+                        <li class="flex justify-between items-center"><a href="#" class="hover:underline truncate pr-4">외국인 유학생 기숙사 신청 관련 공지</a><span class="text-gray-400 text-sm flex-shrink-0">2024.07.05</span></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold border-b-2 border-gray-200 pb-2 mb-4">ONDY 추천 대학</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <a href="universities.html" class="flex items-center bg-white p-3 rounded-lg border hover:border-indigo-400">
+                            <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center font-bold text-indigo-700 mr-3">K</div>
+                            <div>
+                                <p class="font-semibold">한국대학교</p>
+                                <p class="text-xs text-gray-500">서울</p>
+                            </div>
+                        </a>
+                        <a href="universities.html" class="flex items-center bg-white p-3 rounded-lg border hover:border-indigo-400">
+                            <div class="w-12 h-12 bg-rose-100 rounded-lg flex items-center justify-center font-bold text-rose-700 mr-3">A</div>
+                            <div>
+                                <p class="font-semibold">아트대학교</p>
+                                <p class="text-xs text-gray-500">부산</p>
+                            </div>
+                        </a>
+                        <a href="universities.html" class="flex items-center bg-white p-3 rounded-lg border hover:border-indigo-400">
+                            <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center font-bold text-amber-700 mr-3">B</div>
+                            <div>
+                                <p class="font-semibold">비즈니스대학교</p>
+                                <p class="text-xs text-gray-500">서울</p>
+                            </div>
+                        </a>
+                        <a href="universities.html" class="flex items-center bg-white p-3 rounded-lg border hover:border-indigo-400">
+                            <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center font-bold text-emerald-700 mr-3">G</div>
+                            <div>
+                                <p class="font-semibold">글로벌과기원</p>
+                                <p class="text-xs text-gray-500">대전</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300">
+        <div class="container mx-auto px-6 py-12">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8 pb-8 border-b border-gray-700">
+                <div class="flex space-x-6 text-sm font-medium">
+                    <a href="#" class="hover:text-white">회사소개</a>
+                    <a href="#" class="hover:text-white">이용약관</a>
+                    <a href="#" class="hover:text-white font-bold text-white">개인정보처리방침</a>
+                    <a href="#" class="hover:text-white">고객센터</a>
+                </div>
+                <div class="flex space-x-4 text-gray-400 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white"><i class="fab fa-youtube fa-lg"></i></a>
+                    <a href="#" class="hover:text-white"><i class="fab fa-instagram fa-lg"></i></a>
+                    <a href="#" class="hover:text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+                </div>
+            </div>
+            <div class="text-sm text-gray-400 text-center md:text-left">
+                <p>(주)온디 | 대표: OOO | 사업자등록번호: 123-45-67890 | 통신판매업신고: 2024-서울강남-00000</p>
+                <p>주소: 서울특별시 강남구 테헤란로 123, 45층 | 이메일: contact@ondy.com | 고객센터: 1588-0000</p>
+                <p class="mt-4">&copy; ONDY Inc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

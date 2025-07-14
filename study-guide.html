@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>유학가이드 - ONDY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #ffffff;
+            color: #333333;
+        }
+        .main-header {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .header-top-nav a {
+            color: #555;
+        }
+        .main-nav a {
+            transition: color 0.2s ease, border-color 0.2s ease;
+            padding: 24px 0;
+            border-bottom: 4px solid transparent;
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: #111827;
+        }
+        .main-nav a:hover, .main-nav a.active {
+            color: #4f46e5;
+            border-bottom-color: #4f46e5;
+        }
+        .step-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .progress-line {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header -->
+    <header class="main-header bg-white sticky top-0 z-50">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-end items-center h-10 border-b border-gray-100 text-xs header-top-nav space-x-4">
+                <a href="login.html" class="hover:underline">로그인</a>
+                <a href="signup.html" class="hover:underline">회원가입</a>
+                <a href="sitemap.html" class="hover:underline">사이트맵</a>
+            </div>
+            <div class="flex justify-between items-center h-24">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <svg class="h-9 w-auto text-amber-500" viewBox="0 0 44 54" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 0C12.059 0 4 8.059 4 18C4 26.28 9.625 33.125 17.5 35.5V36C14.149 36 10.992 37.06 8.5 38.883V42.25C12.723 39.547 17.167 38 22 38C26.833 38 31.277 39.547 35.5 42.25V38.883C33.008 37.06 29.851 36 26.5 36V35.5C34.375 33.125 40 26.28 40 18C40 8.059 31.941 0 22 0ZM22 30C15.373 30 10 24.627 10 18C10 11.373 15.373 6 22 6C28.627 6 34 11.373 34 18C34 24.627 28.627 30 22 30Z"/>
+                        <path d="M15.5 44.5L22 51L28.5 44.5L22 38L15.5 44.5Z"/>
+                    </svg>
+                    <span class="text-3xl font-bold text-indigo-800">ONDY</span>
+                </a>
+                <nav class="hidden lg:flex items-center space-x-12 h-full main-nav">
+                    <a href="study-guide.html" class="active">유학가이드</a>
+                    <a href="universities.html">대학/전공 정보</a>
+                    <a href="scholarships.html">장학금</a>
+                    <a href="online-application.html">온라인 지원</a>
+                    <a href="community.html">커뮤니티</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 text-white py-16">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">한국 유학 완벽 가이드</h1>
+                <p class="text-xl opacity-90 mb-8">체계적인 준비로 성공적인 한국 유학을 시작하세요</p>
+                <div class="flex justify-center">
+                    <div class="bg-white/20 rounded-full p-4">
+                        <i class="fa-solid fa-graduation-cap fa-3x"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Study Process Steps -->
+        <section class="container mx-auto px-6 py-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">유학 준비 과정</h2>
+                <p class="text-lg text-gray-600">단계별로 차근차근 준비하여 성공적인 유학을 만들어보세요</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                <div class="step-card bg-white rounded-xl p-6 border shadow-sm">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-bold text-indigo-600">1</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">목표 설정</h3>
+                        <p class="text-gray-600 mb-4">전공, 학위 과정, 희망 대학 등 명확한 목표를 설정합니다.</p>
+                        <ul class="text-sm text-gray-500 space-y-1">
+                            <li>• 학업 목표 명확화</li>
+                            <li>• 전공 분야 선택</li>
+                            <li>• 학위 과정 결정</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step-card bg-white rounded-xl p-6 border shadow-sm">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-bold text-emerald-600">2</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">언어 능력</h3>
+                        <p class="text-gray-600 mb-4">한국어 능력시험(TOPIK) 등 필요한 언어 자격을 취득합니다.</p>
+                        <ul class="text-sm text-gray-500 space-y-1">
+                            <li>• TOPIK 시험 준비</li>
+                            <li>• 영어 능력 점검</li>
+                            <li>• 언어 연수 고려</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step-card bg-white rounded-xl p-6 border shadow-sm">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-bold text-amber-600">3</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">서류 준비</h3>
+                        <p class="text-gray-600 mb-4">지원에 필요한 모든 서류를 체계적으로 준비합니다.</p>
+                        <ul class="text-sm text-gray-500 space-y-1">
+                            <li>• 학업계획서 작성</li>
+                            <li>• 성적증명서 준비</li>
+                            <li>• 추천서 확보</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step-card bg-white rounded-xl p-6 border shadow-sm">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-bold text-rose-600">4</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">지원 및 준비</h3>
+                        <p class="text-gray-600 mb-4">온라인 지원을 완료하고 입국 준비를 시작합니다.</p>
+                        <ul class="text-sm text-gray-500 space-y-1">
+                            <li>• 온라인 지원 제출</li>
+                            <li>• 비자 신청</li>
+                            <li>• 숙소 및 생활 준비</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Required Documents -->
+        <section class="bg-white py-16">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <div>
+                        <h2 class="text-3xl font-bold text-gray-800 mb-6">필수 준비 서류</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-start p-4 bg-gray-50 rounded-lg">
+                                <i class="fa-solid fa-file-lines text-indigo-600 mr-4 mt-1"></i>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">학업계획서</h4>
+                                    <p class="text-sm text-gray-600">입학 동기, 학업 목표, 졸업 후 계획 등을 구체적으로 작성</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start p-4 bg-gray-50 rounded-lg">
+                                <i class="fa-solid fa-graduation-cap text-emerald-600 mr-4 mt-1"></i>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">최종학력 증명서류</h4>
+                                    <p class="text-sm text-gray-600">졸업증명서, 성적증명서 (영문 또는 한글 번역본)</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start p-4 bg-gray-50 rounded-lg">
+                                <i class="fa-solid fa-language text-amber-600 mr-4 mt-1"></i>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">언어능력 증명서</h4>
+                                    <p class="text-sm text-gray-600">TOPIK, TOEFL, IELTS 등 공인 언어능력시험 성적표</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start p-4 bg-gray-50 rounded-lg">
+                                <i class="fa-solid fa-id-card text-rose-600 mr-4 mt-1"></i>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">신원 증명서류</h4>
+                                    <p class="text-sm text-gray-600">여권 사본, 출생증명서, 가족관계증명서 등</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start p-4 bg-gray-50 rounded-lg">
+                                <i class="fa-solid fa-dollar-sign text-purple-600 mr-4 mt-1"></i>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">재정능력 증명서</h4>
+                                    <p class="text-sm text-gray-600">은행잔고증명서, 부모님 재직증명서, 소득증명서 등</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-bold text-gray-800 mb-6">중요 일정 및 팁</h2>
+                        <div class="bg-gradient-to-br from-indigo-500 to-purple-600 text-white p-6 rounded-xl mb-6">
+                            <h3 class="text-xl font-semibold mb-4">📅 지원 시기</h3>
+                            <div class="space-y-3">
+                                <div class="flex justify-between">
+                                    <span>봄학기 지원</span>
+                                    <span class="font-semibold">9월 ~ 11월</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>가을학기 지원</span>
+                                    <span class="font-semibold">3월 ~ 5월</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="bg-amber-50 border-l-4 border-amber-400 p-4">
+                                <h4 class="font-semibold text-amber-800 flex items-center">
+                                    <i class="fa-solid fa-lightbulb mr-2"></i>
+                                    준비 팁
+                                </h4>
+                                <p class="text-sm text-amber-700 mt-2">서류 준비는 최소 6개월 전부터 시작하세요. 특히 언어능력시험은 여러 번 응시할 수 있도록 충분한 시간을 확보하는 것이 중요합니다.</p>
+                            </div>
+                            <div class="bg-blue-50 border-l-4 border-blue-400 p-4">
+                                <h4 class="font-semibold text-blue-800 flex items-center">
+                                    <i class="fa-solid fa-info-circle mr-2"></i>
+                                    장학금 정보
+                                </h4>
+                                <p class="text-sm text-blue-700 mt-2">GKS(Global Korea Scholarship) 등 정부 장학금은 별도 일정으로 운영됩니다. 조기에 확인하여 지원 기회를 놓치지 마세요.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="container mx-auto px-6 py-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">자주 묻는 질문</h2>
+                <p class="text-lg text-gray-600">유학생들이 가장 궁금해하는 질문들을 정리했습니다</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto space-y-6">
+                <div class="bg-white border rounded-lg overflow-hidden">
+                    <button class="w-full text-left p-6 focus:outline-none" onclick="toggleFaq(1)">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-lg font-semibold text-gray-800">한국어를 전혀 모르는데 지원이 가능한가요?</h3>
+                            <i class="fa-solid fa-chevron-down text-gray-400" id="faq-icon-1"></i>
+                        </div>
+                    </button>
+                    <div class="hidden p-6 pt-0 border-t" id="faq-answer-1">
+                        <p class="text-gray-600">네, 가능합니다. 많은 대학에서 영어로 진행되는 프로그램을 제공하고 있으며, 한국어 연수 과정도 함께 운영합니다. 다만 일상생활을 위해 기초 한국어 학습을 권장합니다.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white border rounded-lg overflow-hidden">
+                    <button class="w-full text-left p-6 focus:outline-none" onclick="toggleFaq(2)">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-lg font-semibold text-gray-800">학비와 생활비는 얼마나 필요한가요?</h3>
+                            <i class="fa-solid fa-chevron-down text-gray-400" id="faq-icon-2"></i>
+                        </div>
+                    </button>
+                    <div class="hidden p-6 pt-0 border-t" id="faq-answer-2">
+                        <p class="text-gray-600">학부 기준 연간 학비는 300-800만원, 생활비는 600-900만원 정도입니다. 지역과 생활 수준에 따라 차이가 있으며, 기숙사 이용 시 비용을 절약할 수 있습니다.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white border rounded-lg overflow-hidden">
+                    <button class="w-full text-left p-6 focus:outline-none" onclick="toggleFaq(3)">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-lg font-semibold text-gray-800">아르바이트가 가능한가요?</h3>
+                            <i class="fa-solid fa-chevron-down text-gray-400" id="faq-icon-3"></i>
+                        </div>
+                    </button>
+                    <div class="hidden p-6 pt-0 border-t" id="faq-answer-3">
+                        <p class="text-gray-600">D-2 비자로 입국한 유학생은 별도 허가를 받아 주당 20시간 이내에서 아르바이트가 가능합니다. 학기 중에는 제한이 있지만, 방학 중에는 시간 제한이 완화됩니다.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white border rounded-lg overflow-hidden">
+                    <button class="w-full text-left p-6 focus:outline-none" onclick="toggleFaq(4)">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-lg font-semibold text-gray-800">장학금 수혜 가능성은 어떻게 되나요?</h3>
+                            <i class="fa-solid fa-chevron-down text-gray-400" id="faq-icon-4"></i>
+                        </div>
+                    </button>
+                    <div class="hidden p-6 pt-0 border-t" id="faq-answer-4">
+                        <p class="text-gray-600">정부초청장학금(GKS), 대학 자체 장학금, 외부 재단 장학금 등 다양한 기회가 있습니다. 성적과 언어능력에 따라 차등 지급되며, 조기 지원이 유리합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-16">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold mb-4">지금 바로 시작하세요!</h2>
+                <p class="text-xl opacity-90 mb-8">ONDY와 함께 체계적이고 성공적인 한국 유학을 준비하세요</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="universities.html" class="bg-white text-indigo-600 font-semibold py-3 px-8 rounded-lg hover:bg-gray-100 transition duration-200">
+                        대학 정보 보기
+                    </a>
+                    <a href="online-application.html" class="bg-transparent border-2 border-white text-white font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-indigo-600 transition duration-200">
+                        온라인 지원하기
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300">
+        <div class="container mx-auto px-6 py-12">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8 pb-8 border-b border-gray-700">
+                <div class="flex space-x-6 text-sm font-medium">
+                    <a href="#" class="hover:text-white">회사소개</a>
+                    <a href="#" class="hover:text-white">이용약관</a>
+                    <a href="#" class="hover:text-white font-bold text-white">개인정보처리방침</a>
+                    <a href="#" class="hover:text-white">고객센터</a>
+                </div>
+                <div class="flex space-x-4 text-gray-400 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white"><i class="fab fa-youtube fa-lg"></i></a>
+                    <a href="#" class="hover:text-white"><i class="fab fa-instagram fa-lg"></i></a>
+                    <a href="#" class="hover:text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+                </div>
+            </div>
+            <div class="text-sm text-gray-400 text-center md:text-left">
+                <p>(주)온디 | 대표: OOO | 사업자등록번호: 123-45-67890 | 통신판매업신고: 2024-서울강남-00000</p>
+                <p>주소: 서울특별시 강남구 테헤란로 123, 45층 | 이메일: contact@ondy.com | 고객센터: 1588-0000</p>
+                <p class="mt-4">&copy; ONDY Inc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleFaq(id) {
+            const answer = document.getElementById(`faq-answer-${id}`);
+            const icon = document.getElementById(`faq-icon-${id}`);
+            
+            if (answer.classList.contains('hidden')) {
+                answer.classList.remove('hidden');
+                icon.classList.add('fa-chevron-up');
+                icon.classList.remove('fa-chevron-down');
+            } else {
+                answer.classList.add('hidden');
+                icon.classList.add('fa-chevron-down');
+                icon.classList.remove('fa-chevron-up');
+            }
+        }
+    </script>
+
+</body>
+</html> 
