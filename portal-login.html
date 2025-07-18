@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>업무 포털 로그인 - ONDY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #F9FAFB;
+        }
+        .login-card {
+            background: white;
+            border: 1px solid #E5E7EB;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+        .primary-button {
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            transition: all 0.3s ease;
+        }
+        .primary-button:hover {
+            background: linear-gradient(135deg, #4338ca, #4f46e5);
+            transform: translateY(-1px);
+        }
+        .form-input {
+            transition: all 0.2s ease;
+            border: 1px solid #D1D5DB;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4">
+
+    <div class="w-full max-w-sm">
+        <a href="index.html" class="flex items-center justify-center space-x-2 mb-8">
+            <svg class="h-10 w-auto text-amber-500" viewBox="0 0 44 54" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22 0C12.059 0 4 8.059 4 18C4 26.28 9.625 33.125 17.5 35.5V36C14.149 36 10.992 37.06 8.5 38.883V42.25C12.723 39.547 17.167 38 22 38C26.833 38 31.277 39.547 35.5 42.25V38.883C33.008 37.06 29.851 36 26.5 36V35.5C34.375 33.125 40 26.28 40 18C40 8.059 31.941 0 22 0ZM22 30C15.373 30 10 24.627 10 18C10 11.373 15.373 6 22 6C28.627 6 34 11.373 34 18C34 24.627 28.627 30 22 30Z"/>
+                <path d="M15.5 44.5L22 51L28.5 44.5L22 38L15.5 44.5Z"/>
+            </svg>
+            <span class="text-4xl font-bold text-indigo-800">ONDY</span>
+        </a>
+        
+        <div class="login-card rounded-2xl p-8">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-1">업무 포털 로그인</h2>
+            <p class="text-center text-gray-500 mb-8">대학 및 유학원 담당자 전용 페이지입니다.</p>
+            
+            <form id="loginForm">
+                <div class="space-y-4">
+                    <div>
+                        <label for="email" class="text-sm font-medium text-gray-700">업무용 이메일</label>
+                        <input type="email" id="email" name="email" required
+                            class="form-input mt-1 block w-full rounded-lg px-4 py-3 border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
+                            placeholder="email@example.com">
+                    </div>
+                    <div>
+                        <label for="password" class="text-sm font-medium text-gray-700">비밀번호</label>
+                        <input type="password" id="password" name="password" required
+                            class="form-input mt-1 block w-full rounded-lg px-4 py-3 border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
+                            placeholder="••••••••">
+                    </div>
+                </div>
+                
+                <div class="mt-8">
+                    <button type="submit" class="primary-button w-full text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:shadow-outline">
+                        로그인
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html> 
