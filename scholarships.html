@@ -7,76 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Pretendard', sans-serif;
-            background-color: #F9FAFB;
-            color: #111827;
-        }
-        .main-header {
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        .header-top-nav a {
-            color: #555;
-        }
-        .main-nav a {
-            transition: color 0.2s ease, border-color 0.2s ease;
-            padding: 24px 0;
-            border-bottom: 4px solid transparent;
-            font-weight: 700;
-            font-size: 1.125rem;
-            color: #111827;
-        }
-        .main-nav a:hover, .main-nav a.active {
-            color: #4f46e5;
-            border-bottom-color: #4f46e5;
-        }
-        .scholarship-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .scholarship-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-        }
-        .tab-button {
-            transition: all 0.3s ease;
-        }
-        .tab-button.active {
-            background-color: #4f46e5;
-            color: white;
-        }
-        .dropdown {
-            position: relative;
-        }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: white;
-            min-width: 160px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            z-index: 1000;
-            padding: 8px 0;
-        }
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        .dropdown-content a {
-            color: #333;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            font-size: 14px;
-            font-weight: 500;
-            border-bottom: none !important;
-        }
-        .dropdown-content a:hover {
-            background-color: #f3f4f6;
-            color: #4f46e5;
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-gray-50">
 
@@ -84,9 +15,8 @@
     <header class="main-header bg-white sticky top-0 z-50">
         <div class="container mx-auto px-6">
             <div class="flex justify-end items-center h-10 border-b border-gray-100 text-xs header-top-nav space-x-4">
-                <a href="login.html" class="hover:underline">로그인</a>
-                <a href="signup.html" class="hover:underline">회원가입</a>
-                <a href="sitemap.html" class="hover:underline">사이트맵</a>
+                <a href="login.html" class="hover:underline transition-colors">로그인</a>
+                <a href="signup.html" class="hover:underline transition-colors">회원가입</a>
             </div>
             <div class="flex justify-between items-center h-24">
                 <a href="index.html" class="flex items-center space-x-2">
@@ -97,19 +27,47 @@
                     <span class="text-3xl font-bold text-indigo-800">ONDY</span>
                 </a>
                 <nav class="hidden lg:flex items-center space-x-12 h-full main-nav">
+                    <a href="notices.html">공지사항</a>
+                    <a href="news.html">유학뉴스</a>
                     <a href="study-guide.html">유학가이드</a>
                     <a href="universities.html">대학/전공 정보</a>
                     <a href="scholarships.html" class="active">장학금</a>
-                    <div class="dropdown">
-                        <a href="#">소식</a>
-                        <div class="dropdown-content">
-                            <a href="notices.html">공지사항</a>
-                            <a href="news.html">유학뉴스</a>
-                        </div>
-                    </div>
                 </nav>
+                <button id="mobileMenuButton" class="lg:hidden text-gray-600 hover:text-gray-900">
+                    <i class="fas fa-bars fa-lg"></i>
+                </button>
             </div>
         </div>
+        
+        <!-- Mobile Navigation -->
+        <div id="mobileMenu" class="mobile-menu fixed inset-y-0 left-0 w-80 bg-white shadow-xl lg:hidden z-50">
+            <div class="flex items-center justify-between p-6 border-b">
+                <div class="flex items-center space-x-2">
+                    <svg class="h-8 w-auto text-amber-500" viewBox="0 0 44 54" fill="currentColor">
+                        <path d="M22 0C12.059 0 4 8.059 4 18C4 26.28 9.625 33.125 17.5 35.5V36C14.149 36 10.992 37.06 8.5 38.883V42.25C12.723 39.547 17.167 38 22 38C26.833 38 31.277 39.547 35.5 42.25V38.883C33.008 37.06 29.851 36 26.5 36V35.5C34.375 33.125 40 26.28 40 18C40 8.059 31.941 0 22 0ZM22 30C15.373 30 10 24.627 10 18C10 11.373 15.373 6 22 6C28.627 6 34 11.373 34 18C34 24.627 28.627 30 22 30Z"/>
+                        <path d="M15.5 44.5L22 51L28.5 44.5L22 38L15.5 44.5Z"/>
+                    </svg>
+                    <span class="text-2xl font-bold text-indigo-800">ONDY</span>
+                </div>
+                <button id="mobileMenuCloseButton" class="text-gray-600">
+                    <i class="fas fa-times fa-lg"></i>
+                </button>
+            </div>
+            <nav class="p-6 mobile-nav">
+                <a href="notices.html" class="block py-3 text-lg font-semibold text-gray-800 border-b border-gray-100">공지사항</a>
+                <a href="news.html" class="block py-3 text-lg font-semibold text-gray-800 border-b border-gray-100">유학뉴스</a>
+                <a href="study-guide.html" class="block py-3 text-lg font-semibold text-gray-800 border-b border-gray-100">유학가이드</a>
+                <a href="universities.html" class="block py-3 text-lg font-semibold text-gray-800 border-b border-gray-100">대학/전공 정보</a>
+                <a href="scholarships.html" class="block py-3 text-lg font-semibold text-gray-800 border-b border-gray-100 active">장학금</a>
+            </nav>
+            <div class="border-t p-6">
+                <a href="login.html" class="block py-2 text-indigo-600 font-medium">로그인</a>
+                <a href="signup.html" class="block py-2 text-indigo-600 font-medium">회원가입</a>
+            </div>
+        </div>
+        
+        <!-- Mobile menu overlay -->
+        <div id="mobileOverlay" class="hidden fixed inset-0 bg-black bg-opacity-50 lg:hidden z-40"></div>
     </header>
 
     <!-- Main Content -->
@@ -137,21 +95,21 @@
             <!-- Tab Navigation -->
             <div class="flex justify-center mb-8">
                 <div class="bg-white rounded-lg p-1 shadow-sm border">
-                    <button class="tab-button active px-6 py-3 rounded-lg font-semibold" onclick="showTab('government')">정부 장학금</button>
-                    <button class="tab-button px-6 py-3 rounded-lg font-semibold" onclick="showTab('university')">대학 장학금</button>
-                    <button class="tab-button px-6 py-3 rounded-lg font-semibold" onclick="showTab('foundation')">재단 장학금</button>
+                    <button class="tab-button active px-6 py-3 rounded-lg font-semibold" data-tab="government">정부 장학금</button>
+                    <button class="tab-button px-6 py-3 rounded-lg font-semibold" data-tab="university">대학 장학금</button>
+                    <button class="tab-button px-6 py-3 rounded-lg font-semibold" data-tab="foundation">재단 장학금</button>
                 </div>
             </div>
 
             <!-- Government Scholarships -->
             <div id="government-tab" class="tab-content">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-                    <div class="scholarship-card bg-white rounded-xl p-6 border shadow-sm">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
-                                <i class="fa-solid fa-flag text-blue-600"></i>
+                    <a href="scholarship-detail-1.html" class="scholarship-card block bg-white p-6 rounded-lg shadow-sm border border-transparent hover:border-indigo-500 hover:shadow-md transition-all duration-300">
+                        <div class="flex flex-col sm:flex-row items-start gap-6">
+                            <div class="w-24 h-24 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-flag text-blue-600 text-4xl"></i>
                             </div>
-                            <div>
+                            <div class="flex flex-col">
                                 <h3 class="text-lg font-bold text-gray-800">GKS 학부과정</h3>
                                 <p class="text-sm text-blue-600">Global Korea Scholarship</p>
                             </div>
@@ -178,17 +136,14 @@
                             <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">전액장학금</span>
                             <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">생활비지원</span>
                         </div>
-                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
-                            자세히 보기
-                        </button>
-                    </div>
+                    </a>
 
-                    <div class="scholarship-card bg-white rounded-xl p-6 border shadow-sm">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
-                                <i class="fa-solid fa-graduation-cap text-purple-600"></i>
+                    <a href="scholarship-detail-2.html" class="scholarship-card block bg-white p-6 rounded-lg shadow-sm border border-transparent hover:border-indigo-500 hover:shadow-md transition-all duration-300">
+                        <div class="flex flex-col sm:flex-row items-start gap-6">
+                            <div class="w-24 h-24 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-graduation-cap text-purple-600 text-4xl"></i>
                             </div>
-                            <div>
+                            <div class="flex flex-col">
                                 <h3 class="text-lg font-bold text-gray-800">GKS 대학원과정</h3>
                                 <p class="text-sm text-purple-600">석사/박사 과정</p>
                             </div>
@@ -215,17 +170,14 @@
                             <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">대학원</span>
                             <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">연구지원</span>
                         </div>
-                        <button class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
-                            자세히 보기
-                        </button>
-                    </div>
+                    </a>
 
-                    <div class="scholarship-card bg-white rounded-xl p-6 border shadow-sm">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mr-4">
-                                <i class="fa-solid fa-globe text-emerald-600"></i>
+                    <a href="scholarship-detail-3.html" class="scholarship-card block bg-white p-6 rounded-lg shadow-sm border border-transparent hover:border-indigo-500 hover:shadow-md transition-all duration-300">
+                        <div class="flex flex-col sm:flex-row items-start gap-6">
+                            <div class="w-24 h-24 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-globe text-emerald-600 text-4xl"></i>
                             </div>
-                            <div>
+                            <div class="flex flex-col">
                                 <h3 class="text-lg font-bold text-gray-800">K-REACH 장학금</h3>
                                 <p class="text-sm text-emerald-600">한국어 능력 우수자</p>
                             </div>
@@ -252,23 +204,20 @@
                             <span class="px-2 py-1 bg-emerald-100 text-emerald-800 text-xs rounded-full">한국어우수</span>
                             <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">상시모집</span>
                         </div>
-                        <button class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
-                            자세히 보기
-                        </button>
-                    </div>
+                    </a>
                 </div>
             </div>
 
             <!-- University Scholarships -->
             <div id="university-tab" class="tab-content hidden">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-                    <div class="scholarship-card bg-white rounded-xl p-6 border shadow-sm">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mr-4">
-                                <i class="fa-solid fa-university text-indigo-600"></i>
+                    <a href="scholarship-detail-4.html" class="scholarship-card block bg-white p-6 rounded-lg shadow-sm border border-transparent hover:border-indigo-500 hover:shadow-md transition-all duration-300">
+                        <div class="flex flex-col sm:flex-row items-start gap-6">
+                            <div class="w-24 h-24 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-3xl font-bold text-indigo-700">서울대</span>
                             </div>
-                            <div>
-                                <h3 class="text-lg font-bold text-gray-800">우수학생 장학금</h3>
+                            <div class="flex flex-col">
+                                <h3 class="text-lg font-bold text-gray-800">서울대학교 우수 장학금</h3>
                                 <p class="text-sm text-indigo-600">성적 우수자 대상</p>
                             </div>
                         </div>
@@ -290,88 +239,79 @@
                             <span class="px-2 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">성적우수</span>
                             <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">매학기갱신</span>
                         </div>
-                        <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
-                            자세히 보기
-                        </button>
-                    </div>
+                    </a>
 
-                    <div class="scholarship-card bg-white rounded-xl p-6 border shadow-sm">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-rose-100 rounded-lg flex items-center justify-center mr-4">
-                                <i class="fa-solid fa-heart text-rose-600"></i>
+                    <a href="scholarship-detail-5.html" class="scholarship-card block bg-white p-6 rounded-lg shadow-sm border border-transparent hover:border-indigo-500 hover:shadow-md transition-all duration-300">
+                        <div class="flex flex-col sm:flex-row items-start gap-6">
+                            <div class="w-24 h-24 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-3xl font-bold text-emerald-700">연세대</span>
                             </div>
-                            <div>
-                                <h3 class="text-lg font-bold text-gray-800">저소득층 지원</h3>
-                                <p class="text-sm text-rose-600">경제적 어려움 학생</p>
+                            <div class="flex flex-col">
+                                <h3 class="text-lg font-bold text-gray-800">연세대학교 우수 장학금</h3>
+                                <p class="text-sm text-rose-600">신입생 대상</p>
                             </div>
                         </div>
                         <div class="space-y-3 mb-4">
                             <div class="flex justify-between text-sm">
                                 <span class="text-gray-500">지원 금액</span>
-                                <span class="font-semibold text-green-600">학비 50-80%</span>
+                                <span class="font-semibold text-green-600">학비 50-100%</span>
                             </div>
                             <div class="flex justify-between text-sm">
                                 <span class="text-gray-500">지원 조건</span>
-                                <span class="font-semibold">소득분위 하위</span>
+                                <span class="font-semibold">입학성적 우수</span>
                             </div>
                             <div class="flex justify-between text-sm">
                                 <span class="text-gray-500">추가 혜택</span>
-                                <span class="font-semibold">생활비 일부</span>
+                                <span class="font-semibold">기숙사 우선 배정</span>
                             </div>
                         </div>
                         <div class="mb-4">
-                            <span class="px-2 py-1 bg-rose-100 text-rose-800 text-xs rounded-full">저소득층</span>
-                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">생활비지원</span>
+                            <span class="px-2 py-1 bg-rose-100 text-rose-800 text-xs rounded-full">신입생</span>
+                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">자동심사</span>
                         </div>
-                        <button class="w-full bg-rose-600 hover:bg-rose-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
-                            자세히 보기
-                        </button>
-                    </div>
+                    </a>
 
-                    <div class="scholarship-card bg-white rounded-xl p-6 border shadow-sm">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mr-4">
-                                <i class="fa-solid fa-star text-amber-600"></i>
+                    <a href="scholarship-detail-6.html" class="scholarship-card block bg-white p-6 rounded-lg shadow-sm border border-transparent hover:border-indigo-500 hover:shadow-md transition-all duration-300">
+                        <div class="flex flex-col sm:flex-row items-start gap-6">
+                            <div class="w-24 h-24 bg-rose-100 rounded-lg flex items-center justify-center">
+                                <span class="text-3xl font-bold text-rose-700">고려대</span>
                             </div>
-                            <div>
-                                <h3 class="text-lg font-bold text-gray-800">특기자 장학금</h3>
-                                <p class="text-sm text-amber-600">특별 재능 보유자</p>
+                            <div class="flex flex-col">
+                                <h3 class="text-lg font-bold text-gray-800">고려대학교 우수 장학금</h3>
+                                <p class="text-sm text-amber-600">다양한 유형 제공</p>
                             </div>
                         </div>
                         <div class="space-y-3 mb-4">
                             <div class="flex justify-between text-sm">
                                 <span class="text-gray-500">지원 금액</span>
-                                <span class="font-semibold text-green-600">학비 100%</span>
+                                <span class="font-semibold text-green-600">학비/생활비</span>
                             </div>
                             <div class="flex justify-between text-sm">
                                 <span class="text-gray-500">대상 분야</span>
-                                <span class="font-semibold">체육, 예술, 언어</span>
+                                <span class="font-semibold">신입, 재학, 성적향상</span>
                             </div>
                             <div class="flex justify-between text-sm">
                                 <span class="text-gray-500">선발 방식</span>
-                                <span class="font-semibold">실기/포트폴리오</span>
+                                <span class="font-semibold">자동/신청</span>
                             </div>
                         </div>
                         <div class="mb-4">
-                            <span class="px-2 py-1 bg-amber-100 text-amber-800 text-xs rounded-full">특기자</span>
-                            <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">실기평가</span>
+                            <span class="px-2 py-1 bg-amber-100 text-amber-800 text-xs rounded-full">다양한유형</span>
+                            <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">신청필요</span>
                         </div>
-                        <button class="w-full bg-amber-600 hover:bg-amber-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
-                            자세히 보기
-                        </button>
-                    </div>
+                    </a>
                 </div>
             </div>
 
             <!-- Foundation Scholarships -->
             <div id="foundation-tab" class="tab-content hidden">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-                    <div class="scholarship-card bg-white rounded-xl p-6 border shadow-sm">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center mr-4">
-                                <i class="fa-solid fa-building text-teal-600"></i>
+                    <a href="scholarship-detail-7.html" class="scholarship-card block bg-white p-6 rounded-lg shadow-sm border border-transparent hover:border-indigo-500 hover:shadow-md transition-all duration-300">
+                        <div class="flex flex-col sm:flex-row items-start gap-6">
+                            <div class="w-24 h-24 bg-teal-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-building text-teal-600 text-4xl"></i>
                             </div>
-                            <div>
+                            <div class="flex flex-col">
                                 <h3 class="text-lg font-bold text-gray-800">삼성장학재단</h3>
                                 <p class="text-sm text-teal-600">기업 재단 장학금</p>
                             </div>
@@ -394,17 +334,14 @@
                             <span class="px-2 py-1 bg-teal-100 text-teal-800 text-xs rounded-full">이공계</span>
                             <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">멘토링</span>
                         </div>
-                        <button class="w-full bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
-                            자세히 보기
-                        </button>
-                    </div>
+                    </a>
 
-                    <div class="scholarship-card bg-white rounded-xl p-6 border shadow-sm">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-cyan-100 rounded-lg flex items-center justify-center mr-4">
-                                <i class="fa-solid fa-handshake text-cyan-600"></i>
+                    <a href="scholarship-detail-8.html" class="scholarship-card block bg-white p-6 rounded-lg shadow-sm border border-transparent hover:border-indigo-500 hover:shadow-md transition-all duration-300">
+                        <div class="flex flex-col sm:flex-row items-start gap-6">
+                            <div class="w-24 h-24 bg-cyan-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-handshake text-cyan-600 text-4xl"></i>
                             </div>
-                            <div>
+                            <div class="flex flex-col">
                                 <h3 class="text-lg font-bold text-gray-800">한국국제교류재단</h3>
                                 <p class="text-sm text-cyan-600">KF 글로벌 챌린저</p>
                             </div>
@@ -427,17 +364,14 @@
                             <span class="px-2 py-1 bg-cyan-100 text-cyan-800 text-xs rounded-full">한국학</span>
                             <span class="px-2 py-1 bg-pink-100 text-pink-800 text-xs rounded-full">문화체험</span>
                         </div>
-                        <button class="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
-                            자세히 보기
-                        </button>
-                    </div>
+                    </a>
 
-                    <div class="scholarship-card bg-white rounded-xl p-6 border shadow-sm">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
-                                <i class="fa-solid fa-leaf text-green-600"></i>
+                    <a href="scholarship-detail-9.html" class="scholarship-card block bg-white p-6 rounded-lg shadow-sm border border-transparent hover:border-indigo-500 hover:shadow-md transition-all duration-300">
+                        <div class="flex flex-col sm:flex-row items-start gap-6">
+                            <div class="w-24 h-24 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-leaf text-green-600 text-4xl"></i>
                             </div>
-                            <div>
+                            <div class="flex flex-col">
                                 <h3 class="text-lg font-bold text-gray-800">환경재단 장학금</h3>
                                 <p class="text-sm text-green-600">환경 분야 특화</p>
                             </div>
@@ -460,10 +394,7 @@
                             <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">환경분야</span>
                             <span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded-full">봉사활동</span>
                         </div>
-                        <button class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
-                            자세히 보기
-                        </button>
-                    </div>
+                    </a>
                 </div>
             </div>
         </section>
@@ -550,25 +481,6 @@
         </div>
     </footer>
 
-    <script>
-        function showTab(tabName) {
-            // Hide all tab contents
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.add('hidden');
-            });
-            
-            // Remove active class from all buttons
-            document.querySelectorAll('.tab-button').forEach(button => {
-                button.classList.remove('active');
-            });
-            
-            // Show selected tab
-            document.getElementById(tabName + '-tab').classList.remove('hidden');
-            
-            // Add active class to clicked button
-            event.target.classList.add('active');
-        }
-    </script>
-
+    <script src="js/main.js"></script>
 </body>
 </html> 

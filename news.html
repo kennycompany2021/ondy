@@ -7,69 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Pretendard', sans-serif;
-            background-color: #F9FAFB;
-            color: #111827;
-        }
-        .main-header {
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        .header-top-nav a {
-            color: #555;
-        }
-        .main-nav a {
-            transition: color 0.2s ease, border-color 0.2s ease;
-            padding: 24px 0;
-            border-bottom: 4px solid transparent;
-            font-weight: 700;
-            font-size: 1.125rem;
-            color: #111827;
-        }
-        .main-nav a:hover, .main-nav a.active {
-            color: #4f46e5;
-            border-bottom-color: #4f46e5;
-        }
-        .dropdown {
-            position: relative;
-        }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: white;
-            min-width: 160px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            z-index: 1000;
-            padding: 8px 0;
-        }
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        .dropdown-content a {
-            color: #333;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            font-size: 14px;
-            font-weight: 500;
-            border-bottom: none !important;
-        }
-        .dropdown-content a:hover {
-            background-color: #f3f4f6;
-            color: #4f46e5;
-        }
-        .news-card {
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .news-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-gray-50">
 
@@ -77,9 +15,8 @@
     <header class="main-header bg-white sticky top-0 z-50">
         <div class="container mx-auto px-6">
             <div class="flex justify-end items-center h-10 border-b border-gray-100 text-xs header-top-nav space-x-4">
-                <a href="login.html" class="hover:underline">로그인</a>
-                <a href="signup.html" class="hover:underline">회원가입</a>
-                <a href="sitemap.html" class="hover:underline">사이트맵</a>
+                <a href="login.html" class="hover:underline transition-colors">로그인</a>
+                <a href="signup.html" class="hover:underline transition-colors">회원가입</a>
             </div>
             <div class="flex justify-between items-center h-24">
                 <a href="index.html" class="flex items-center space-x-2">
@@ -90,19 +27,45 @@
                     <span class="text-3xl font-bold text-indigo-800">ONDY</span>
                 </a>
                 <nav class="hidden lg:flex items-center space-x-12 h-full main-nav">
+                    <a href="notices.html">공지사항</a>
+                    <a href="news.html">유학뉴스</a>
                     <a href="study-guide.html">유학가이드</a>
                     <a href="universities.html">대학/전공 정보</a>
                     <a href="scholarships.html">장학금</a>
-                    <div class="dropdown">
-                        <a href="#" class="active">소식</a>
-                        <div class="dropdown-content">
-                            <a href="notices.html">공지사항</a>
-                            <a href="news.html">유학뉴스</a>
-                        </div>
-                    </div>
                 </nav>
+                <button id="mobileMenuButton" class="lg:hidden text-gray-600 hover:text-gray-900">
+                    <i class="fas fa-bars fa-lg"></i>
+                </button>
             </div>
         </div>
+        
+        <div id="mobileMenu" class="mobile-menu fixed inset-y-0 left-0 w-80 bg-white shadow-xl lg:hidden z-50">
+            <div class="flex items-center justify-between p-6 border-b">
+                <div class="flex items-center space-x-2">
+                    <svg class="h-8 w-auto text-amber-500" viewBox="0 0 44 54" fill="currentColor">
+                        <path d="M22 0C12.059 0 4 8.059 4 18C4 26.28 9.625 33.125 17.5 35.5V36C14.149 36 10.992 37.06 8.5 38.883V42.25C12.723 39.547 17.167 38 22 38C26.833 38 31.277 39.547 35.5 42.25V38.883C33.008 37.06 29.851 36 26.5 36V35.5C34.375 33.125 40 26.28 40 18C40 8.059 31.941 0 22 0ZM22 30C15.373 30 10 24.627 10 18C10 11.373 15.373 6 22 6C28.627 6 34 11.373 34 18C34 24.627 28.627 30 22 30Z"/>
+                        <path d="M15.5 44.5L22 51L28.5 44.5L22 38L15.5 44.5Z"/>
+                    </svg>
+                    <span class="text-2xl font-bold text-indigo-800">ONDY</span>
+                </div>
+                <button id="mobileMenuCloseButton" class="text-gray-600">
+                    <i class="fas fa-times fa-lg"></i>
+                </button>
+            </div>
+            <nav class="p-6 mobile-nav">
+                <a href="notices.html" class="block py-3 text-lg font-semibold text-gray-800 border-b border-gray-100">공지사항</a>
+                <a href="news.html" class="block py-3 text-lg font-semibold text-gray-800 border-b border-gray-100">유학뉴스</a>
+                <a href="study-guide.html" class="block py-3 text-lg font-semibold text-gray-800 border-b border-gray-100">유학가이드</a>
+                <a href="universities.html" class="block py-3 text-lg font-semibold text-gray-800 border-b border-gray-100">대학/전공 정보</a>
+                <a href="scholarships.html" class="block py-3 text-lg font-semibold text-gray-800">장학금</a>
+            </nav>
+            <div class="border-t p-6">
+                <a href="login.html" class="block py-2 text-indigo-600 font-medium">로그인</a>
+                <a href="signup.html" class="block py-2 text-indigo-600 font-medium">회원가입</a>
+            </div>
+        </div>
+        
+        <div id="mobileOverlay" class="hidden fixed inset-0 bg-black bg-opacity-50 lg:hidden z-40"></div>
     </header>
 
     <!-- Main Content -->
@@ -386,7 +349,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-gray-300">
+    <footer class="bg-gray-800 text-gray-300 mt-12">
         <div class="container mx-auto px-6 py-12">
             <div class="flex flex-col md:flex-row justify-between items-center mb-8 pb-8 border-b border-gray-700">
                 <div class="flex space-x-6 text-sm font-medium">
@@ -408,6 +371,8 @@
             </div>
         </div>
     </footer>
+
+    <script src="js/main.js"></script>
 
 </body>
 </html> 

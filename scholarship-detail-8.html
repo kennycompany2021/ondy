@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>장학금 상세 - ONDY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="main-header bg-white sticky top-0 z-50">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-end items-center h-10 border-b border-gray-100 text-xs header-top-nav space-x-4">
+                <a href="login.html" class="hover:underline transition-colors">로그인</a>
+                <a href="signup.html" class="hover:underline transition-colors">회원가입</a>
+            </div>
+            <div class="flex justify-between items-center h-24">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <svg class="h-9 w-auto text-amber-500" viewBox="0 0 44 54" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 0C12.059 0 4 8.059 4 18C4 26.28 9.625 33.125 17.5 35.5V36C14.149 36 10.992 37.06 8.5 38.883V42.25C12.723 39.547 17.167 38 22 38C26.833 38 31.277 39.547 35.5 42.25V38.883C33.008 37.06 29.851 36 26.5 36V35.5C34.375 33.125 40 26.28 40 18C40 8.059 31.941 0 22 0ZM22 30C15.373 30 10 24.627 10 18C10 11.373 15.373 6 22 6C28.627 6 34 11.373 34 18C34 24.627 28.627 30 22 30Z"/>
+                        <path d="M15.5 44.5L22 51L28.5 44.5L22 38L15.5 44.5Z"/>
+                    </svg>
+                    <span class="text-3xl font-bold text-indigo-800">ONDY</span>
+                </a>
+                <nav class="hidden lg:flex items-center space-x-12 h-full main-nav">
+                    <a href="notices.html">공지사항</a>
+                    <a href="news.html">유학뉴스</a>
+                    <a href="study-guide.html">유학가이드</a>
+                    <a href="universities.html">대학/전공 정보</a>
+                    <a href="scholarships.html">장학금</a>
+                </nav>
+                <button id="mobileMenuButton" class="lg:hidden text-gray-600 hover:text-gray-900">
+                    <i class="fas fa-bars fa-lg"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div id="mobileMenu" class="mobile-menu fixed inset-y-0 left-0 w-80 bg-white shadow-xl lg:hidden z-50">
+            <div class="flex items-center justify-between p-6 border-b">
+                <div class="flex items-center space-x-2">
+                    <svg class="h-8 w-auto text-amber-500" viewBox="0 0 44 54" fill="currentColor">
+                        <path d="M22 0C12.059 0 4 8.059 4 18C4 26.28 9.625 33.125 17.5 35.5V36C14.149 36 10.992 37.06 8.5 38.883V42.25C12.723 39.547 17.167 38 22 38C26.833 38 31.277 39.547 35.5 42.25V38.883C33.008 37.06 29.851 36 26.5 36V35.5C34.375 33.125 40 26.28 40 18C40 8.059 31.941 0 22 0ZM22 30C15.373 30 10 24.627 10 18C10 11.373 15.373 6 22 6C28.627 6 34 11.373 34 18C34 24.627 28.627 30 22 30Z"/>
+                        <path d="M15.5 44.5L22 51L28.5 44.5L22 38L15.5 44.5Z"/>
+                    </svg>
+                    <span class="text-2xl font-bold text-indigo-800">ONDY</span>
+                </div>
+                <button id="mobileMenuCloseButton" class="text-gray-600">
+                    <i class="fas fa-times fa-lg"></i>
+                </button>
+            </div>
+            <nav class="p-6 mobile-nav">
+                <a href="notices.html" class="block py-3 text-lg font-semibold text-gray-800 border-b border-gray-100">공지사항</a>
+                <a href="news.html" class="block py-3 text-lg font-semibold text-gray-800 border-b border-gray-100">유학뉴스</a>
+                <a href="study-guide.html" class="block py-3 text-lg font-semibold text-gray-800 border-b border-gray-100">유학가이드</a>
+                <a href="universities.html" class="block py-3 text-lg font-semibold text-gray-800 border-b border-gray-100">대학/전공 정보</a>
+                <a href="scholarships.html" class="block py-3 text-lg font-semibold text-gray-800 border-b border-gray-100">장학금</a>
+            </nav>
+            <div class="border-t p-6">
+                <a href="login.html" class="block py-2 text-indigo-600 font-medium">로그인</a>
+                <a href="signup.html" class="block py-2 text-indigo-600 font-medium">회원가입</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-8">
+        <div class="flex items-center space-x-2 text-sm text-gray-500 mb-6">
+            <a href="index.html" class="hover:text-indigo-600">홈</a>
+            <i class="fas fa-chevron-right text-xs"></i>
+            <a href="scholarships.html" class="hover:text-indigo-600">장학금 정보</a>
+            <i class="fas fa-chevron-right text-xs"></i>
+            <span class="text-gray-800">한국국제교류재단(KF) 장학금</span>
+        </div>
+
+        <!-- Scholarship Header -->
+        <div class="bg-white rounded-lg shadow-sm border p-8 mb-6">
+            <div class="flex flex-col md:flex-row items-start gap-6">
+                <div class="w-32 h-32 bg-cyan-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                     <i class="fa-solid fa-handshake text-cyan-600 text-5xl"></i>
+                </div>
+                <div class="flex-1">
+                    <h1 class="text-3xl font-bold text-gray-800 mb-2">한국국제교류재단(KF) 장학금</h1>
+                    <p class="text-gray-600 mb-4 text-lg">주관: 한국국제교류재단 (Korea Foundation)</p>
+                    <p class="text-gray-700 leading-relaxed">한국학 및 관련 분야의 해외 차세대 인재를 양성하여 전 세계적으로 한국에 대한 이해를 높이고 국제 우호 관계를 증진시키기 위한 장학 프로그램입니다.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Info -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm border text-center">
+                <div class="text-2xl font-bold text-indigo-600 mb-2">약 50명</div>
+                <div class="text-gray-600">선발 인원</div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm border text-center">
+                <div class="text-2xl font-bold text-green-600 mb-2">연 400만원</div>
+                <div class="text-gray-600">지원 금액</div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm border text-center">
+                <div class="text-2xl font-bold text-blue-600 mb-2">1년</div>
+                <div class="text-gray-600">지원 기간</div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm border text-center">
+                <div class="text-2xl font-bold text-purple-600 mb-2">한국학 전공</div>
+                <div class="text-gray-600">주요 조건</div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2 space-y-8">
+                <!-- 지원 자격 -->
+                <div class="bg-white rounded-lg shadow-sm border p-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">지원 자격</h2>
+                    <ul class="list-disc list-inside space-y-3 text-gray-700">
+                        <li><strong>학적:</strong> 국내 대학의 석사 또는 박사 과정에 재학 중인 외국인 학생</li>
+                        <li><strong>전공:</strong> 한국학(인문, 사회과학) 관련 분야 전공자</li>
+                        <li><strong>성적:</strong> 직전 학기까지의 총 평점 평균이 4.0 만점 기준 3.0 이상인 자</li>
+                        <li><strong>언어:</strong> 한국어로 진행되는 학위과정 수학이 가능한 자 (TOPIK 4급 이상 권장)</li>
+                    </ul>
+                </div>
+
+                <!-- 지원 내용 -->
+                <div class="bg-white rounded-lg shadow-sm border p-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">지원 내용</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-4 bg-green-50 rounded-lg"><i class="fas fa-wallet mr-2 text-green-600"></i>생활비 (연 400만원, 분기별 지급)</div>
+                        <div class="p-4 bg-pink-50 rounded-lg"><i class="fas fa-book-reader mr-2 text-pink-600"></i>한국 문화 체험 프로그램 참여 기회</li>
+                        <div class="p-4 bg-blue-50 rounded-lg"><i class="fas fa-network-wired mr-2 text-blue-600"></i>KF 글로벌 네트워킹 행사 초청</li>
+                        <div class="p-4 bg-yellow-50 rounded-lg"><i class="fas fa-trophy mr-2 text-yellow-600"></i>우수 장학생 대상 학술활동 지원</div>
+                    </div>
+                </div>
+
+                <!-- 신청 방법 -->
+                <div class="bg-white rounded-lg shadow-sm border p-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">신청 방법 및 절차</h2>
+                     <ol class="relative border-l border-gray-200">                  
+                        <li class="mb-10 ml-4">
+                            <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white"></div>
+                            <time class="mb-1 text-sm font-normal leading-none text-gray-400">매년 7월 ~ 8월</time>
+                            <h3 class="text-lg font-semibold text-gray-900">온라인 신청</h3>
+                            <p class="mb-4 text-base font-normal text-gray-500">KF 온라인 신청 시스템(apply.kf.or.kr)을 통해 접수</p>
+                        </li>
+                        <li class="mb-10 ml-4">
+                            <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white"></div>
+                            <time class="mb-1 text-sm font-normal leading-none text-gray-400">매년 9월</time>
+                            <h3 class="text-lg font-semibold text-gray-900">서류 심사</h3>
+                            <p class="text-base font-normal text-gray-500">내부 심사위원회를 통해 지원자의 자격 및 제출 서류 심사</p>
+                        </li>
+                        <li class="ml-4">
+                            <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white"></div>
+                            <time class="mb-1 text-sm font-normal leading-none text-gray-400">매년 10월</time>
+                            <h3 class="text-lg font-semibold text-gray-900">결과 발표</h3>
+                            <p class="text-base font-normal text-gray-500">KF 홈페이지 및 개별 이메일을 통해 공지</p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="space-y-6">
+                <!-- 제출 서류 -->
+                <div class="bg-white rounded-lg shadow-sm border p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">제출 서류</h3>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i>온라인 신청서</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i>학위 및 성적 증명서</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i>재학증명서</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i>연구계획서</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i>추천서 2부</li>
+                    </ul>
+                </div>
+
+                <!-- 문의처 -->
+                <div class="bg-white rounded-lg shadow-sm border p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">문의처</h3>
+                    <div class="space-y-3 text-sm">
+                        <div>
+                            <span class="text-gray-600">기관:</span>
+                            <p class="font-medium">한국국제교류재단 (KF)</p>
+                        </div>
+                        <div>
+                            <span class="text-gray-600">이메일:</span>
+                            <p class="font-medium">fellowship@kf.or.kr</p>
+                        </div>
+                        <div>
+                            <span class="text-gray-600">웹사이트:</span>
+                            <a href="https://www.kf.or.kr" target="_blank" class="font-medium text-indigo-600 hover:underline">www.kf.or.kr</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 mt-16">
+        <div class="container mx-auto px-6 py-12">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8 pb-8 border-b border-gray-700">
+                <div class="flex space-x-6 text-sm font-medium">
+                    <a href="#" class="hover:text-white">회사소개</a>
+                    <a href="#" class="hover:text-white">이용약관</a>
+                    <a href="#" class="hover:text-white font-bold text-white">개인정보처리방침</a>
+                    <a href="#" class="hover:text-white">고객센터</a>
+                </div>
+                <div class="flex space-x-4 text-gray-400 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white"><i class="fab fa-youtube fa-lg"></i></a>
+                    <a href="#" class="hover:text-white"><i class="fab fa-instagram fa-lg"></i></a>
+                    <a href="#" class="hover:text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+                </div>
+            </div>
+            <div class="text-sm text-gray-400 text-center md:text-left">
+                <p>(주)온디 | 대표: OOO | 사업자등록번호: 123-45-67890 | 통신판매업신고: 2024-서울강남-00000</p>
+                <p>주소: 서울특별시 강남구 테헤란로 123, 45층 | 이메일: contact@ondy.com | 고객센터: 1588-0000</p>
+                <p class="mt-4">&copy; ONDY Inc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html> 

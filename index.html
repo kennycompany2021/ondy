@@ -3,34 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ONDY - 대한민국 유학 공식 포털</title>
+    <title>ONDY - 대한민국 유학의 모든 것</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <style>
-        body {
-            font-family: 'Pretendard', sans-serif;
-            background-color: #F9FAFB;
-            color: #111827;
-        }
-        .main-header {
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        .header-top-nav a {
-            color: #6B7280;
-        }
-        .main-nav a {
-            transition: color 0.2s ease, border-color 0.2s ease;
-            padding: 24px 0;
-            border-bottom: 4px solid transparent;
-            font-weight: 700;
-            font-size: 1.125rem;
-            color: #111827;
-        }
-        .main-nav a:hover, .main-nav a.active {
-            color: #4f46e5;
-            border-bottom-color: #4f46e5;
-        }
         .hero-section {
             background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070&auto=format&fit=crop') center center/cover no-repeat;
         }
@@ -59,13 +37,6 @@
         .notice-tab:hover {
             color: #4f46e5;
         }
-        .mobile-menu {
-            transform: translateX(-100%);
-            transition: transform 0.3s ease;
-        }
-        .mobile-menu.open {
-            transform: translateX(0);
-        }
         .tab-content {
             display: none;
         }
@@ -88,37 +59,6 @@
                 opacity: 1;
                 transform: translateY(0);
             }
-        }
-        .dropdown {
-            position: relative;
-        }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: white;
-            min-width: 160px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            z-index: 1000;
-            padding: 8px 0;
-        }
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        .dropdown-content a {
-            color: #111827;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            font-size: 14px;
-            font-weight: 500;
-            border-bottom: none !important;
-        }
-        .dropdown-content a:hover {
-            background-color: #F3F4F6;
-            color: #4f46e5;
         }
         .university-card {
             transition: all 0.3s ease;
@@ -159,25 +99,18 @@
                     <span class="text-3xl font-bold text-indigo-800">ONDY</span>
                 </a>
                 <nav class="hidden lg:flex items-center space-x-12 h-full main-nav">
-                    <a href="study-guide.html" class="active">유학가이드</a>
+                    <a href="notices.html">공지사항</a>
+                    <a href="news.html">유학뉴스</a>
+                    <a href="study-guide.html">유학가이드</a>
                     <a href="universities.html">대학/전공 정보</a>
                     <a href="scholarships.html">장학금</a>
-                    <div class="dropdown">
-                        <a href="#">소식</a>
-                        <div class="dropdown-content">
-                            <a href="notices.html">공지사항</a>
-                            <a href="news.html">유학뉴스</a>
-                        </div>
-                    </div>
                 </nav>
-                <!-- Mobile menu button -->
-                <button class="lg:hidden text-gray-600 hover:text-gray-900" onclick="toggleMobileMenu()">
+                <button id="mobileMenuButton" class="lg:hidden text-gray-600 hover:text-gray-900">
                     <i class="fas fa-bars fa-lg"></i>
                 </button>
             </div>
         </div>
         
-        <!-- Mobile Navigation -->
         <div id="mobileMenu" class="mobile-menu fixed inset-y-0 left-0 w-80 bg-white shadow-xl lg:hidden z-50">
             <div class="flex items-center justify-between p-6 border-b">
                 <div class="flex items-center space-x-2">
@@ -187,21 +120,16 @@
                     </svg>
                     <span class="text-2xl font-bold text-indigo-800">ONDY</span>
                 </div>
-                <button onclick="toggleMobileMenu()" class="text-gray-600">
+                <button id="mobileMenuCloseButton" class="text-gray-600">
                     <i class="fas fa-times fa-lg"></i>
                 </button>
             </div>
-            <nav class="p-6">
+            <nav class="p-6 mobile-nav">
+                <a href="notices.html" class="block py-3 text-lg font-semibold text-gray-800 border-b border-gray-100">공지사항</a>
+                <a href="news.html" class="block py-3 text-lg font-semibold text-gray-800 border-b border-gray-100">유학뉴스</a>
                 <a href="study-guide.html" class="block py-3 text-lg font-semibold text-gray-800 border-b border-gray-100">유학가이드</a>
                 <a href="universities.html" class="block py-3 text-lg font-semibold text-gray-800 border-b border-gray-100">대학/전공 정보</a>
-                <a href="scholarships.html" class="block py-3 text-lg font-semibold text-gray-800 border-b border-gray-100">장학금</a>
-                <div class="py-3 border-b border-gray-100">
-                    <span class="text-lg font-semibold text-gray-800">소식</span>
-                    <div class="mt-2 ml-4 space-y-2">
-                        <a href="notices.html" class="block py-1 text-gray-600">공지사항</a>
-                        <a href="news.html" class="block py-1 text-gray-600">유학뉴스</a>
-                    </div>
-                </div>
+                <a href="scholarships.html" class="block py-3 text-lg font-semibold text-gray-800">장학금</a>
             </nav>
             <div class="border-t p-6">
                 <a href="login.html" class="block py-2 text-indigo-600 font-medium">로그인</a>
@@ -209,8 +137,7 @@
             </div>
         </div>
         
-        <!-- Mobile menu overlay -->
-        <div id="mobileOverlay" class="hidden fixed inset-0 bg-black bg-opacity-50 lg:hidden z-40" onclick="toggleMobileMenu()"></div>
+        <div id="mobileOverlay" class="hidden fixed inset-0 bg-black bg-opacity-50 lg:hidden z-40"></div>
     </header>
 
     <!-- Main Content -->
@@ -349,7 +276,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-gray-300">
+    <footer class="bg-gray-800 text-gray-300 mt-12">
         <div class="container mx-auto px-6 py-12">
             <div class="flex flex-col md:flex-row justify-between items-center mb-8 pb-8 border-b border-gray-700">
                 <div class="flex space-x-6 text-sm font-medium">
@@ -372,16 +299,8 @@
         </div>
     </footer>
 
+    <script src="js/main.js"></script>
     <script>
-        // 모바일 메뉴 토글
-        function toggleMobileMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const overlay = document.getElementById('mobileOverlay');
-            
-            mobileMenu.classList.toggle('open');
-            overlay.classList.toggle('hidden');
-        }
-
         // 탭 전환 기능
         function switchTab(tabType) {
             // 모든 탭 버튼에서 active 클래스 제거
@@ -448,6 +367,5 @@
             }
         });
     </script>
-
 </body>
 </html>

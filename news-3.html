@@ -3,45 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2024년 하반기 K-유학박람회, 아시아 5개국에서 개최 - ONDY</title>
+    <title>유학뉴스 상세 - ONDY</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body { font-family: 'Pretendard', sans-serif; }
-        .main-header { box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-gray-50">
 
+    <!-- Header -->
     <header class="main-header bg-white sticky top-0 z-50">
         <div class="container mx-auto px-6">
-            <div class="flex justify-end items-center h-10 border-b border-gray-100 text-xs text-gray-600 space-x-4">
-                <a href="login.html" class="hover:underline">로그인</a>
-                <a href="signup.html" class="hover:underline">회원가입</a>
-                <a href="sitemap.html" class="hover:underline">사이트맵</a>
+            <div class="flex justify-end items-center h-10 border-b border-gray-100 text-xs header-top-nav space-x-4">
+                <a href="login.html" class="hover:underline transition-colors">로그인</a>
+                <a href="signup.html" class="hover:underline transition-colors">회원가입</a>
             </div>
             <div class="flex justify-between items-center h-24">
                 <a href="index.html" class="flex items-center space-x-2">
-                    <svg class="h-9 w-auto text-amber-500" viewBox="0 0 44 54" fill="currentColor">
+                    <svg class="h-9 w-auto text-amber-500" viewBox="0 0 44 54" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path d="M22 0C12.059 0 4 8.059 4 18C4 26.28 9.625 33.125 17.5 35.5V36C14.149 36 10.992 37.06 8.5 38.883V42.25C12.723 39.547 17.167 38 22 38C26.833 38 31.277 39.547 35.5 42.25V38.883C33.008 37.06 29.851 36 26.5 36V35.5C34.375 33.125 40 26.28 40 18C40 8.059 31.941 0 22 0ZM22 30C15.373 30 10 24.627 10 18C10 11.373 15.373 6 22 6C28.627 6 34 11.373 34 18C34 24.627 28.627 30 22 30Z"/>
                         <path d="M15.5 44.5L22 51L28.5 44.5L22 38L15.5 44.5Z"/>
                     </svg>
                     <span class="text-3xl font-bold text-indigo-800">ONDY</span>
                 </a>
-                <nav class="hidden lg:flex items-center space-x-12">
-                    <a href="study-guide.html" class="text-gray-600 hover:text-indigo-600 font-medium">유학가이드</a>
-                    <a href="universities.html" class="text-gray-600 hover:text-indigo-600 font-medium">대학/전공 정보</a>
-                    <a href="scholarships.html" class="text-gray-600 hover:text-indigo-600 font-medium">장학금</a>
+                <nav class="hidden lg:flex items-center space-x-12 h-full main-nav">
+                    <a href="notices.html">공지사항</a>
+                    <a href="news.html">유학뉴스</a>
+                    <a href="study-guide.html">유학가이드</a>
+                    <a href="universities.html">대학/전공 정보</a>
+                    <a href="scholarships.html">장학금</a>
                 </nav>
+                <button id="mobileMenuButton" class="lg:hidden text-gray-600 hover:text-gray-900">
+                    <i class="fas fa-bars fa-lg"></i>
+                </button>
             </div>
         </div>
+        
+        <div id="mobileMenu" class="mobile-menu fixed inset-y-0 left-0 w-80 bg-white shadow-xl lg:hidden z-50">
+            <div class="flex items-center justify-between p-6 border-b">
+                <div class="flex items-center space-x-2">
+                    <svg class="h-8 w-auto text-amber-500" viewBox="0 0 44 54" fill="currentColor">
+                        <path d="M22 0C12.059 0 4 8.059 4 18C4 26.28 9.625 33.125 17.5 35.5V36C14.149 36 10.992 37.06 8.5 38.883V42.25C12.723 39.547 17.167 38 22 38C26.833 38 31.277 39.547 35.5 42.25V38.883C33.008 37.06 29.851 36 26.5 36V35.5C34.375 33.125 40 26.28 40 18C40 8.059 31.941 0 22 0ZM22 30C15.373 30 10 24.627 10 18C10 11.373 15.373 6 22 6C28.627 6 34 11.373 34 18C34 24.627 28.627 30 22 30Z"/>
+                        <path d="M15.5 44.5L22 51L28.5 44.5L22 38L15.5 44.5Z"/>
+                    </svg>
+                    <span class="text-2xl font-bold text-indigo-800">ONDY</span>
+                </div>
+                <button id="mobileMenuCloseButton" class="text-gray-600">
+                    <i class="fas fa-times fa-lg"></i>
+                </button>
+            </div>
+            <nav class="p-6 mobile-nav">
+                <a href="notices.html" class="block py-3 text-lg font-semibold text-gray-800 border-b border-gray-100">공지사항</a>
+                <a href="news.html" class="block py-3 text-lg font-semibold text-gray-800 border-b border-gray-100">유학뉴스</a>
+                <a href="study-guide.html" class="block py-3 text-lg font-semibold text-gray-800 border-b border-gray-100">유학가이드</a>
+                <a href="universities.html" class="block py-3 text-lg font-semibold text-gray-800 border-b border-gray-100">대학/전공 정보</a>
+                <a href="scholarships.html" class="block py-3 text-lg font-semibold text-gray-800">장학금</a>
+            </nav>
+            <div class="border-t p-6">
+                <a href="login.html" class="block py-2 text-indigo-600 font-medium">로그인</a>
+                <a href="signup.html" class="block py-2 text-indigo-600 font-medium">회원가입</a>
+            </div>
+        </div>
+        
+        <div id="mobileOverlay" class="hidden fixed inset-0 bg-black bg-opacity-50 lg:hidden z-40"></div>
     </header>
 
     <main class="container mx-auto px-6 py-8">
+        <div class="flex items-center space-x-2 text-sm text-gray-500 mb-6">
+            <a href="index.html" class="hover:text-indigo-600">홈</a>
+            <i class="fas fa-chevron-right text-xs"></i>
+            <a href="news.html" class="hover:text-indigo-600">유학뉴스</a>
+            <i class="fas fa-chevron-right text-xs"></i>
+            <span class="text-gray-800">뉴스 상세</span>
+        </div>
+
         <div class="bg-white rounded-lg shadow-sm border p-8 mb-6">
             <div class="border-b pb-6 mb-6">
-                <span class="inline-block bg-orange-100 text-orange-600 text-sm font-medium px-3 py-1 rounded-full mb-4">행사</span>
+                <span class="inline-block bg-pink-100 text-pink-600 text-sm font-medium px-3 py-1 rounded-full mb-4">행사</span>
                 <h1 class="text-3xl font-bold text-gray-900 mb-4">2024년 하반기 K-유학박람회, 아시아 5개국에서 개최</h1>
                 <div class="flex items-center text-gray-500 text-sm space-x-4">
                     <div class="flex items-center space-x-1">
@@ -50,115 +88,109 @@
                     </div>
                     <div class="flex items-center space-x-1">
                         <i class="fas fa-eye"></i>
-                        <span>조회수 1,678</span>
+                        <span>조회수 1,542</span>
+                    </div>
+                    <div class="flex items-center space-x-1">
+                        <i class="fas fa-user"></i>
+                        <span>ONDY 편집부</span>
                     </div>
                 </div>
             </div>
 
-            <div class="prose max-w-none">
-                <div class="bg-orange-50 border-l-4 border-orange-400 p-4 mb-6">
-                    <p class="text-orange-700 font-medium">
-                        <i class="fas fa-flag mr-2"></i>
-                        한국 유학 홍보를 위한 K-유학박람회가 아시아 주요 5개국에서 개최됩니다.
+            <article class="prose max-w-none">
+                <div class="bg-pink-50 border-l-4 border-pink-400 p-4 mb-6">
+                    <p class="text-pink-700 font-medium">
+                        <i class="fas fa-plane-departure mr-2"></i>
+                        교육부와 국립국제교육원이 주관하는 '2024년 하반기 K-유학박람회'가 아시아 5개국에서 순차적으로 개최됩니다.
                     </p>
                 </div>
 
-                <h2 class="text-xl font-semibold mb-4">🌏 개최 국가 및 일정</h2>
+                <figure class="mb-6">
+                    <img src="https://images.unsplash.com/photo-1560972550-9e672c3d7d7c?q=80&w=2070&auto=format&fit=crop" alt="유학박람회" class="w-full h-auto object-cover rounded-lg">
+                    <figcaption class="text-sm text-gray-500 text-center mt-2">유학박람회에서 상담을 받는 학생들</figcaption>
+                </figure>
+
+                <h2>🌏 개최 국가 및 일정</h2>
                 <div class="overflow-x-auto mb-6">
                     <table class="w-full border-collapse border border-gray-300">
-                        <thead>
-                            <tr class="bg-gray-50">
+                        <thead class="bg-gray-50">
+                            <tr>
                                 <th class="border border-gray-300 px-4 py-3 text-left font-semibold">국가</th>
                                 <th class="border border-gray-300 px-4 py-3 text-left font-semibold">도시</th>
                                 <th class="border border-gray-300 px-4 py-3 text-left font-semibold">일정</th>
-                                <th class="border border-gray-300 px-4 py-3 text-left font-semibold">장소</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="border border-gray-300 px-4 py-3">베트남</td>
-                                <td class="border border-gray-300 px-4 py-3">호치민</td>
-                                <td class="border border-gray-300 px-4 py-3 text-orange-600 font-medium">8.15-16</td>
-                                <td class="border border-gray-300 px-4 py-3">사이공 컨벤션센터</td>
+                                <td class="border border-gray-300 px-4 py-3 font-medium">베트남</td>
+                                <td class="border border-gray-300 px-4 py-3">하노이</td>
+                                <td class="border border-gray-300 px-4 py-3 font-medium text-indigo-600">2024.09.20 ~ 09.22</td>
                             </tr>
                             <tr class="bg-gray-50">
-                                <td class="border border-gray-300 px-4 py-3">태국</td>
+                                <td class="border border-gray-300 px-4 py-3 font-medium">태국</td>
                                 <td class="border border-gray-300 px-4 py-3">방콕</td>
-                                <td class="border border-gray-300 px-4 py-3 text-orange-600 font-medium">8.22-23</td>
-                                <td class="border border-gray-300 px-4 py-3">퀸 시리킷 컨벤션센터</td>
+                                <td class="border border-gray-300 px-4 py-3 font-medium text-indigo-600">2024.10.05 ~ 10.07</td>
                             </tr>
                             <tr>
-                                <td class="border border-gray-300 px-4 py-3">인도네시아</td>
+                                <td class="border border-gray-300 px-4 py-3 font-medium">인도네시아</td>
                                 <td class="border border-gray-300 px-4 py-3">자카르타</td>
-                                <td class="border border-gray-300 px-4 py-3 text-orange-600 font-medium">9.05-06</td>
-                                <td class="border border-gray-300 px-4 py-3">자카르타 컨벤션센터</td>
+                                <td class="border border-gray-300 px-4 py-3 font-medium text-indigo-600">2024.10.18 ~ 10.20</td>
                             </tr>
                             <tr class="bg-gray-50">
-                                <td class="border border-gray-300 px-4 py-3">필리핀</td>
-                                <td class="border border-gray-300 px-4 py-3">마닐라</td>
-                                <td class="border border-gray-300 px-4 py-3 text-orange-600 font-medium">9.12-13</td>
-                                <td class="border border-gray-300 px-4 py-3">SMX 컨벤션센터</td>
+                                <td class="border border-gray-300 px-4 py-3 font-medium">말레이시아</td>
+                                <td class="border border-gray-300 px-4 py-3">쿠알라룸푸르</td>
+                                <td class="border border-gray-300 px-4 py-3 font-medium text-indigo-600">2024.11.01 ~ 11.03</td>
                             </tr>
-                            <tr>
-                                <td class="border border-gray-300 px-4 py-3">인도</td>
-                                <td class="border border-gray-300 px-4 py-3">뉴델리</td>
-                                <td class="border border-gray-300 px-4 py-3 text-orange-600 font-medium">9.26-27</td>
-                                <td class="border border-gray-300 px-4 py-3">프라가티 마이단</td>
+                             <tr>
+                                <td class="border border-gray-300 px-4 py-3 font-medium">필리핀</td>
+                                <td class="border border-gray-300 px-4 py-3">마닐라</td>
+                                <td class="border border-gray-300 px-4 py-3 font-medium text-indigo-600">2024.11.15 ~ 11.17</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <h2 class="text-xl font-semibold mb-4">🎯 박람회 주요 내용</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h3 class="font-semibold text-blue-800 mb-3">참여 기관</h3>
-                        <ul class="space-y-2 text-blue-700">
-                            <li>🏫 한국 주요 대학 60개교</li>
-                            <li>🏢 한국 교육원</li>
-                            <li>💼 현지 유학원</li>
-                            <li>🎓 졸업생 네트워크</li>
-                        </ul>
-                    </div>
-                    <div class="bg-green-50 p-6 rounded-lg">
-                        <h3 class="font-semibold text-green-800 mb-3">주요 프로그램</h3>
-                        <ul class="space-y-2 text-green-700">
-                            <li>📊 대학별 입학 설명회</li>
-                            <li>💬 1:1 맞춤 상담</li>
-                            <li>🎤 한국 유학 체험담</li>
-                            <li>🎁 현장 이벤트</li>
-                        </ul>
-                    </div>
+                <h2>🏫 참여 대학 및 기관</h2>
+                <div class="bg-indigo-50 p-6 rounded-lg mb-6">
+                    <p>이번 박람회에는 서울대, 연세대, 고려대 등 국내 상위 50개 대학과 10개 전문대학이 참여하여 현지 학생들에게 맞춤형 입학 상담을 제공합니다. 또한, 각 대학의 국제처 담당자와 직접 소통할 수 있는 기회도 마련됩니다.</p>
                 </div>
-
-                <div class="text-center">
-                    <a href="universities.html" class="inline-block bg-orange-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-orange-700 transition-colors">
-                        대학 정보 보기
-                    </a>
-                </div>
-            </div>
+            </article>
         </div>
 
-        <div class="flex justify-between items-center bg-white p-6 rounded-lg shadow-sm border">
-            <a href="news-2.html" class="flex items-center space-x-2 text-gray-600 hover:text-indigo-600">
-                <i class="fas fa-arrow-left"></i>
-                <span>이전 글</span>
+        <div class="flex justify-between items-center bg-white p-4 rounded-lg shadow-sm border">
+            <a href="news.html" class="text-gray-600 hover:text-indigo-600 transition-colors">
+                <i class="fas fa-list mr-2"></i>목록으로
             </a>
-            <a href="index.html" class="text-gray-600 hover:text-indigo-600">목록으로</a>
-            <a href="news-4.html" class="flex items-center space-x-2 text-gray-600 hover:text-indigo-600">
-                <span>다음 글</span>
-                <i class="fas fa-arrow-right"></i>
-            </a>
+            <div class="flex space-x-4">
+                <a href="news-2.html" class="text-gray-600 hover:text-indigo-600 transition-colors"><i class="fas fa-arrow-left mr-2"></i>이전 글</a>
+                <a href="news-4.html" class="text-gray-600 hover:text-indigo-600 transition-colors">다음 글<i class="fas fa-arrow-right ml-2"></i></a>
+            </div>
         </div>
     </main>
 
     <footer class="bg-gray-800 text-gray-300 mt-12">
-        <div class="container mx-auto px-6 py-8">
-            <div class="text-center">
-                <p class="text-sm">&copy; ONDY Inc. All rights reserved.</p>
+        <div class="container mx-auto px-6 py-12">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8 pb-8 border-b border-gray-700">
+                <div class="flex space-x-6 text-sm font-medium">
+                    <a href="#" class="hover:text-white">회사소개</a>
+                    <a href="#" class="hover:text-white">이용약관</a>
+                    <a href="#" class="hover:text-white font-bold text-white">개인정보처리방침</a>
+                    <a href="#" class="hover:text-white">고객센터</a>
+                </div>
+                <div class="flex space-x-4 text-gray-400 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white"><i class="fab fa-youtube fa-lg"></i></a>
+                    <a href="#" class="hover:text-white"><i class="fab fa-instagram fa-lg"></i></a>
+                    <a href="#" class="hover:text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+                </div>
+            </div>
+            <div class="text-sm text-gray-400 text-center md:text-left">
+                <p>(주)온디 | 대표: OOO | 사업자등록번호: 123-45-67890 | 통신판매업신고: 2024-서울강남-00000</p>
+                <p>주소: 서울특별시 강남구 테헤란로 123, 45층 | 이메일: contact@ondy.com | 고객센터: 1588-0000</p>
+                <p class="mt-4">&copy; ONDY Inc. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
+    <script src="js/main.js"></script>
 </body>
 </html> 
