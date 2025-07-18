@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>업무 포털 - ONDY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #F9FAFB;
+        }
+        .role-card {
+            transition: all 0.3s ease;
+            border: 1px solid #E5E7EB;
+        }
+        .role-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: #4f46e5;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4">
+
+    <div class="w-full max-w-4xl">
+        <a href="../index.html" class="flex items-center justify-center space-x-2 mb-10">
+            <svg class="h-10 w-auto text-amber-500" viewBox="0 0 44 54" fill="currentColor">
+                <path d="M22 0C12.059 0 4 8.059 4 18C4 26.28 9.625 33.125 17.5 35.5V36C14.149 36 10.992 37.06 8.5 38.883V42.25C12.723 39.547 17.167 38 22 38C26.833 38 31.277 39.547 35.5 42.25V38.883C33.008 37.06 29.851 36 26.5 36V35.5C34.375 33.125 40 26.28 40 18C40 8.059 31.941 0 22 0ZM22 30C15.373 30 10 24.627 10 18C10 11.373 15.373 6 22 6C28.627 6 34 11.373 34 18C34 24.627 28.627 30 22 30Z"/>
+                <path d="M15.5 44.5L22 51L28.5 44.5L22 38L15.5 44.5Z"/>
+            </svg>
+            <span class="text-4xl font-bold text-indigo-800">ONDY 업무 포털</span>
+        </a>
+        
+        <div class="text-center mb-12">
+            <h1 class="text-3xl font-bold text-gray-800">역할을 선택하여 대시보드로 이동하세요</h1>
+            <p class="text-lg text-gray-600 mt-2">환영합니다! ONDY 업무 포털에 오신 것을 환영합니다.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- University Card -->
+            <a href="univ/index.html" class="role-card bg-white p-8 rounded-xl text-center">
+                <div class="w-20 h-20 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fa-solid fa-school-flag text-4xl text-indigo-600"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900">대학 담당자</h3>
+                <p class="text-gray-600 mt-2">지원자 관리 및 입학 사정</p>
+            </a>
+            <!-- Agency Card -->
+            <a href="academy/index.html" class="role-card bg-white p-8 rounded-xl text-center">
+                <div class="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fa-solid fa-earth-americas text-4xl text-emerald-600"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900">유학원 담당자</h3>
+                <p class="text-gray-600 mt-2">학생 등록 및 대학 지원</p>
+            </a>
+            <!-- Admin Card -->
+            <a href="admin/index.html" class="role-card bg-white p-8 rounded-xl text-center">
+                <div class="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fa-solid fa-shield-halved text-4xl text-amber-600"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900">시스템 관리자</h3>
+                <p class="text-gray-600 mt-2">플랫폼 전체 관리 및 운영</p>
+            </a>
+        </div>
+    </div>
+</body>
+</html> 
