@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONDY - 지원공고 상세</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        pretendard: ['Pretendard', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#4f46e5',
+                        'primary-dark': '#4338ca',
+                        secondary: '#f59e0b',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-pretendard bg-gray-100">
+
+    <div class="flex h-screen">
+        <!-- LNB (Desktop) -->
+        <nav class="hidden lg:block w-64 bg-white shadow-md flex-shrink-0">
+            <div class="h-16 px-6 border-b flex items-center">
+                <a href="./index.html" class="flex items-center gap-2">
+                    <svg class="h-10 w-auto text-amber-500" viewBox="0 0 44 54" fill="currentColor"><path d="M22 0C12.059 0 4 8.059 4 18C4 26.28 9.625 33.125 17.5 35.5V36C14.149 36 10.992 37.06 8.5 38.883V42.25C12.723 39.547 17.167 38 22 38C26.833 38 31.277 39.547 35.5 42.25V38.883C33.008 37.06 29.851 36 26.5 36V35.5C34.375 33.125 40 26.28 40 18C40 8.059 31.941 0 22 0ZM22 30C15.373 30 10 24.627 10 18C10 11.373 15.373 6 22 6C28.627 6 34 11.373 34 18C34 24.627 28.627 30 22 30Z"></path><path d="M15.5 44.5L22 51L28.5 44.5L22 38L15.5 44.5Z"></path></svg>
+                    <span class="text-xl font-bold text-gray-800">ONDY</span>
+                </a>
+            </div>
+            <div class="p-4">
+                <ul>
+                    <li><a href="./index.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg"><i class="fa-solid fa-chart-pie w-5"></i>대시보드</a></li>
+                    <li><a href="./applicant-list.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg"><i class="fa-solid fa-users w-5"></i>지원자 관리</a></li>
+                    <li><a href="./announcement-management.html" class="flex items-center gap-3 px-4 py-3 bg-primary/10 text-primary rounded-lg font-bold"><i class="fa-solid fa-bullhorn w-5"></i>지원공고 관리</a></li>
+                    <li><a href="./university-info.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg"><i class="fa-solid fa-building-columns w-5"></i>대학 정보 관리</a></li>
+                    <li><a href="./messages.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg"><i class="fa-solid fa-comments w-5"></i>메시지</a></li>
+                    <li><a href="./account-settings.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg"><i class="fa-solid fa-user-gear w-5"></i>계정 설정</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Header -->
+            <header class="bg-white shadow-sm z-10">
+                <div class="flex items-center justify-between h-16 px-6">
+                    <button id="mobile-menu-button" class="lg:hidden text-gray-600"><i class="fas fa-bars text-xl"></i></button>
+                    <nav class="hidden lg:flex items-center text-sm">
+                        <a href="./announcement-management.html" class="text-gray-500 hover:text-primary">지원공고 관리</a>
+                        <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
+                        <span class="font-semibold text-gray-800">공고 상세</span>
+                    </nav>
+                    <div class="flex items-center gap-4">
+                        <span class="text-sm"><strong>대학 담당자</strong>님</span>
+                        <a href="/login.html" class="text-sm text-gray-500 hover:text-primary">로그아웃</a>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <main class="flex-1 flex flex-col overflow-hidden bg-gray-100 p-6">
+                <div class="flex-1 flex lg:gap-8 lg:flex-row flex-col">
+                    <!-- Left Column: Announcement Details -->
+                    <div class="lg:w-1/2 flex flex-col">
+                        <div class="bg-white rounded-xl shadow-lg flex-1 flex flex-col">
+                            <div class="p-8 border-b flex justify-between items-start">
+                                <div>
+                                    <span class="px-3 py-1 inline-flex text-sm leading-5 font-semibold rounded-full bg-green-100 text-green-800">진행 중</span>
+                                    <h2 class="text-3xl font-bold text-gray-900 mt-4">2025년도 봄학기 외국인 유학생 모집</h2>
+                                    <p class="text-lg text-gray-600 mt-2">컴퓨터공학과</p>
+                                </div>
+                                <div class="flex gap-3 flex-shrink-0">
+                                    <a href="./announcement-management.html" class="bg-white hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-lg shadow-sm border text-sm"><i class="fas fa-list mr-1"></i>목록</a>
+                                    <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow-sm text-sm"><i class="fas fa-edit mr-1"></i>수정</button>
+                                    <button class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg shadow-sm text-sm"><i class="fas fa-trash-alt mr-1"></i>삭제</button>
+                                </div>
+                            </div>
+                            <div class="p-8 overflow-y-auto">
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+                                    <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-lg"><i class="fas fa-calendar-alt fa-2x text-primary"></i><div><h4 class="text-sm font-medium text-gray-500">지원기간</h4><p class="text-md text-gray-800 font-semibold">~ 2025.01.31</p></div></div>
+                                    <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-lg"><i class="fas fa-users fa-2x text-primary"></i><div><h4 class="text-sm font-medium text-gray-500">모집인원</h4><p class="text-md text-gray-800 font-semibold">00명</p></div></div>
+                                    <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-lg"><i class="fas fa-user-check fa-2x text-primary"></i><div><h4 class="text-sm font-medium text-gray-500">현재 지원자</h4><p id="applicant-count" class="text-md text-gray-800 font-semibold">45명</p></div></div>
+                                </div>
+                                <div class="space-y-8">
+                                    <div><h3 class="text-xl font-bold text-gray-800 border-l-4 border-primary pl-4 mb-4">공고 상세 내용</h3><div class="prose max-w-none text-gray-700"><p>본교 컴퓨터공학과에서는 2025년도 봄학기 외국인 유학생을 아래와 같이 모집합니다. IT 분야의 글로벌 리더를 꿈꾸는 여러분의 많은 지원 바랍니다.</p></div></div>
+                                    <div><h3 class="text-xl font-bold text-gray-800 border-l-4 border-primary pl-4 mb-4">전형 방법</h3><ul class="list-none space-y-4 pl-2"><li class="flex items-center"><span class="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-white font-bold mr-4">1</span><span class="font-semibold text-gray-700">서류 심사</span></li><li class="flex items-center"><span class="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-white font-bold mr-4">2</span><span class="font-semibold text-gray-700">1차 면접</span></li><li class="flex items-center"><span class="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-white font-bold mr-4">3</span><span class="font-semibold text-gray-700">최종 합격자 발표</span></li></ul></div>
+                                    <div><h3 class="text-xl font-bold text-gray-800 border-l-4 border-primary pl-4 mb-4">1. 모집 분야</h3><ul class="list-none space-y-3 pl-2"><li class="flex items-start"><i class="fas fa-check-circle text-secondary mt-1 mr-3"></i><div><strong class="font-semibold">학과:</strong> 컴퓨터공학과</div></li><li class="flex items-start"><i class="fas fa-check-circle text-secondary mt-1 mr-3"></i><div><strong class="font-semibold">모집 과정:</strong> 학사, 석사, 박사</div></li></ul></div>
+                                    <div><h3 class="text-xl font-bold text-gray-800 border-l-4 border-primary pl-4 mb-4">2. 지원 자격</h3><ul class="list-none space-y-3 pl-2"><li class="flex items-start"><i class="fas fa-check-circle text-secondary mt-1 mr-3"></i>부모 모두 외국인인 외국인</li><li class="flex items-start"><i class="fas fa-check-circle text-secondary mt-1 mr-3"></i>국내외 정규 교육과정 이수자</li><li class="flex items-start"><i class="fas fa-check-circle text-secondary mt-1 mr-3"></i>한국어능력시험(TOPIK) 3급 이상 취득자</li></ul></div>
+                                    <div><h3 class="text-xl font-bold text-gray-800 border-l-4 border-primary pl-4 mb-4">3. 제출 서류</h3><ul class="list-none space-y-3 pl-2"><li class="flex items-start"><i class="fas fa-check-circle text-secondary mt-1 mr-3"></i>입학지원서 (본교 양식)</li><li class="flex items-start"><i class="fas fa-check-circle text-secondary mt-1 mr-3"></i>자기소개서 및 학업계획서</li><li class="flex items-start"><i class="fas fa-check-circle text-secondary mt-1 mr-3"></i>최종학력 증명서 및 성적 증명서</li><li class="flex items-start"><i class="fas fa-check-circle text-secondary mt-1 mr-3"></i>여권 사본</li><li class="flex items-start"><i class="fas fa-check-circle text-secondary mt-1 mr-3"></i>TOPIK 성적표 원본</li></ul></div>
+                                    <div><h3 class="text-xl font-bold text-gray-800 border-l-4 border-primary pl-4 mb-4">첨부파일</h3><div class="border rounded-lg p-4 flex items-center justify-between bg-gray-50"><div class="flex items-center gap-3"><i class="fas fa-file-pdf text-red-500 fa-lg"></i><span class="text-sm font-medium text-gray-700">2025학년도_봄학기_외국인_유학생_모집요강.pdf</span></div><a href="#" class="text-sm text-primary hover:underline font-semibold">다운로드</a></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Applicant List -->
+                    <div class="lg:w-1/2 flex flex-col mt-8 lg:mt-0">
+                        <div class="bg-white rounded-xl shadow-lg flex-1 flex flex-col">
+                            <div class="p-8 border-b">
+                                <div class="flex flex-wrap justify-between items-center gap-4 mb-4">
+                                        <h3 class="text-xl font-bold text-gray-800">지원자 목록 <span id="applicant-list-count" class="text-primary">45</span></h3>
+                                        <div class="flex gap-2 items-center">
+                                            <div class="relative inline-block text-left">
+                                                <select id="process-stage-selector" class="appearance-none bg-white border border-gray-300 text-gray-700 py-2 pl-3 pr-8 rounded-lg text-sm focus:outline-none focus:border-primary">
+                                                    <option value="1차 면접 대기">1차 서류 합격</option>
+                                                    <option value="최종 합격">2차 면접 합격</option>
+                                                    <option value="불합격">불합격</option>
+                                                </select>
+                                            </div>
+                                            <button id="apply-status-button" class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg text-sm"><i class="fas fa-check mr-1"></i>적용</button>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-2 items-center">
+                                        <div class="relative inline-block text-left">
+                                            <select id="status-filter" class="appearance-none bg-white border border-gray-300 text-gray-700 py-2 pl-3 pr-8 rounded-lg text-sm focus:outline-none focus:border-primary">
+                                                <option value="all">전체</option>
+                                                <option value="서류 심사 중">서류 심사 중</option>
+                                                <option value="1차 면접 대기">1차 면접 대기</option>
+                                                <option value="최종 합격">최종 합격</option>
+                                                <option value="불합격">불합격</option>
+                                            </select>
+                                        </div>
+                                        <input type="text" id="search-filter" placeholder="이름/이메일 검색" class="w-40 border border-gray-300 rounded-lg text-sm py-2 px-3 focus:outline-none focus:border-primary">
+                                    </div>
+                                </div>
+                                <div class="overflow-y-auto flex-1">
+                                    <table id="applicant-table" class="w-full text-sm text-left text-gray-500">
+                                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 sticky top-0">
+                                            <tr>
+                                                <th scope="col" class="p-4"><input id="checkbox-all" type="checkbox" class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary"></th>
+                                                <th scope="col" class="px-6 py-3">이름</th>
+                                                <th scope="col" class="px-6 py-3">유학원</th>
+                                                <th scope="col" class="px-6 py-3">진행 상태</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="applicant-table-body">
+                                            <!-- Applicant rows will be dynamically inserted here -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <nav id="pagination" class="p-4 border-t flex items-center justify-between" aria-label="Table navigation">
+                                    <!-- Pagination will be dynamically inserted here -->
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40 hidden">
+        <nav class="w-64 bg-white h-full shadow-md">
+             <div class="h-16 px-6 border-b flex items-center"><a href="./index.html" class="flex items-center gap-2"><svg class="h-10 w-auto text-amber-500" viewBox="0 0 44 54" fill="currentColor"><path d="M22 0C12.059 0 4 8.059 4 18C4 26.28 9.625 33.125 17.5 35.5V36C14.149 36 10.992 37.06 8.5 38.883V42.25C12.723 39.547 17.167 38 22 38C26.833 38 31.277 39.547 35.5 42.25V38.883C33.008 37.06 29.851 36 26.5 36V35.5C34.375 33.125 40 26.28 40 18C40 8.059 31.941 0 22 0ZM22 30C15.373 30 10 24.627 10 18C10 11.373 15.373 6 22 6C28.627 6 34 11.373 34 18C34 24.627 28.627 30 22 30Z"></path><path d="M15.5 44.5L22 51L28.5 44.5L22 38L15.5 44.5Z"></path></svg><span class="text-xl font-bold text-gray-800">ONDY</span></a></div>
+            <div class="p-4">
+                <ul>
+                    <li><a href="./index.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg"><i class="fa-solid fa-chart-pie w-5"></i>대시보드</a></li>
+                    <li><a href="./applicant-list.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg"><i class="fa-solid fa-users w-5"></i>지원자 관리</a></li>
+                    <li><a href="./announcement-management.html" class="flex items-center gap-3 px-4 py-3 bg-primary/10 text-primary rounded-lg font-bold"><i class="fa-solid fa-bullhorn w-5"></i>지원공고 관리</a></li>
+                    <li><a href="./university-info.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg"><i class="fa-solid fa-building-columns w-5"></i>대학 정보 관리</a></li>
+                    <li><a href="./messages.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg"><i class="fa-solid fa-comments w-5"></i>메시지</a></li>
+                    <li><a href="./account-settings.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg"><i class="fa-solid fa-user-gear w-5"></i>계정 설정</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Application Detail Modal -->
+    <div id="application-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col">
+            <div class="flex justify-between items-center p-6 border-b">
+                <h3 class="text-2xl font-bold text-gray-800">지원서 상세</h3>
+                <button id="close-application-modal-button" class="text-gray-500 hover:text-gray-800"><i class="fas fa-times fa-lg"></i></button>
+            </div>
+            <div id="application-modal-content-body" class="p-8 overflow-y-auto">
+                <!-- Modal content will be dynamically inserted here -->
+            </div>
+            <div class="flex justify-end items-center p-6 border-t gap-3 bg-gray-50 rounded-b-xl">
+                <button id="agency-contact-button" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2 rounded-lg text-sm">유학원 문의</button>
+                <button id="close-application-modal-button-footer" class="bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-lg text-sm">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Agency Detail Modal -->
+    <div id="agency-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg">
+            <div class="flex justify-between items-center p-6 border-b">
+                <h3 class="text-2xl font-bold text-gray-800">유학원 정보</h3>
+                <button id="close-agency-modal-button" class="text-gray-500 hover:text-gray-800"><i class="fas fa-times fa-lg"></i></button>
+            </div>
+            <div id="agency-modal-content-body" class="p-8">
+                <!-- Agency modal content will be dynamically inserted here -->
+            </div>
+            <div class="flex justify-end items-center p-6 border-t gap-3 bg-gray-50 rounded-b-xl">
+                <a href="./messages.html" id="agency-message-link" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg text-sm">메시지 보내기</a>
+                <button id="close-agency-modal-button-footer" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2 rounded-lg text-sm">닫기</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const applicants = [
+            { name: 'John Doe', email: 'john.doe@example.com', country: '미국', status: '서류 심사 중', photo: 'https://randomuser.me/api/portraits/men/1.jpg', agency: { name: 'Global Bridge', manager: '김철수', contact: '010-1234-5678' } },
+            { name: 'Jane Smith', email: 'jane.smith@example.com', country: '중국', status: '1차 면접 대기', photo: 'https://randomuser.me/api/portraits/women/2.jpg', agency: { name: 'China Connect', manager: '왕서방', contact: '010-9876-5432' } },
+            { name: 'Ken Watanabe', email: 'ken.w@example.com', country: '일본', status: '최종 합격', photo: 'https://randomuser.me/api/portraits/men/3.jpg', agency: { name: 'Sakura Study', manager: '이토', contact: '010-1111-2222' } },
+            { name: 'Li Wei', email: 'li.wei@example.com', country: '중국', status: '불합격', photo: 'https://randomuser.me/api/portraits/women/4.jpg', agency: { name: 'China Connect', manager: '왕서방', contact: '010-9876-5432' } },
+            { name: 'Mohammed Ali', email: 'mo.ali@example.com', country: '이집트', status: '서류 심사 중', photo: 'https://randomuser.me/api/portraits/men/5.jpg', agency: null },
+            { name: 'Sophia Loren', email: 'sophia.l@example.com', country: '이탈리아', status: '1차 면접 대기', photo: 'https://randomuser.me/api/portraits/women/6.jpg', agency: { name: 'Global Bridge', manager: '김철수', contact: '010-1234-5678' } },
+            { name: 'David Kim', email: 'david.kim@example.com', country: '대한민국', status: '최종 합격', photo: 'https://randomuser.me/api/portraits/men/7.jpg', agency: null },
+            { name: 'Yuki Tanaka', email: 'yuki.t@example.com', country: '일본', status: '서류 심사 중', photo: 'https://randomuser.me/api/portraits/women/8.jpg', agency: { name: 'Sakura Study', manager: '이토', contact: '010-1111-2222' } },
+            { name: 'Chen Yue', email: 'chen.yue@example.com', country: '중국', status: '1차 면접 대기', photo: 'https://randomuser.me/api/portraits/men/9.jpg', agency: { name: 'China Connect', manager: '왕서방', contact: '010-9876-5432' } },
+            { name: 'Isabella Rossi', email: 'isabella.r@example.com', country: '이탈리아', status: '서류 심사 중', photo: 'https://randomuser.me/api/portraits/women/10.jpg', agency: null },
+            { name: 'James Johnson', email: 'james.j@example.com', country: '미국', status: '최종 합격', photo: 'https://randomuser.me/api/portraits/men/11.jpg', agency: { name: 'Global Bridge', manager: '김철수', contact: '010-1234-5678' } },
+            { name: 'Olivia Brown', email: 'olivia.b@example.com', country: '캐나다', status: '불합격', photo: 'https://randomuser.me/api/portraits/women/12.jpg', agency: null },
+        ];
+
+        const itemsPerPage = 10;
+        let currentPage = 1;
+        let filteredApplicants = [...applicants];
+
+        const statusClasses = {
+            '서류 심사 중': 'bg-blue-100 text-blue-800',
+            '1차 면접 대기': 'bg-yellow-100 text-yellow-800',
+            '최종 합격': 'bg-green-100 text-green-800',
+            '불합격': 'bg-red-100 text-red-800',
+        };
+
+        function renderTable() {
+            const tableBody = document.getElementById('applicant-table-body');
+            tableBody.innerHTML = '';
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const paginatedApplicants = filteredApplicants.slice(start, end);
+
+            paginatedApplicants.forEach(applicant => {
+                const row = document.createElement('tr');
+                row.className = 'bg-white border-b hover:bg-gray-50';
+                row.innerHTML = `
+                    <td class="p-4"><input type="checkbox" class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary applicant-checkbox" data-email="${applicant.email}"></td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center">
+                            <img class="w-10 h-10 rounded-full" src="${applicant.photo}" alt="${applicant.name} image">
+                            <div class="pl-3">
+                                <div class="text-base font-semibold text-blue-600 hover:underline cursor-pointer open-application-modal-button" data-email="${applicant.email}">${applicant.name}</div>
+                                <div class="font-normal text-gray-500">${applicant.email}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4">${applicant.agency ? `<button class="text-blue-600 hover:underline font-medium open-agency-modal-button" data-email="${applicant.email}">${applicant.agency.name}</button>` : '-'}</td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusClasses[applicant.status]}">${applicant.status}</span>
+                        </div>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+            renderPagination();
+            updateCounts();
+        }
+
+        function renderPagination() {
+            const paginationContainer = document.getElementById('pagination');
+            const totalPages = Math.ceil(filteredApplicants.length / itemsPerPage);
+            paginationContainer.innerHTML = `
+                <span class="text-sm font-normal text-gray-500">Showing <span class="font-semibold text-gray-900">${(currentPage - 1) * itemsPerPage + 1}-${Math.min(currentPage * itemsPerPage, filteredApplicants.length)}</span> of <span class="font-semibold text-gray-900">${filteredApplicants.length}</span></span>
+                <ul class="inline-flex items-center -space-x-px">
+                    <li><button ${currentPage === 1 ? 'disabled' : ''} onclick="changePage(${currentPage - 1})" class="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"><i class="fas fa-chevron-left"></i></button></li>
+                    ${[...Array(totalPages).keys()].map(n => `<li><button onclick="changePage(${n + 1})" class="${currentPage === n + 1 ? 'z-10 px-3 py-2 leading-tight text-primary bg-indigo-50 border-primary' : 'px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100'}">${n + 1}</button></li>`).join('')}
+                    <li><button ${currentPage === totalPages ? 'disabled' : ''} onclick="changePage(${currentPage + 1})" class="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"><i class="fas fa-chevron-right"></i></button></li>
+                </ul>
+            `;
+        }
+        
+        function changePage(page) {
+            currentPage = page;
+            renderTable();
+        }
+
+        function filterAndRender() {
+            const statusFilter = document.getElementById('status-filter').value;
+            const searchFilter = document.getElementById('search-filter').value.toLowerCase();
+            
+            filteredApplicants = applicants.filter(applicant => {
+                const matchesStatus = statusFilter === 'all' || applicant.status === statusFilter;
+                const matchesSearch = applicant.name.toLowerCase().includes(searchFilter) || applicant.email.toLowerCase().includes(searchFilter);
+                return matchesStatus && matchesSearch;
+            });
+            
+            currentPage = 1;
+            renderTable();
+        }
+
+        function updateCounts() {
+            document.getElementById('applicant-count').textContent = `${applicants.length}명`;
+            document.getElementById('applicant-list-count').textContent = `${filteredApplicants.length}명`;
+        }
+
+        function processApplicants() {
+            const newStatus = document.getElementById('process-stage-selector').value;
+            const checkedBoxes = document.querySelectorAll('#applicant-table-body .applicant-checkbox:checked');
+            
+            if (checkedBoxes.length === 0) {
+                alert('처리할 지원자를 선택해주세요.');
+                return;
+            }
+
+            checkedBoxes.forEach(checkbox => {
+                const email = checkbox.dataset.email;
+                const applicant = applicants.find(a => a.email === email);
+                if (applicant) {
+                    applicant.status = newStatus;
+                }
+            });
+
+            filterAndRender(); // Re-render the table to show changes
+        }
+
+        document.getElementById('status-filter').addEventListener('change', filterAndRender);
+        document.getElementById('search-filter').addEventListener('input', filterAndRender);
+        document.getElementById('apply-status-button').addEventListener('click', processApplicants);
+
+        // Initial Render
+        renderTable();
+
+        // Mobile Menu
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+
+        // Checkbox All
+        const checkAll = document.getElementById('checkbox-all');
+        checkAll.addEventListener('change', (e) => {
+            document.querySelectorAll('#applicant-table-body .applicant-checkbox').forEach(checkbox => {
+                checkbox.checked = e.target.checked;
+            });
+        });
+
+        // Modal Control
+        const applicationModal = document.getElementById('application-modal');
+        const agencyModal = document.getElementById('agency-modal');
+        const applicantTableBody = document.getElementById('applicant-table-body');
+
+        applicantTableBody.addEventListener('click', (e) => {
+            const target = e.target;
+
+            // Check if the click is on a modal trigger
+            const isApplicationModalTrigger = target.closest('.open-application-modal-button');
+            const isAgencyModalTrigger = target.closest('.open-agency-modal-button');
+
+            if (isApplicationModalTrigger) {
+                const email = isApplicationModalTrigger.dataset.email;
+                const applicant = applicants.find(a => a.email === email);
+                if (applicant) openApplicationModal(applicant);
+            } else if (isAgencyModalTrigger) {
+                const email = isAgencyModalTrigger.dataset.email;
+                const applicant = applicants.find(a => a.email === email);
+                if (applicant && applicant.agency) openAgencyModal(applicant.agency);
+            }
+        });
+
+        function openApplicationModal(applicant) {
+            const agencyContactBtn = document.getElementById('agency-contact-button');
+            if (applicant.agency) {
+                agencyContactBtn.disabled = false;
+                agencyContactBtn.onclick = () => { window.location.href = './messages.html'; };
+                agencyContactBtn.classList.remove('bg-gray-200', 'hover:bg-gray-300', 'text-gray-800');
+                agencyContactBtn.classList.add('bg-blue-600', 'hover:bg-blue-700', 'text-white');
+            } else {
+                agencyContactBtn.disabled = true;
+                agencyContactBtn.onclick = null;
+                agencyContactBtn.classList.add('bg-gray-200', 'hover:bg-gray-300', 'text-gray-800');
+                agencyContactBtn.classList.remove('bg-blue-600', 'hover:bg-blue-700', 'text-white');
+            }
+
+            document.getElementById('application-modal-content-body').innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="md:col-span-1 flex flex-col items-center">
+                        <img class="w-32 h-32 rounded-full object-cover shadow-md" src="${applicant.photo}" alt="Applicant Photo">
+                        <h3 class="text-xl font-bold mt-4">${applicant.name}</h3>
+                        <p class="text-gray-600">${applicant.country}</p>
+                        <div class="mt-4 text-sm space-y-2 text-left">
+                            <p><i class="fas fa-envelope w-5 text-gray-500"></i> ${applicant.email}</p>
+                            <p><i class="fas fa-phone w-5 text-gray-500"></i> +1 123-456-7890</p>
+                            <p><i class="fas fa-birthday-cake w-5 text-gray-500"></i> 1998-05-20</p>
+                        </div>
+                    </div>
+                    <div class="md:col-span-2">
+                        <div class="space-y-6">
+                            <div><h4 class="font-bold text-lg text-primary border-b pb-2 mb-3">지원 정보</h4><div class="grid grid-cols-2 gap-2 text-sm">
+                                <p><strong class="text-gray-600">지원 학과:</strong> 컴퓨터공학과</p>
+                                <p><strong class="text-gray-600">지원 과정:</strong> 학사</p>
+                                <p><strong class="text-gray-600">지원일:</strong> 2024.12.15</p>
+                                <p><strong class="text-gray-600">진행 상태:</strong> ${applicant.status}</p>
+                                <p><strong class="text-gray-600">소속 유학원:</strong> ${applicant.agency ? applicant.agency.name : '없음'}</p>
+                            </div></div>
+                            <div><h4 class="font-bold text-lg text-primary border-b pb-2 mb-3">학력 사항</h4><div class="text-sm space-y-2"><p><strong class="text-gray-600">고등학교:</strong> Example High School (2016-2020)</p><p><strong class="text-gray-600">대학교:</strong> -</p></div></div>
+                            <div><h4 class="font-bold text-lg text-primary border-b pb-2 mb-3">어학 능력</h4><div class="text-sm space-y-2"><p><strong class="text-gray-600">TOPIK:</strong> 4급</p><p><strong class="text-gray-600">TOEFL:</strong> 110</p></div></div>
+                            <div><h4 class="font-bold text-lg text-primary border-b pb-2 mb-3">첨부 서류</h4><ul class="text-sm space-y-2 list-none"><li><a href="#" class="text-blue-600 hover:underline"><i class="fas fa-file-pdf mr-2"></i>입학지원서.pdf</a></li><li><a href="#" class="text-blue-600 hover:underline"><i class="fas fa-file-alt mr-2"></i>자기소개서.docx</a></li><li><a href="#" class="text-blue-600 hover:underline"><i class="fas fa-file-image mr-2"></i>여권사본.jpg</a></li></ul></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            applicationModal.classList.remove('hidden');
+        }
+
+        function openAgencyModal(agency) {
+            document.getElementById('agency-modal-content-body').innerHTML = `
+                <div class="space-y-4">
+                    <p><strong class="w-24 inline-block text-gray-600">유학원명:</strong> ${agency.name}</p>
+                    <p><strong class="w-24 inline-block text-gray-600">담당자:</strong> ${agency.manager}</p>
+                    <p><strong class="w-24 inline-block text-gray-600">연락처:</strong> ${agency.contact}</p>
+                </div>
+            `;
+            agencyModal.classList.remove('hidden');
+        }
+
+        function closeModal(modal) {
+            modal.classList.add('hidden');
+        }
+
+        document.getElementById('close-application-modal-button').addEventListener('click', () => closeModal(applicationModal));
+        document.getElementById('close-application-modal-button-footer').addEventListener('click', () => closeModal(applicationModal));
+        applicationModal.addEventListener('click', (e) => {
+            if (e.target === applicationModal) closeModal(applicationModal);
+        });
+
+        document.getElementById('close-agency-modal-button').addEventListener('click', () => closeModal(agencyModal));
+        document.getElementById('close-agency-modal-button-footer').addEventListener('click', () => closeModal(agencyModal));
+        agencyModal.addEventListener('click', (e) => {
+            if (e.target === agencyModal) closeModal(agencyModal);
+        });
+
+    </script>
+</body>
+</html>

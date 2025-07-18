@@ -29,7 +29,7 @@
     <div class="flex h-screen">
         <!-- LNB (Desktop) -->
         <nav class="hidden lg:block w-64 bg-white shadow-md">
-            <div class="p-6 border-b">
+            <div class="h-16 px-6 border-b flex items-center">
                 <a href="./index.html" class="flex items-center gap-2">
                     <svg class="h-10 w-auto text-amber-500" viewBox="0 0 44 54" fill="currentColor">
                         <path d="M22 0C12.059 0 4 8.059 4 18C4 26.28 9.625 33.125 17.5 35.5V36C14.149 36 10.992 37.06 8.5 38.883V42.25C12.723 39.547 17.167 38 22 38C26.833 38 31.277 39.547 35.5 42.25V38.883C33.008 37.06 29.851 36 26.5 36V35.5C34.375 33.125 40 26.28 40 18C40 8.059 31.941 0 22 0ZM22 30C15.373 30 10 24.627 10 18C10 11.373 15.373 6 22 6C28.627 6 34 11.373 34 18C34 24.627 28.627 30 22 30Z"></path>
@@ -124,10 +124,10 @@
                                 <tbody class="divide-y divide-gray-200">
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div>
+                                            <a href="./announcement-detail.html" class="hover:underline">
                                                 <div class="text-sm font-medium text-gray-900">2025년도 봄학기 외국인 유학생 모집</div>
                                                 <div class="text-sm text-gray-500">컴퓨터공학과</div>
-                                            </div>
+                                            </a>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">컴퓨터공학과</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2024.12.01 ~ 2025.01.31</td>
@@ -142,10 +142,10 @@
                                     </tr>
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div>
+                                            <a href="./announcement-detail.html" class="hover:underline">
                                                 <div class="text-sm font-medium text-gray-900">2025년도 봄학기 외국인 유학생 모집</div>
                                                 <div class="text-sm text-gray-500">경영학과</div>
-                                            </div>
+                                            </a>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">경영학과</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2024.12.01 ~ 2025.01.31</td>
@@ -160,10 +160,10 @@
                                     </tr>
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div>
+                                            <a href="./announcement-detail.html" class="hover:underline">
                                                 <div class="text-sm font-medium text-gray-900">2025년도 봄학기 외국인 유학생 모집</div>
                                                 <div class="text-sm text-gray-500">디자인학과</div>
-                                            </div>
+                                            </a>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">디자인학과</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2024.12.01 ~ 2025.01.15</td>
@@ -178,10 +178,10 @@
                                     </tr>
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div>
+                                            <a href="./announcement-detail.html" class="hover:underline">
                                                 <div class="text-sm font-medium text-gray-900">2024년도 가을학기 외국인 유학생 모집</div>
                                                 <div class="text-sm text-gray-500">전자공학과</div>
-                                            </div>
+                                            </a>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">전자공학과</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2024.06.01 ~ 2024.07.31</td>
@@ -206,7 +206,7 @@
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-20 hidden">
         <nav class="w-64 bg-white h-full shadow-md">
-             <div class="p-6 border-b">
+             <div class="h-16 px-6 border-b flex items-center">
                 <a href="./index.html" class="flex items-center gap-2">
                     <svg class="h-10 w-auto text-amber-500" viewBox="0 0 44 54" fill="currentColor">
                         <path d="M22 0C12.059 0 4 8.059 4 18C4 26.28 9.625 33.125 17.5 35.5V36C14.149 36 10.992 37.06 8.5 38.883V42.25C12.723 39.547 17.167 38 22 38C26.833 38 31.277 39.547 35.5 42.25V38.883C33.008 37.06 29.851 36 26.5 36V35.5C34.375 33.125 40 26.28 40 18C40 8.059 31.941 0 22 0ZM22 30C15.373 30 10 24.627 10 18C10 11.373 15.373 6 22 6C28.627 6 34 11.373 34 18C34 24.627 28.627 30 22 30Z"></path>
@@ -228,9 +228,94 @@
         </nav>
     </div>
     
+    <!-- Modal -->
+    <div id="new-announcement-modal" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden flex items-center justify-center">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl mx-4">
+            <div class="p-6 border-b">
+                <h3 class="text-xl font-bold text-gray-800">새 지원공고 등록</h3>
+            </div>
+            <div class="p-8 max-h-[70vh] overflow-y-auto">
+                <form>
+                    <div class="space-y-10">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 border-l-4 border-primary pl-4 mb-4">기본 정보</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                                <div>
+                                    <label for="modal-title" class="block text-sm font-medium text-gray-700">공고명</label>
+                                    <input type="text" id="modal-title" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary" placeholder="예: 2025년도 봄학기 외국인 유학생 모집">
+                                </div>
+                                <div>
+                                    <label for="modal-department" class="block text-sm font-medium text-gray-700">학과</label>
+                                    <select id="modal-department" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
+                                        <option>컴퓨터공학과</option>
+                                        <option>경영학과</option>
+                                        <option>디자인학과</option>
+                                        <option>전자공학과</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="modal-start-date" class="block text-sm font-medium text-gray-700">모집 시작일</label>
+                                    <input type="date" id="modal-start-date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
+                                </div>
+                                <div>
+                                    <label for="modal-end-date" class="block text-sm font-medium text-gray-700">모집 마감일</label>
+                                    <input type="date" id="modal-end-date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
+                                </div>
+                                <div>
+                                    <label for="modal-quota" class="block text-sm font-medium text-gray-700">모집인원</label>
+                                    <input type="text" id="modal-quota" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary" placeholder="00명 또는 제한 없음">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 border-l-4 border-primary pl-4 mb-4">전형 방법</h3>
+                            <div id="evaluation-steps-container" class="space-y-4 mt-4">
+                                <!-- Dynamic steps will be inserted here -->
+                            </div>
+                            <button type="button" id="add-step-button" class="mt-4 bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg text-sm">
+                                <i class="fas fa-plus mr-2"></i>전형 단계 추가
+                            </button>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 border-l-4 border-primary pl-4 mb-4">공고 상세 내용</h3>
+                            <div class="mt-4">
+                                <textarea id="modal-content" rows="8" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary" placeholder="공고의 상세 내용을 입력하세요. 지원 자격, 제출 서류 등을 포함할 수 있습니다."></textarea>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 border-l-4 border-primary pl-4 mb-4">첨부파일</h3>
+                            <div class="mt-4">
+                                <div class="flex items-center justify-center w-full">
+                                    <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+                                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                            <i class="fas fa-cloud-upload-alt fa-3x text-gray-400"></i>
+                                            <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">클릭하여 업로드</span> 또는 파일을 드래그하세요</p>
+                                            <p class="text-xs text-gray-500">PDF, DOCX, HW P (MAX. 10MB)</p>
+                                        </div>
+                                        <input id="dropzone-file" type="file" class="hidden" />
+                                    </label>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="p-6 border-t flex justify-end gap-4">
+                <button id="modal-close-button" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2 rounded-lg">취소</button>
+                <button class="bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-lg">등록</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
+        const newAnnouncementButton = document.querySelector('button.bg-primary');
+        const newAnnouncementModal = document.getElementById('new-announcement-modal');
+        const modalCloseButton = document.getElementById('modal-close-button');
 
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
@@ -241,6 +326,62 @@
                 mobileMenu.classList.add('hidden');
             }
         });
+
+        newAnnouncementButton.addEventListener('click', () => {
+            newAnnouncementModal.classList.remove('hidden');
+        });
+
+        modalCloseButton.addEventListener('click', () => {
+            newAnnouncementModal.classList.add('hidden');
+        });
+
+        newAnnouncementModal.addEventListener('click', (e) => {
+            if (e.target === newAnnouncementModal) {
+                newAnnouncementModal.classList.add('hidden');
+            }
+        });
+
+        // Logic for adding and removing evaluation steps
+        const stepsContainer = document.getElementById('evaluation-steps-container');
+        const addStepButton = document.getElementById('add-step-button');
+        let stepCounter = 0;
+
+        const addStep = () => {
+            stepCounter++;
+            const stepId = `step-${stepCounter}`;
+            const newStep = document.createElement('div');
+            newStep.id = stepId;
+            newStep.classList.add('flex', 'items-center', 'gap-4');
+            newStep.innerHTML = `
+                <span class="font-semibold text-gray-600">${stepCounter}차</span>
+                <input type="text" class="flex-grow block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary" placeholder="예: 서류 심사">
+                <button type="button" onclick="removeStep('${stepId}')" class="text-red-500 hover:text-red-700">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            `;
+            stepsContainer.appendChild(newStep);
+        };
+
+        const removeStep = (stepId) => {
+            const stepToRemove = document.getElementById(stepId);
+            if (stepToRemove) {
+                stepsContainer.removeChild(stepToRemove);
+                // Re-number the remaining steps
+                const remainingSteps = stepsContainer.children;
+                stepCounter = 0;
+                for(let i = 0; i < remainingSteps.length; i++) {
+                    stepCounter++;
+                    remainingSteps[i].id = `step-${stepCounter}`;
+                    remainingSteps[i].querySelector('span').textContent = `${stepCounter}차`;
+                    remainingSteps[i].querySelector('button').setAttribute('onclick', `removeStep('step-${stepCounter}')`);
+                }
+            }
+        };
+
+        addStepButton.addEventListener('click', addStep);
+
+        // Add one step by default
+        addStep();
     </script>
 </body>
 </html> 
