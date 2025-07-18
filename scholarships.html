@@ -42,7 +42,7 @@
         </div>
         
         <!-- Mobile Navigation -->
-        <div id="mobileMenu" class="mobile-menu fixed inset-y-0 left-0 w-80 bg-white shadow-xl lg:hidden z-50">
+        <div id="mobileMenu" class="mobile-menu fixed inset-y-0 right-0 w-80 bg-white shadow-xl lg:hidden z-50">
             <div class="flex items-center justify-between p-6 border-b">
                 <div class="flex items-center space-x-2">
                     <svg class="h-8 w-auto text-amber-500" viewBox="0 0 44 54" fill="currentColor">
@@ -97,9 +97,18 @@
             <!-- Tab Navigation -->
             <div class="flex justify-center mb-8">
                 <div class="bg-white rounded-lg p-1 shadow-sm border">
-                    <button class="tab-button active px-6 py-3 rounded-lg font-semibold" data-tab="government">정부 장학금</button>
-                    <button class="tab-button px-6 py-3 rounded-lg font-semibold" data-tab="university">대학 장학금</button>
-                    <button class="tab-button px-6 py-3 rounded-lg font-semibold" data-tab="foundation">재단 장학금</button>
+                    <button class="tab-button active px-4 py-2 md:px-6 md:py-3 rounded-lg font-semibold text-sm md:text-base" data-tab="government">
+                        <span class="md:hidden">정부</span>
+                        <span class="hidden md:inline">정부 장학금</span>
+                    </button>
+                    <button class="tab-button px-4 py-2 md:px-6 md:py-3 rounded-lg font-semibold text-sm md:text-base" data-tab="university">
+                        <span class="md:hidden">대학</span>
+                        <span class="hidden md:inline">대학 장학금</span>
+                    </button>
+                    <button class="tab-button px-4 py-2 md:px-6 md:py-3 rounded-lg font-semibold text-sm md:text-base" data-tab="foundation">
+                        <span class="md:hidden">재단</span>
+                        <span class="hidden md:inline">재단 장학금</span>
+                    </button>
                 </div>
             </div>
 

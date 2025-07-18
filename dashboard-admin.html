@@ -179,6 +179,10 @@
                     <i class="fas fa-file-alt mr-3 w-5"></i>
                     <span>지원 현황</span>
                 </div>
+                <div class="sidebar-item p-3 rounded-lg flex items-center" onclick="showSection('inquiries')">
+                    <i class="fas fa-headset mr-3 w-5"></i>
+                    <span>도입 문의 관리</span>
+                </div>
                 <div class="sidebar-item p-3 rounded-lg flex items-center" onclick="showSection('statistics')">
                     <i class="fas fa-chart-bar mr-3 w-5"></i>
                     <span>통계 분석</span>
@@ -498,6 +502,32 @@
                                     <button class="text-red-600 hover:text-red-900">비활성화</button>
                                 </td>
                             </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Inquiries Section -->
+        <div id="inquiries" class="content-section p-6">
+            <div class="dashboard-card p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold">도입 문의 현황</h2>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">접수일</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">기관명</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">담당자</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">이메일</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">상태</th>
+                                <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">관리</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inquiriesTableBody" class="bg-white divide-y divide-gray-200">
+                            <!-- Inquiry data will be populated here -->
                         </tbody>
                     </table>
                 </div>
@@ -1019,7 +1049,68 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize any required functionality
         });
-    </script>
 
+        function loadInquiries() {
+            const inquiries = JSON.parse(localStorage.getItem('inquiries')) || [];
+            const tableBody = document.getElementById('inquiriesTableBody');
+            tableBody.innerHTML = '';
+
+            if (inquiries.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="6" class="text-center py-10 text-gray-500">접수된 문의가 없습니다.</td></tr>';
+                return;
+            }
+
+            inquiries.forEach(inquiry => {
+                const row = `
+                    <tr class="table-row">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">${inquiry.date}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">${inquiry.companyName} (${inquiry.orgType})</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">${inquiry.contactPerson}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm"><a href="mailto:${inquiry.email}" class="text-indigo-600 hover:underline">${inquiry.email}</a></td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                            <select class="status-select rounded-md border-gray-300 shadow-sm" data-id="${inquiry.id}">
+                                <option value="접수완료" ${inquiry.status === '접수완료' ? 'selected' : ''}>접수완료</option>
+                                <option value="처리중" ${inquiry.status === '처리중' ? 'selected' : ''}>처리중</option>
+                                <option value="완료" ${inquiry.status === '완료' ? 'selected' : ''}>완료</option>
+                            </select>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                            <button onclick="viewInquiry('${inquiry.id}')" class="text-indigo-600 hover:text-indigo-900">상세보기</button>
+                        </td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
+            
+            document.querySelectorAll('.status-select').forEach(select => {
+                select.addEventListener('change', function() {
+                    updateInquiryStatus(this.dataset.id, this.value);
+                });
+            });
+        }
+
+        function updateInquiryStatus(id, newStatus) {
+            let inquiries = JSON.parse(localStorage.getItem('inquiries')) || [];
+            const inquiryIndex = inquiries.findIndex(inq => inq.id === id);
+            if (inquiryIndex > -1) {
+                inquiries[inquiryIndex].status = newStatus;
+                localStorage.setItem('inquiries', JSON.stringify(inquiries));
+            }
+        }
+
+        // Dummy function for viewing inquiry details
+        function viewInquiry(id) {
+            let inquiries = JSON.parse(localStorage.getItem('inquiries')) || [];
+            const inquiry = inquiries.find(inq => inq.id === id);
+            if (inquiry) {
+                alert(`[문의 내용]\n\n기관명: ${inquiry.companyName}\n담당자: ${inquiry.contactPerson}\n연락처: ${inquiry.phone}\n\n${inquiry.message}`);
+            }
+        }
+
+        // Load inquiries when the page loads
+        window.addEventListener('DOMContentLoaded', loadInquiries);
+
+
+    </script>
 </body>
 </html> 

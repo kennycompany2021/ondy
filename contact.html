@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>도입 상담 신청 - ONDY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header -->
+    <header class="main-header bg-white sticky top-0 z-50">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-end items-center h-10 border-b border-gray-100 text-xs header-top-nav space-x-4 items-center">
+                <a href="portal-login.html" class="font-semibold text-indigo-600 hover:text-indigo-800 transition-colors">업무포털</a>
+                <span class="text-gray-300">|</span>
+                <a href="login.html" class="hover:underline transition-colors">로그인</a>
+                <a href="signup.html" class="hover:underline transition-colors">회원가입</a>
+            </div>
+            <div class="flex justify-between items-center h-24">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <svg class="h-9 w-auto text-amber-500" viewBox="0 0 44 54" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 0C12.059 0 4 8.059 4 18C4 26.28 9.625 33.125 17.5 35.5V36C14.149 36 10.992 37.06 8.5 38.883V42.25C12.723 39.547 17.167 38 22 38C26.833 38 31.277 39.547 35.5 42.25V38.883C33.008 37.06 29.851 36 26.5 36V35.5C34.375 33.125 40 26.28 40 18C40 8.059 31.941 0 22 0ZM22 30C15.373 30 10 24.627 10 18C10 11.373 15.373 6 22 6C28.627 6 34 11.373 34 18C34 24.627 28.627 30 22 30Z"/>
+                        <path d="M15.5 44.5L22 51L28.5 44.5L22 38L15.5 44.5Z"/>
+                    </svg>
+                    <span class="text-3xl font-bold text-indigo-800">ONDY</span>
+                </a>
+                <nav class="hidden lg:flex items-center space-x-12 h-full main-nav">
+                    <a href="notices.html">공지사항</a>
+                    <a href="news.html">유학뉴스</a>
+                    <a href="study-guide.html">유학가이드</a>
+                    <a href="universities.html">대학/전공 정보</a>
+                    <a href="scholarships.html">장학금</a>
+                </nav>
+                <button id="mobileMenuButton" class="lg:hidden text-gray-600 hover:text-gray-900">
+                    <i class="fas fa-bars fa-lg"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div id="mobileMenu" class="mobile-menu fixed inset-y-0 right-0 w-80 bg-white shadow-xl lg:hidden z-50">
+            <div class="flex items-center justify-between p-6 border-b">
+                <div class="flex items-center space-x-2">
+                     <svg class="h-8 w-auto text-amber-500" viewBox="0 0 44 54" fill="currentColor">
+                        <path d="M22 0C12.059 0 4 8.059 4 18C4 26.28 9.625 33.125 17.5 35.5V36C14.149 36 10.992 37.06 8.5 38.883V42.25C12.723 39.547 17.167 38 22 38C26.833 38 31.277 39.547 35.5 42.25V38.883C33.008 37.06 29.851 36 26.5 36V35.5C34.375 33.125 40 26.28 40 18C40 8.059 31.941 0 22 0ZM22 30C15.373 30 10 24.627 10 18C10 11.373 15.373 6 22 6C28.627 6 34 11.373 34 18C34 24.627 28.627 30 22 30Z"/>
+                        <path d="M15.5 44.5L22 51L28.5 44.5L22 38L15.5 44.5Z"/>
+                    </svg>
+                    <span class="text-2xl font-bold text-indigo-800">ONDY</span>
+                </div>
+                <button id="mobileMenuCloseButton" class="text-gray-600">
+                    <i class="fas fa-times fa-lg"></i>
+                </button>
+            </div>
+            <nav class="p-6 mobile-nav">
+                <a href="notices.html" class="block py-3 text-lg font-semibold text-gray-800 border-b border-gray-100">공지사항</a>
+                <a href="news.html" class="block py-3 text-lg font-semibold text-gray-800 border-b border-gray-100">유학뉴스</a>
+                <a href="study-guide.html" class="block py-3 text-lg font-semibold text-gray-800 border-b border-gray-100">유학가이드</a>
+                <a href="universities.html" class="block py-3 text-lg font-semibold text-gray-800 border-b border-gray-100">대학/전공 정보</a>
+                <a href="scholarships.html" class="block py-3 text-lg font-semibold text-gray-800">장학금</a>
+            </nav>
+        </div>
+        
+        <div id="mobileOverlay" class="hidden fixed inset-0 bg-black bg-opacity-50 lg:hidden z-40"></div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="py-16 md:py-24">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center mb-12">
+                    <h1 class="text-4xl md:text-5xl font-bold text-gray-800">도입 상담 신청</h1>
+                    <p class="text-lg text-gray-600 mt-4">ONDY 도입을 검토해주셔서 감사합니다. 아래 양식을 작성해주시면 전담 컨설턴트가 신속하게 연락드리겠습니다.</p>
+                </div>
+
+                <div id="contactFormWrapper" class="bg-white p-8 md:p-12 rounded-2xl shadow-lg border">
+                    <form id="contactForm">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="companyName" class="block text-sm font-medium text-gray-700 mb-1">기관/회사명</label>
+                                <input type="text" id="companyName" name="companyName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            </div>
+                            <div>
+                                <label for="contactPerson" class="block text-sm font-medium text-gray-700 mb-1">담당자명</label>
+                                <input type="text" id="contactPerson" name="contactPerson" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">이메일</label>
+                                <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            </div>
+                            <div>
+                                <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">연락처</label>
+                                <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label for="orgType" class="block text-sm font-medium text-gray-700 mb-1">기관 유형</label>
+                                <select id="orgType" name="orgType" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
+                                    <option>대학</option>
+                                    <option>유학원</option>
+                                    <option>기타</option>
+                                </select>
+                            </div>
+                            <div class="md:col-span-2">
+                                <label for="message" class="block text-sm font-medium text-gray-700 mb-1">문의 내용</label>
+                                <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                            </div>
+                        </div>
+                        <div class="mt-8 text-center">
+                            <button type="submit" class="w-full md:w-auto px-12 py-4 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-700 transition-colors text-lg">
+                                상담 신청하기
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div id="successMessage" class="hidden text-center bg-emerald-50 border-l-4 border-emerald-500 text-emerald-800 p-8 rounded-lg mt-8">
+                    <i class="fa-solid fa-check-circle text-4xl mb-4"></i>
+                    <h3 class="text-2xl font-bold">신청이 완료되었습니다.</h3>
+                    <p class="mt-2">영업일 기준 1-2일 이내에 담당자가 연락드리겠습니다. 감사합니다.</p>
+                    <a href="index.html" class="inline-block mt-6 px-6 py-2 bg-emerald-600 text-white font-semibold rounded-lg hover:bg-emerald-700">메인으로 돌아가기</a>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 mt-12">
+        <div class="container mx-auto px-6 py-12">
+            <div class="text-sm text-gray-400 text-center">
+                <p>(주)온디 | 대표: OOO | 사업자등록번호: 123-45-67890</p>
+                <p class="mt-4">&copy; ONDY Inc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="js/main.js"></script>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const inquiry = {
+                id: 'INQ' + Date.now(),
+                companyName: formData.get('companyName'),
+                contactPerson: formData.get('contactPerson'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                orgType: formData.get('orgType'),
+                message: formData.get('message'),
+                date: new Date().toLocaleDateString('ko-KR'),
+                status: '접수완료'
+            };
+
+            // Save to localStorage
+            let inquiries = JSON.parse(localStorage.getItem('inquiries')) || [];
+            inquiries.push(inquiry);
+            localStorage.setItem('inquiries', JSON.stringify(inquiries));
+            
+            // Show success message
+            document.getElementById('contactFormWrapper').classList.add('hidden');
+            document.getElementById('successMessage').classList.remove('hidden');
+        });
+    </script>
+</body>
+</html> 
