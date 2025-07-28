@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대학 지원 관리 - ONDY</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+            color: #374151;
+        }
+
+        .portal-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .portal-sidebar {
+            width: 280px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+
+        /* 개선된 로고 스타일 */
+        .logo {
+            padding: 24px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .logo-link:hover {
+            transform: translateY(-1px);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 67px;
+            margin-right: 12px;
+            color: #fbbf24;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+            flex-shrink: 0;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .logo-text .brand-name {
+            display: block;
+            color: white;
+        }
+
+        .logo-text .brand-subtitle {
+            display: block;
+            font-size: 12px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.8);
+            margin-top: 2px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* 네비게이션 메뉴 스타일 */
+        .nav-menu {
+            list-style: none;
+            padding: 20px 0;
+        }
+
+        .nav-category {
+            padding: 12px 20px 8px 20px;
+            font-size: 11px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 20px;
+        }
+
+        .nav-category:first-child {
+            margin-top: 0;
+        }
+
+        .nav-item {
+            margin: 2px 12px;
+        }
+
+        .nav-item a {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .nav-item a:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            transform: translateX(4px);
+        }
+
+        .nav-item.active a {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .nav-item a i {
+            margin-right: 12px;
+            width: 16px;
+            text-align: center;
+            opacity: 0.8;
+        }
+
+        /* 메인 콘텐츠 */
+        .portal-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .portal-header {
+            background: white;
+            padding: 16px 24px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #6b7280;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #e5e7eb;
+        }
+
+        .user-profile span {
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .portal-content {
+            flex: 1;
+            padding: 24px;
+        }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 24px;
+        }
+
+        .card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .card-header {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .portal-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .portal-table th,
+        .portal-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .portal-table th {
+            background: #f9fafb;
+            font-weight: 600;
+            color: #374151;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .portal-table td {
+            color: #6b7280;
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .portal-sidebar {
+                width: 280px;
+                position: fixed;
+                left: -280px;
+                z-index: 1000;
+                height: 100vh;
+            }
+
+            .portal-sidebar.active {
+                left: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .portal-main {
+                width: 100%;
+            }
+
+            .logo-text {
+                font-size: 20px;
+            }
+
+            .logo-icon {
+                width: 36px;
+                height: 36px;
+            }
+        }
+
+        /* 작은 화면에서 로고 최적화 */
+        @media (max-width: 320px) {
+            .logo {
+                padding: 20px 16px;
+            }
+            
+            .logo-text {
+                font-size: 18px;
+            }
+            
+            .logo-icon {
+                width: 32px;
+                height: 32px;
+                margin-right: 10px;
+            }
+        }
+    </style>
+</head>
+<body class="portal-body">
+    <div class="portal-container">
+        <!-- Sidebar -->
+        <aside class="portal-sidebar">
+            <div class="logo">
+                <a href="../../index.html" class="logo-link">
+                    <svg class="logo-icon" viewBox="0 0 44 54" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 0C12.059 0 4 8.059 4 18C4 26.28 9.625 33.125 17.5 35.5V36C14.149 36 10.992 37.06 8.5 38.883V42.25C12.723 39.547 17.167 38 22 38C26.833 38 31.277 39.547 35.5 42.25V38.883C33.008 37.06 29.851 36 26.5 36V35.5C34.375 33.125 40 26.28 40 18C40 8.059 31.941 0 22 0ZM22 30C15.373 30 10 24.627 10 18C10 11.373 15.373 6 22 6C28.627 6 34 11.373 34 18C34 24.627 28.627 30 22 30Z"></path>
+                        <path d="M15.5 44.5L22 51L28.5 44.5L22 38L15.5 44.5Z"></path>
+                    </svg>
+                    <div class="logo-text">
+                        <span class="brand-name">ONDY</span>
+                        <span class="brand-subtitle">Global</span>
+                    </div>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-category">메인</li>
+                <li class="nav-item"><a href="index.html"><i class="fas fa-tachometer-alt"></i>대시보드</a></li>
+                <li class="nav-item"><a href="academy-info.html"><i class="fas fa-building"></i>유학원 정보 관리</a></li>
+                <li class="nav-category">학생 관리</li>
+                <li class="nav-item"><a href="students.html"><i class="fas fa-user-graduate"></i>학생 관리</a></li>
+                <li class="nav-item active"><a href="applications.html"><i class="fas fa-file-alt"></i>대학 지원 관리</a></li>
+                <li class="nav-category">계정</li>
+                <li class="nav-item"><a href="#"><i class="fas fa-cog"></i>계정 설정</a></li>
+                <li class="nav-item"><a href="../login.html"><i class="fas fa-sign-out-alt"></i>로그아웃</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="portal-main">
+            <header class="portal-header">
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="user-profile">
+                    <img src="https://via.placeholder.com/40" alt="User Profile">
+                    <span>유학원 관계자님</span>
+                </div>
+            </header>
+
+            <div class="portal-content">
+                <h1 class="page-title">대학 지원 관리</h1>
+
+                <!-- Tab Navigation -->
+                <div class="main-tabs">
+                    <button class="main-tab-button active" onclick="switchMainTab('programs')">전형 목록</button>
+                    <button class="main-tab-button" onclick="switchMainTab('status')">지원 현황</button>
+                </div>
+
+                <!-- Programs Tab -->
+                <div id="programsTab" class="main-tab-content active">
+                    <div class="card">
+                        <div class="card-header">모집 중인 전형</div>
+                        
+                        <!-- Search and Filter -->
+                        <div style="display: flex; gap: 20px; margin-bottom: 25px; flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 300px;">
+                                <input type="text" class="form-control" placeholder="대학명 또는 전형명으로 검색..." id="programSearchInput">
+                            </div>
+                            <div>
+                                <select class="form-control" id="universityFilter" style="width: 150px;">
+                                    <option value="">모든 대학</option>
+                                    <option value="서울국제대">서울국제대</option>
+                                    <option value="부산대학교">부산대학교</option>
+                                    <option value="경기대학교">경기대학교</option>
+                                    <option value="인천대학교">인천대학교</option>
+                                </select>
+                            </div>
+                            <div>
+                                <select class="form-control" id="semesterFilter" style="width: 120px;">
+                                    <option value="">모든 학기</option>
+                                    <option value="2025-1">2025-1학기</option>
+                                    <option value="2024-2">2024-2학기</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Programs Table -->
+                        <table class="portal-table">
+                            <thead>
+                                <tr>
+                                    <th>대학명</th>
+                                    <th>전형명</th>
+                                    <th>모집 기간</th>
+                                    <th>지원 자격 요약</th>
+                                    <th>모집 인원</th>
+                                    <th>현재 지원자</th>
+                                    <th>상세 보기</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr onclick="openProgramDetailModal('서울국제대', '2025-1학기 일반전형')" style="cursor: pointer;">
+                                    <td style="font-weight: 500;">서울국제대학교</td>
+                                    <td>2025-1학기 일반전형</td>
+                                    <td>2024-12-01 ~ 2024-12-30</td>
+                                    <td>외국인, TOPIK 3급 이상</td>
+                                    <td>200명</td>
+                                    <td>156명</td>
+                                    <td>
+                                        <button class="btn-small btn-primary" onclick="event.stopPropagation(); openProgramDetailModal('서울국제대', '2025-1학기 일반전형')">
+                                            상세 보기
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr onclick="openProgramDetailModal('부산대학교', '2025-1학기 특별전형')" style="cursor: pointer;">
+                                    <td style="font-weight: 500;">부산대학교</td>
+                                    <td>2025-1학기 특별전형</td>
+                                    <td>2024-11-15 ~ 2024-12-20</td>
+                                    <td>외국인, TOPIK 4급 이상</td>
+                                    <td>30명</td>
+                                    <td>22명</td>
+                                    <td>
+                                        <button class="btn-small btn-primary" onclick="event.stopPropagation(); openProgramDetailModal('부산대학교', '2025-1학기 특별전형')">
+                                            상세 보기
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr onclick="openProgramDetailModal('경기대학교', '2025-1학기 편입전형')" style="cursor: pointer;">
+                                    <td style="font-weight: 500;">경기대학교</td>
+                                    <td>2025-1학기 편입전형</td>
+                                    <td>2024-12-05 ~ 2024-12-25</td>
+                                    <td>전문대 졸업, TOPIK 3급</td>
+                                    <td>25명</td>
+                                    <td>18명</td>
+                                    <td>
+                                        <button class="btn-small btn-primary" onclick="event.stopPropagation(); openProgramDetailModal('경기대학교', '2025-1학기 편입전형')">
+                                            상세 보기
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr onclick="openProgramDetailModal('인천대학교', '2025-1학기 우수자전형')" style="cursor: pointer;">
+                                    <td style="font-weight: 500;">인천대학교</td>
+                                    <td>2025-1학기 우수자전형</td>
+                                    <td>2024-11-20 ~ 2024-12-22</td>
+                                    <td>외국인, TOPIK 5급 이상</td>
+                                    <td>15명</td>
+                                    <td>12명</td>
+                                    <td>
+                                        <button class="btn-small btn-primary" onclick="event.stopPropagation(); openProgramDetailModal('인천대학교', '2025-1학기 우수자전형')">
+                                            상세 보기
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Application Status Tab -->
+                <div id="statusTab" class="main-tab-content">
+                    <div class="card">
+                        <div class="card-header">학생별 지원 현황</div>
+                        
+                        <!-- Filter -->
+                        <div style="display: flex; gap: 20px; margin-bottom: 25px; flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 300px;">
+                                <input type="text" class="form-control" placeholder="학생명으로 검색..." id="statusSearchInput">
+                            </div>
+                            <div>
+                                <select class="form-control" id="statusFilter" style="width: 150px;">
+                                    <option value="">모든 상태</option>
+                                    <option value="pending">심사 중</option>
+                                    <option value="accepted">합격</option>
+                                    <option value="rejected">불합격</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Status Table -->
+                        <table class="portal-table">
+                            <thead>
+                                <tr>
+                                    <th>학생명</th>
+                                    <th>국적</th>
+                                    <th>대학명</th>
+                                    <th>전형명</th>
+                                    <th>지원일</th>
+                                    <th>현재 단계</th>
+                                    <th>상태</th>
+                                    <th>관리</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="font-weight: 500;">김민수</td>
+                                    <td>🇰🇷 한국</td>
+                                    <td>서울국제대</td>
+                                    <td>일반전형</td>
+                                    <td>2024-12-15</td>
+                                    <td>서류 심사</td>
+                                    <td><span class="status-badge pending">심사 중</span></td>
+                                    <td>
+                                        <button class="btn-icon" onclick="viewApplicationDetail('김민수')" title="상세 보기">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 500;">이영희</td>
+                                    <td>🇰🇷 한국</td>
+                                    <td>부산대학교</td>
+                                    <td>특별전형</td>
+                                    <td>2024-12-14</td>
+                                    <td>최종 합격</td>
+                                    <td><span class="status-badge accepted">합격</span></td>
+                                    <td>
+                                        <button class="btn-icon" onclick="viewApplicationDetail('이영희')" title="상세 보기">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 500;">박철수</td>
+                                    <td>🇰🇷 한국</td>
+                                    <td>경기대학교</td>
+                                    <td>편입전형</td>
+                                    <td>2024-12-13</td>
+                                    <td>1차 면접</td>
+                                    <td><span class="status-badge pending">심사 중</span></td>
+                                    <td>
+                                        <button class="btn-icon" onclick="viewApplicationDetail('박철수')" title="상세 보기">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 500;">张伟</td>
+                                    <td>🇨🇳 중국</td>
+                                    <td>서울국제대</td>
+                                    <td>일반전형</td>
+                                    <td>2024-12-12</td>
+                                    <td>최종 합격</td>
+                                    <td><span class="status-badge accepted">합격</span></td>
+                                    <td>
+                                        <button class="btn-icon" onclick="viewApplicationDetail('张伟')" title="상세 보기">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 500;">田中太郎</td>
+                                    <td>🇯🇵 일본</td>
+                                    <td>인천대학교</td>
+                                    <td>우수자전형</td>
+                                    <td>2024-12-11</td>
+                                    <td>서류 심사</td>
+                                    <td><span class="status-badge rejected">불합격</span></td>
+                                    <td>
+                                        <button class="btn-icon" onclick="viewApplicationDetail('田中太郎')" title="상세 보기">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Program Detail Modal -->
+    <div id="programDetailModal" class="modal" style="display: none;">
+        <div class="modal-content" style="max-width: 900px;">
+            <div class="modal-header">
+                <h3 id="programModalTitle">전형 상세 정보</h3>
+                <span class="close" onclick="closeProgramDetailModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 30px;">
+                    <!-- Left Column - Program Info -->
+                    <div>
+                        <div class="info-section">
+                            <h4>전형 정보</h4>
+                            <div class="info-item">
+                                <label>대학명</label>
+                                <p id="modalUniversity">서울국제대학교</p>
+                            </div>
+                            <div class="info-item">
+                                <label>전형명</label>
+                                <p id="modalProgram">2025-1학기 일반전형</p>
+                            </div>
+                            <div class="info-item">
+                                <label>모집 기간</label>
+                                <p id="modalPeriod">2024-12-01 ~ 2024-12-30</p>
+                            </div>
+                            <div class="info-item">
+                                <label>모집 인원</label>
+                                <p id="modalCapacity">200명</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-section">
+                            <h4>지원 자격</h4>
+                            <div style="background: #f9fafb; padding: 15px; border-radius: 8px;">
+                                <p id="modalRequirements" style="margin: 0; line-height: 1.6;">
+                                    • 외국 국적을 소지한 자<br>
+                                    • 고등학교 졸업자 또는 이와 동등한 학력을 인정받은 자<br>
+                                    • TOPIK 3급 이상 취득자<br>
+                                    • 한국어 능력이 대학 수학에 지장이 없다고 인정되는 자
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-section">
+                            <h4>제출 서류</h4>
+                            <div style="background: #f9fafb; padding: 15px; border-radius: 8px;">
+                                <p id="modalDocuments" style="margin: 0; line-height: 1.6;">
+                                    • 입학지원서 1부<br>
+                                    • 고등학교 졸업증명서 1부<br>
+                                    • 고등학교 성적증명서 1부<br>
+                                    • TOPIK 성적증명서 1부<br>
+                                    • 여권 사본 1부<br>
+                                    • 자기소개서 1부
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column - Application -->
+                    <div>
+                        <div class="info-section">
+                            <h4>이 전형에 지원하기</h4>
+                            
+                            <div style="margin-bottom: 15px;">
+                                <label>
+                                    <input type="checkbox" id="includeUnqualified" style="margin-right: 8px;">
+                                    자격 미달 학생 포함 조회
+                                </label>
+                            </div>
+                            
+                            <div class="eligible-students">
+                                <h5 style="color: #059669; margin-bottom: 10px;">지원 가능 학생 (3명)</h5>
+                                <div class="student-list">
+                                    <label class="student-item">
+                                        <input type="checkbox" name="selectedStudents" value="김민수">
+                                        <div class="student-info">
+                                            <span class="student-name">김민수</span>
+                                            <span class="student-nationality">🇰🇷 한국</span>
+                                            <span class="student-topik">TOPIK 5급</span>
+                                        </div>
+                                    </label>
+                                    <label class="student-item">
+                                        <input type="checkbox" name="selectedStudents" value="이영희">
+                                        <div class="student-info">
+                                            <span class="student-name">이영희</span>
+                                            <span class="student-nationality">🇰🇷 한국</span>
+                                            <span class="student-topik">TOPIK 4급</span>
+                                        </div>
+                                    </label>
+                                    <label class="student-item">
+                                        <input type="checkbox" name="selectedStudents" value="张伟">
+                                        <div class="student-info">
+                                            <span class="student-name">张伟</span>
+                                            <span class="student-nationality">🇨🇳 중국</span>
+                                            <span class="student-topik">TOPIK 4급</span>
+                                        </div>
+                                    </label>
+                                </div>
+                                
+                                <div id="unqualifiedStudents" style="display: none;">
+                                    <h5 style="color: #dc2626; margin: 20px 0 10px;">자격 미달 학생 (2명)</h5>
+                                    <div class="student-list">
+                                        <label class="student-item disabled">
+                                            <input type="checkbox" name="selectedStudents" value="박철수" disabled>
+                                            <div class="student-info">
+                                                <span class="student-name">박철수</span>
+                                                <span class="student-nationality">🇰🇷 한국</span>
+                                                <span class="student-topik">TOPIK 2급</span>
+                                                <span class="student-issue">(자격 미달)</span>
+                                            </div>
+                                        </label>
+                                        <label class="student-item disabled">
+                                            <input type="checkbox" name="selectedStudents" value="田中太郎" disabled>
+                                            <div class="student-info">
+                                                <span class="student-name">田中太郎</span>
+                                                <span class="student-nationality">🇯🇵 일본</span>
+                                                <span class="student-topik">TOPIK 없음</span>
+                                                <span class="student-issue">(자격 미달)</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-primary" style="width: 100%; margin-top: 20px;" onclick="submitApplications()">
+                                <i class="fas fa-paper-plane"></i>
+                                선택한 학생 지원 신청
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .main-tabs {
+            display: flex;
+            border-bottom: 2px solid #e5e7eb;
+            margin-bottom: 30px;
+        }
+        .main-tab-button {
+            padding: 12px 24px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        .main-tab-button.active {
+            border-bottom-color: #3b82f6;
+            color: #3b82f6;
+        }
+        .main-tab-button:hover:not(.active) {
+            color: #6b7280;
+        }
+        
+        .main-tab-content {
+            display: none;
+        }
+        .main-tab-content.active {
+            display: block;
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 0.8rem;
+        }
+
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        .status-badge.pending {
+            background: #fef3c7;
+            color: #d97706;
+        }
+        .status-badge.accepted {
+            background: #dcfdf4;
+            color: #059669;
+        }
+        .status-badge.rejected {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        .btn-icon {
+            background: none;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            color: #6b7280;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        .btn-icon:hover {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .modal {
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .modal-content {
+            background-color: white;
+            margin: 2% auto;
+            padding: 0;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .modal-body {
+            padding: 20px;
+        }
+        .close {
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #6b7280;
+        }
+        .close:hover {
+            color: #374151;
+        }
+
+        .info-section {
+            margin-bottom: 25px;
+        }
+        .info-section h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #374151;
+        }
+        .info-section h5 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #374151;
+        }
+        
+        .info-item {
+            margin-bottom: 15px;
+        }
+        .info-item label {
+            display: block;
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        .info-item p {
+            margin: 0;
+            font-size: 1rem;
+            color: #374151;
+        }
+
+        .student-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .student-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .student-item:hover:not(.disabled) {
+            background: #f9fafb;
+            border-color: #3b82f6;
+        }
+        .student-item.disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            background: #f9fafb;
+        }
+        .student-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .student-name {
+            font-weight: 600;
+            color: #374151;
+        }
+        .student-nationality, .student-topik {
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+        .student-issue {
+            font-size: 0.8rem;
+            color: #dc2626;
+            font-weight: 500;
+        }
+    </style>
+
+    <script>
+        // Tab switching
+        function switchMainTab(tabName) {
+            document.querySelectorAll('.main-tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.main-tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+
+            document.getElementById(tabName + 'Tab').classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Modal functions
+        function openProgramDetailModal(university, program) {
+            document.getElementById('programModalTitle').textContent = `${university} - ${program}`;
+            document.getElementById('modalUniversity').textContent = university;
+            document.getElementById('modalProgram').textContent = program;
+            document.getElementById('programDetailModal').style.display = 'block';
+        }
+
+        function closeProgramDetailModal() {
+            document.getElementById('programDetailModal').style.display = 'none';
+        }
+
+        // Toggle unqualified students
+        document.getElementById('includeUnqualified').addEventListener('change', function() {
+            const unqualifiedSection = document.getElementById('unqualifiedStudents');
+            if (this.checked) {
+                unqualifiedSection.style.display = 'block';
+            } else {
+                unqualifiedSection.style.display = 'none';
+            }
+        });
+
+        // Submit applications
+        function submitApplications() {
+            const selectedStudents = document.querySelectorAll('input[name="selectedStudents"]:checked');
+            if (selectedStudents.length === 0) {
+                alert('지원할 학생을 선택해주세요.');
+                return;
+            }
+            
+            const studentNames = Array.from(selectedStudents).map(checkbox => checkbox.value);
+            if (confirm(`선택한 ${studentNames.length}명의 학생을 이 전형에 지원시키겠습니까?\n\n${studentNames.join(', ')}`)) {
+                alert('지원 신청이 완료되었습니다.');
+                closeProgramDetailModal();
+                // Refresh status tab
+                switchMainTab('status');
+            }
+        }
+
+        // Application detail view
+        function viewApplicationDetail(studentName) {
+            alert(`${studentName} 학생의 지원 상세 정보를 조회합니다.`);
+        }
+
+        // Search functionality
+        document.getElementById('programSearchInput').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#programsTab .portal-table tbody tr');
+            
+            rows.forEach(row => {
+                const university = row.cells[0].textContent.toLowerCase();
+                const program = row.cells[1].textContent.toLowerCase();
+                if (university.includes(searchTerm) || program.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+        document.getElementById('statusSearchInput').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#statusTab .portal-table tbody tr');
+            
+            rows.forEach(row => {
+                const studentName = row.cells[0].textContent.toLowerCase();
+                if (studentName.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('programDetailModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Mobile menu toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.portal-sidebar').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

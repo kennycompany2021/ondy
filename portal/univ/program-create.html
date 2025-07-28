@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전형 등록 - ONDY</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+            color: #374151;
+        }
+
+        .portal-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .portal-sidebar {
+            width: 280px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+
+        /* 개선된 로고 스타일 */
+        .logo {
+            padding: 24px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .logo-link:hover {
+            transform: translateY(-1px);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 67px;
+            margin-right: 12px;
+            color: #fbbf24;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+            flex-shrink: 0;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .logo-text .brand-name {
+            display: block;
+            color: white;
+        }
+
+        .logo-text .brand-subtitle {
+            display: block;
+            font-size: 12px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.8);
+            margin-top: 2px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* 네비게이션 메뉴 스타일 */
+        .nav-menu {
+            list-style: none;
+            padding: 20px 0;
+        }
+
+        .nav-category {
+            padding: 12px 20px 8px 20px;
+            font-size: 11px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 20px;
+        }
+
+        .nav-category:first-child {
+            margin-top: 0;
+        }
+
+        .nav-item {
+            margin: 2px 12px;
+        }
+
+        .nav-item a {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .nav-item a:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            transform: translateX(4px);
+        }
+
+        .nav-item.active a {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .nav-item a i {
+            margin-right: 12px;
+            width: 16px;
+            text-align: center;
+            opacity: 0.8;
+        }
+
+        /* 메인 콘텐츠 */
+        .portal-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .portal-header {
+            background: white;
+            padding: 16px 24px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #6b7280;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #e5e7eb;
+        }
+
+        .user-profile span {
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .portal-content {
+            flex: 1;
+            padding: 24px;
+        }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 24px;
+        }
+
+        .card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+            margin-bottom: 24px;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .card-header {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: #6b7280;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .portal-sidebar {
+                width: 280px;
+                position: fixed;
+                left: -280px;
+                z-index: 1000;
+                height: 100vh;
+            }
+
+            .portal-sidebar.active {
+                left: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .portal-main {
+                width: 100%;
+            }
+
+            .logo-text {
+                font-size: 20px;
+            }
+
+            .logo-icon {
+                width: 36px;
+                height: 36px;
+            }
+        }
+
+        /* 작은 화면에서 로고 최적화 */
+        @media (max-width: 320px) {
+            .logo {
+                padding: 20px 16px;
+            }
+            
+            .logo-text {
+                font-size: 18px;
+            }
+            
+            .logo-icon {
+                width: 32px;
+                height: 32px;
+                margin-right: 10px;
+            }
+        }
+    </style>
+</head>
+<body class="portal-body">
+    <div class="portal-container">
+        <!-- Sidebar -->
+        <aside class="portal-sidebar">
+            <div class="logo">
+                <a href="../../index.html" class="logo-link">
+                    <svg class="logo-icon" viewBox="0 0 44 54" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 0C12.059 0 4 8.059 4 18C4 26.28 9.625 33.125 17.5 35.5V36C14.149 36 10.992 37.06 8.5 38.883V42.25C12.723 39.547 17.167 38 22 38C26.833 38 31.277 39.547 35.5 42.25V38.883C33.008 37.06 29.851 36 26.5 36V35.5C34.375 33.125 40 26.28 40 18C40 8.059 31.941 0 22 0ZM22 30C15.373 30 10 24.627 10 18C10 11.373 15.373 6 22 6C28.627 6 34 11.373 34 18C34 24.627 28.627 30 22 30Z"></path>
+                        <path d="M15.5 44.5L22 51L28.5 44.5L22 38L15.5 44.5Z"></path>
+                    </svg>
+                    <div class="logo-text">
+                        <span class="brand-name">ONDY</span>
+                        <span class="brand-subtitle">Global</span>
+                    </div>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-category">메인</li>
+                <li class="nav-item"><a href="index.html"><i class="fas fa-tachometer-alt"></i>대시보드</a></li>
+                <li class="nav-item"><a href="university-info.html"><i class="fas fa-building"></i>대학 정보 관리</a></li>
+                <li class="nav-category">입학 관리</li>
+                <li class="nav-item active"><a href="programs.html"><i class="fas fa-graduation-cap"></i>전형 관리</a></li>
+                <li class="nav-item"><a href="applicants.html"><i class="fas fa-users"></i>지원자 관리</a></li>
+                <li class="nav-item"><a href="scholarships.html"><i class="fas fa-award"></i>장학 관리</a></li>
+                <li class="nav-category">계정</li>
+                <li class="nav-item"><a href="account-settings.html"><i class="fas fa-cog"></i>계정 설정</a></li>
+                <li class="nav-item"><a href="../login.html"><i class="fas fa-sign-out-alt"></i>로그아웃</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="portal-main">
+            <header class="portal-header">
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="user-profile">
+                    <img src="https://via.placeholder.com/40" alt="User Profile">
+                    <span>대학 관계자님</span>
+                </div>
+            </header>
+
+            <div class="portal-content">
+                <div style="margin-bottom: 30px;">
+                    <a href="programs.html" style="color: #6b7280; text-decoration: none; font-size: 0.9rem;">
+                        <i class="fas fa-arrow-left"></i> 전형 목록으로 돌아가기
+                    </a>
+                    <h1 class="page-title" style="margin: 10px 0 0 0;">신규 전형 등록</h1>
+                </div>
+
+                <form id="programForm">
+                    <div class="card">
+                        <div class="card-header">기본 정보</div>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                            <div class="form-group">
+                                <label for="programName">전형명 *</label>
+                                <input type="text" class="form-control" id="programName" required 
+                                       placeholder="예: 2025-1학기 일반전형">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="semester">모집 학기 *</label>
+                                <select class="form-control" id="semester" required>
+                                    <option value="">선택하세요</option>
+                                    <option value="2025-1">2025-1학기</option>
+                                    <option value="2025-2">2025-2학기</option>
+                                    <option value="2026-1">2026-1학기</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                            <div class="form-group">
+                                <label for="startDate">모집 시작일 *</label>
+                                <input type="date" class="form-control" id="startDate" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="endDate">모집 종료일 *</label>
+                                <input type="date" class="form-control" id="endDate" required>
+                            </div>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                            <div class="form-group">
+                                <label for="capacity">모집 인원 *</label>
+                                <input type="number" class="form-control" id="capacity" required min="1" 
+                                       placeholder="예: 200">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="manager">담당자명</label>
+                                <input type="text" class="form-control" id="manager" 
+                                       placeholder="예: 김입학">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="qualifications">지원 자격</label>
+                            <textarea class="form-control" id="qualifications" rows="4" 
+                                      placeholder="지원 자격 요건을 입력하세요..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">제출 서류</div>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div>
+                                <h4 style="margin-bottom: 15px; color: #374151;">필수 서류</h4>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="documents" value="application" checked disabled>
+                                        <span>입학지원서</span>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="documents" value="graduation">
+                                        <span>고등학교 졸업증명서</span>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="documents" value="transcript">
+                                        <span>고등학교 성적증명서</span>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="documents" value="topik">
+                                        <span>TOPIK 성적증명서</span>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="documents" value="passport">
+                                        <span>여권 사본</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 style="margin-bottom: 15px; color: #374151;">선택 서류</h4>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="documents" value="personal_statement">
+                                        <span>자기소개서</span>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="documents" value="recommendation">
+                                        <span>추천서</span>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="documents" value="portfolio">
+                                        <span>포트폴리오</span>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="documents" value="language_cert">
+                                        <span>기타 어학증명서</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group" style="margin-top: 20px;">
+                            <label for="additionalDocuments">추가 서류</label>
+                            <textarea class="form-control" id="additionalDocuments" rows="2" 
+                                      placeholder="추가로 필요한 서류가 있다면 입력하세요..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                            <div class="card-header" style="margin: 0;">전형 단계 설정</div>
+                            <button type="button" class="btn btn-secondary" id="addStepBtn">
+                                <i class="fas fa-plus"></i>
+                                단계 추가
+                            </button>
+                        </div>
+                        
+                        <div id="stepsContainer">
+                            <div class="step-item" data-step="1">
+                                <div style="display: flex; align-items: center; gap: 15px;">
+                                    <div class="step-number">1</div>
+                                    <div style="flex: 1;">
+                                        <input type="text" class="form-control" name="stepName[]" 
+                                               placeholder="단계명을 입력하세요 (예: 서류 심사)" required>
+                                    </div>
+                                    <button type="button" class="btn-remove-step" onclick="removeStep(1)" disabled>
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p style="color: #6b7280; font-size: 0.9rem; margin-top: 15px;">
+                            <i class="fas fa-info-circle"></i>
+                            최대 5단계까지 설정할 수 있습니다. 첫 번째 단계는 삭제할 수 없습니다.
+                        </p>
+                    </div>
+
+                    <div style="text-align: right; margin-top: 30px;">
+                        <a href="programs.html" class="btn" style="background: #6b7280; color: white; margin-right: 15px;">
+                            취소
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i>
+                            전형 등록
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <style>
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        .checkbox-item:hover {
+            background-color: #f3f4f6;
+        }
+        .checkbox-item input[type="checkbox"] {
+            margin: 0;
+        }
+
+        .step-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            background: #f9fafb;
+        }
+        .step-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #3b82f6;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        .btn-remove-step {
+            background: #ef4444;
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .btn-remove-step:disabled {
+            background: #d1d5db;
+            cursor: not-allowed;
+        }
+        .btn-remove-step:not(:disabled):hover {
+            background: #dc2626;
+        }
+    </style>
+
+    <script>
+        let stepCount = 1;
+        const maxSteps = 5;
+
+        // Add step functionality
+        document.getElementById('addStepBtn').addEventListener('click', function() {
+            if (stepCount >= maxSteps) {
+                alert('최대 5단계까지만 설정할 수 있습니다.');
+                return;
+            }
+
+            stepCount++;
+            const stepContainer = document.getElementById('stepsContainer');
+            const newStep = document.createElement('div');
+            newStep.className = 'step-item';
+            newStep.setAttribute('data-step', stepCount);
+            
+            newStep.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div class="step-number">${stepCount}</div>
+                    <div style="flex: 1;">
+                        <input type="text" class="form-control" name="stepName[]" 
+                               placeholder="단계명을 입력하세요 (예: ${stepCount === 2 ? '1차 면접' : stepCount === 3 ? '2차 면접' : stepCount === 4 ? '최종 면접' : '최종 심사'})" required>
+                    </div>
+                    <button type="button" class="btn-remove-step" onclick="removeStep(${stepCount})">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+            
+            stepContainer.appendChild(newStep);
+            
+            if (stepCount >= maxSteps) {
+                this.disabled = true;
+                this.innerHTML = '<i class="fas fa-check"></i> 최대 단계';
+            }
+        });
+
+        // Remove step functionality
+        function removeStep(stepNumber) {
+            if (stepNumber === 1) return; // First step cannot be removed
+            
+            const stepElement = document.querySelector(`[data-step="${stepNumber}"]`);
+            stepElement.remove();
+            
+            // Renumber remaining steps
+            const remainingSteps = document.querySelectorAll('.step-item');
+            remainingSteps.forEach((step, index) => {
+                const stepNum = index + 1;
+                step.setAttribute('data-step', stepNum);
+                step.querySelector('.step-number').textContent = stepNum;
+                const removeBtn = step.querySelector('.btn-remove-step');
+                if (removeBtn) {
+                    removeBtn.setAttribute('onclick', `removeStep(${stepNum})`);
+                    removeBtn.disabled = stepNum === 1;
+                }
+            });
+            
+            stepCount = remainingSteps.length;
+            
+            // Re-enable add button if under limit
+            const addBtn = document.getElementById('addStepBtn');
+            if (stepCount < maxSteps) {
+                addBtn.disabled = false;
+                addBtn.innerHTML = '<i class="fas fa-plus"></i> 단계 추가';
+            }
+        }
+
+        // Form validation
+        document.getElementById('programForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate date range
+            const startDate = new Date(document.getElementById('startDate').value);
+            const endDate = new Date(document.getElementById('endDate').value);
+            
+            if (startDate >= endDate) {
+                alert('모집 종료일은 시작일보다 늦어야 합니다.');
+                return;
+            }
+            
+            // Validate steps
+            const stepInputs = document.querySelectorAll('input[name="stepName[]"]');
+            for (let input of stepInputs) {
+                if (!input.value.trim()) {
+                    alert('모든 전형 단계명을 입력해주세요.');
+                    input.focus();
+                    return;
+                }
+            }
+            
+            // Show success message and redirect
+            alert('전형이 성공적으로 등록되었습니다.');
+            window.location.href = 'programs.html';
+        });
+
+        // Mobile menu toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.portal-sidebar').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

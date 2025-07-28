@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전형 상세 - ONDY</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+            color: #374151;
+        }
+
+        .portal-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .portal-sidebar {
+            width: 280px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+
+        /* 개선된 로고 스타일 */
+        .logo {
+            padding: 24px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .logo-link:hover {
+            transform: translateY(-1px);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 67px;
+            margin-right: 12px;
+            color: #fbbf24;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+            flex-shrink: 0;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .logo-text .brand-name {
+            display: block;
+            color: white;
+        }
+
+        .logo-text .brand-subtitle {
+            display: block;
+            font-size: 12px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.8);
+            margin-top: 2px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* 네비게이션 메뉴 스타일 */
+        .nav-menu {
+            list-style: none;
+            padding: 20px 0;
+        }
+
+        .nav-category {
+            padding: 12px 20px 8px 20px;
+            font-size: 11px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 20px;
+        }
+
+        .nav-category:first-child {
+            margin-top: 0;
+        }
+
+        .nav-item {
+            margin: 2px 12px;
+        }
+
+        .nav-item a {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .nav-item a:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            transform: translateX(4px);
+        }
+
+        .nav-item.active a {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .nav-item a i {
+            margin-right: 12px;
+            width: 16px;
+            text-align: center;
+            opacity: 0.8;
+        }
+
+        /* 메인 콘텐츠 */
+        .portal-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .portal-header {
+            background: white;
+            padding: 16px 24px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #6b7280;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #e5e7eb;
+        }
+
+        .user-profile span {
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .portal-content {
+            flex: 1;
+            padding: 24px;
+        }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 24px;
+        }
+
+        .card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+            margin-bottom: 24px;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .card-header {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .portal-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .portal-table th,
+        .portal-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .portal-table th {
+            background: #f9fafb;
+            font-weight: 600;
+            color: #374151;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .portal-table td {
+            color: #6b7280;
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .portal-sidebar {
+                width: 280px;
+                position: fixed;
+                left: -280px;
+                z-index: 1000;
+                height: 100vh;
+            }
+
+            .portal-sidebar.active {
+                left: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .portal-main {
+                width: 100%;
+            }
+
+            .logo-text {
+                font-size: 20px;
+            }
+
+            .logo-icon {
+                width: 36px;
+                height: 36px;
+            }
+        }
+
+        /* 작은 화면에서 로고 최적화 */
+        @media (max-width: 320px) {
+            .logo {
+                padding: 20px 16px;
+            }
+            
+            .logo-text {
+                font-size: 18px;
+            }
+            
+            .logo-icon {
+                width: 32px;
+                height: 32px;
+                margin-right: 10px;
+            }
+        }
+    </style>
+</head>
+<body class="portal-body">
+    <div class="portal-container">
+        <!-- Sidebar -->
+        <aside class="portal-sidebar">
+            <div class="logo">
+                <a href="../../index.html" class="logo-link">
+                    <svg class="logo-icon" viewBox="0 0 44 54" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 0C12.059 0 4 8.059 4 18C4 26.28 9.625 33.125 17.5 35.5V36C14.149 36 10.992 37.06 8.5 38.883V42.25C12.723 39.547 17.167 38 22 38C26.833 38 31.277 39.547 35.5 42.25V38.883C33.008 37.06 29.851 36 26.5 36V35.5C34.375 33.125 40 26.28 40 18C40 8.059 31.941 0 22 0ZM22 30C15.373 30 10 24.627 10 18C10 11.373 15.373 6 22 6C28.627 6 34 11.373 34 18C34 24.627 28.627 30 22 30Z"></path>
+                        <path d="M15.5 44.5L22 51L28.5 44.5L22 38L15.5 44.5Z"></path>
+                    </svg>
+                    <div class="logo-text">
+                        <span class="brand-name">ONDY</span>
+                        <span class="brand-subtitle">Global</span>
+                    </div>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-category">메인</li>
+                <li class="nav-item"><a href="index.html"><i class="fas fa-tachometer-alt"></i>대시보드</a></li>
+                <li class="nav-item"><a href="university-info.html"><i class="fas fa-building"></i>대학 정보 관리</a></li>
+                <li class="nav-category">입학 관리</li>
+                <li class="nav-item active"><a href="programs.html"><i class="fas fa-graduation-cap"></i>전형 관리</a></li>
+                <li class="nav-item"><a href="applicants.html"><i class="fas fa-users"></i>지원자 관리</a></li>
+                <li class="nav-item"><a href="scholarships.html"><i class="fas fa-award"></i>장학 관리</a></li>
+                <li class="nav-category">계정</li>
+                <li class="nav-item"><a href="account-settings.html"><i class="fas fa-cog"></i>계정 설정</a></li>
+                <li class="nav-item"><a href="../login.html"><i class="fas fa-sign-out-alt"></i>로그아웃</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="portal-main">
+            <header class="portal-header">
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="user-profile">
+                    <img src="https://via.placeholder.com/40" alt="User Profile">
+                    <span>대학 관계자님</span>
+                </div>
+            </header>
+
+            <div class="portal-content">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                    <div>
+                        <a href="programs.html" style="color: #6b7280; text-decoration: none; font-size: 0.9rem;">
+                            <i class="fas fa-arrow-left"></i> 전형 목록으로 돌아가기
+                        </a>
+                        <h1 class="page-title" style="margin: 10px 0 0 0;">2025-1학기 일반전형</h1>
+                    </div>
+                    <div>
+                        <button class="btn" style="background: #6b7280; color: white; margin-right: 10px;">
+                            <i class="fas fa-edit"></i>
+                            수정
+                        </button>
+                        <button class="btn" style="background: #dc2626; color: white;">
+                            <i class="fas fa-trash"></i>
+                            삭제
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Program Info -->
+                <div class="card">
+                    <div class="card-header">전형 정보</div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                        <div>
+                            <div style="margin-bottom: 20px;">
+                                <h4 style="color: #6b7280; font-size: 0.9rem; margin-bottom: 5px;">전형명</h4>
+                                <p style="font-size: 1.2rem; font-weight: 600; margin: 0;">2025-1학기 일반전형</p>
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <h4 style="color: #6b7280; font-size: 0.9rem; margin-bottom: 5px;">모집 학기</h4>
+                                <p style="margin: 0;">2025-1학기</p>
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <h4 style="color: #6b7280; font-size: 0.9rem; margin-bottom: 5px;">모집 기간</h4>
+                                <p style="margin: 0;">2024-12-01 ~ 2024-12-30</p>
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <h4 style="color: #6b7280; font-size: 0.9rem; margin-bottom: 5px;">모집 인원</h4>
+                                <p style="margin: 0;">200명</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div style="margin-bottom: 20px;">
+                                <h4 style="color: #6b7280; font-size: 0.9rem; margin-bottom: 5px;">담당자</h4>
+                                <p style="margin: 0;">김입학 (입학처 과장)</p>
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <h4 style="color: #6b7280; font-size: 0.9rem; margin-bottom: 5px;">연락처</h4>
+                                <p style="margin: 0;">02-1234-5678</p>
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <h4 style="color: #6b7280; font-size: 0.9rem; margin-bottom: 5px;">상태</h4>
+                                <span class="status-badge active">모집 중</span>
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <h4 style="color: #6b7280; font-size: 0.9rem; margin-bottom: 5px;">등록일</h4>
+                                <p style="margin: 0;">2024-11-15</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 30px;">
+                        <h4 style="color: #6b7280; font-size: 0.9rem; margin-bottom: 10px;">지원 자격</h4>
+                        <div style="background: #f9fafb; padding: 20px; border-radius: 8px;">
+                            <p style="margin: 0; line-height: 1.6;">
+                                • 외국 국적을 소지한 자<br>
+                                • 고등학교 졸업자 또는 이와 동등한 학력을 인정받은 자<br>
+                                • TOPIK 3급 이상 취득자<br>
+                                • 한국어 능력이 대학 수학에 지장이 없다고 인정되는 자
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 20px;">
+                        <h4 style="color: #6b7280; font-size: 0.9rem; margin-bottom: 10px;">제출 서류</h4>
+                        <div style="background: #f9fafb; padding: 20px; border-radius: 8px;">
+                            <p style="margin: 0; line-height: 1.6;">
+                                • 입학지원서 1부<br>
+                                • 고등학교 졸업증명서 1부<br>
+                                • 고등학교 성적증명서 1부<br>
+                                • TOPIK 성적증명서 1부<br>
+                                • 여권 사본 1부<br>
+                                • 자기소개서 1부
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Program Steps -->
+                <div class="card">
+                    <div class="card-header">전형 단계</div>
+                    <div class="steps-container" style="display: flex; align-items: center; justify-content: space-between; margin: 20px 0;">
+                        <div class="step active" onclick="filterByStep('step1')">
+                            <div class="step-number">1</div>
+                            <div class="step-label">서류 심사</div>
+                            <div class="step-count">(120)</div>
+                        </div>
+                        <div class="step-connector"></div>
+                        <div class="step active" onclick="filterByStep('step2')">
+                            <div class="step-number">2</div>
+                            <div class="step-label">1차 면접</div>
+                            <div class="step-count">(68)</div>
+                        </div>
+                        <div class="step-connector"></div>
+                        <div class="step active" onclick="filterByStep('step3')">
+                            <div class="step-number">3</div>
+                            <div class="step-label">최종 합격</div>
+                            <div class="step-count">(45)</div>
+                        </div>
+                        <div class="step-connector"></div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-label">불합격</div>
+                            <div class="step-count">(15)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Applicants Table -->
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <div class="card-header" style="margin: 0;">지원자 목록 (156명)</div>
+                        <div style="display: flex; gap: 10px;">
+                            <select class="form-control" style="width: 150px;">
+                                <option>전체 단계</option>
+                                <option>서류 심사</option>
+                                <option>1차 면접</option>
+                                <option>최종 합격</option>
+                                <option>불합격</option>
+                            </select>
+                            <button class="btn btn-primary">
+                                <i class="fas fa-check"></i>
+                                선택자 처리
+                            </button>
+                        </div>
+                    </div>
+
+                    <table class="portal-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 40px;">
+                                    <input type="checkbox" id="selectAll">
+                                </th>
+                                <th>수험번호</th>
+                                <th>지원자명</th>
+                                <th>국적</th>
+                                <th>지원 유학원</th>
+                                <th>현재 단계</th>
+                                <th>합격 여부</th>
+                                <th>지원일</th>
+                                <th>관리</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox" class="applicant-checkbox"></td>
+                                <td>2025010001</td>
+                                <td><a href="#" onclick="openApplicantModal('김민준')" style="color: #3b82f6; text-decoration: none;">김민준</a></td>
+                                <td>🇰🇷 한국</td>
+                                <td>글로벌유학원</td>
+                                <td><span class="step-badge step1">서류 심사</span></td>
+                                <td>심사중</td>
+                                <td>2024-12-15</td>
+                                <td>
+                                    <button class="btn" style="background: #10b981; color: white; padding: 5px 10px; font-size: 0.8rem;">합격</button>
+                                    <button class="btn" style="background: #ef4444; color: white; padding: 5px 10px; font-size: 0.8rem;">불합격</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="applicant-checkbox"></td>
+                                <td>2025010002</td>
+                                <td><a href="#" onclick="openApplicantModal('田中太郎')" style="color: #3b82f6; text-decoration: none;">田中太郎</a></td>
+                                <td>🇯🇵 일본</td>
+                                <td>아시아유학원</td>
+                                <td><span class="step-badge step2">1차 면접</span></td>
+                                <td>서류 합격</td>
+                                <td>2024-12-14</td>
+                                <td>
+                                    <button class="btn" style="background: #10b981; color: white; padding: 5px 10px; font-size: 0.8rem;">합격</button>
+                                    <button class="btn" style="background: #ef4444; color: white; padding: 5px 10px; font-size: 0.8rem;">불합격</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="applicant-checkbox"></td>
+                                <td>2025010003</td>
+                                <td><a href="#" onclick="openApplicantModal('张伟')" style="color: #3b82f6; text-decoration: none;">张伟</a></td>
+                                <td>🇨🇳 중국</td>
+                                <td>코리아유학원</td>
+                                <td><span class="step-badge step3">최종 합격</span></td>
+                                <td>최종 합격</td>
+                                <td>2024-12-14</td>
+                                <td>
+                                    <span style="color: #10b981; font-weight: 600;">합격 완료</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="applicant-checkbox"></td>
+                                <td>2025010004</td>
+                                <td><a href="#" onclick="openApplicantModal('Nguyen Van A')" style="color: #3b82f6; text-decoration: none;">Nguyen Van A</a></td>
+                                <td>🇻🇳 베트남</td>
+                                <td>베트남유학원</td>
+                                <td><span class="step-badge step1">서류 심사</span></td>
+                                <td>심사중</td>
+                                <td>2024-12-13</td>
+                                <td>
+                                    <button class="btn" style="background: #10b981; color: white; padding: 5px 10px; font-size: 0.8rem;">합격</button>
+                                    <button class="btn" style="background: #ef4444; color: white; padding: 5px 10px; font-size: 0.8rem;">불합격</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="applicant-checkbox"></td>
+                                <td>2025010005</td>
+                                <td><a href="#" onclick="openApplicantModal('สมชาย')" style="color: #3b82f6; text-decoration: none;">สมชาย</a></td>
+                                <td>🇹🇭 태국</td>
+                                <td>태국유학원</td>
+                                <td><span class="step-badge rejected">불합격</span></td>
+                                <td>불합격</td>
+                                <td>2024-12-13</td>
+                                <td>
+                                    <span style="color: #ef4444; font-weight: 600;">불합격</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Applicant Detail Modal -->
+    <div id="applicantModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>지원자 상세 정보</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="tabs">
+                    <button class="tab-button active" onclick="switchTab('basic')">기본 정보</button>
+                    <button class="tab-button" onclick="switchTab('application')">지원 정보</button>
+                    <button class="tab-button" onclick="switchTab('documents')">제출 서류</button>
+                    <button class="tab-button" onclick="switchTab('scholarship')">장학 정보</button>
+                </div>
+                <div id="basicTab" class="tab-content active">
+                    <p>기본 정보 내용...</p>
+                </div>
+                <div id="applicationTab" class="tab-content">
+                    <p>지원 정보 내용...</p>
+                </div>
+                <div id="documentsTab" class="tab-content">
+                    <p>제출 서류 내용...</p>
+                </div>
+                <div id="scholarshipTab" class="tab-content">
+                    <p>장학 정보 내용...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .status-badge.active {
+            background: #dcfdf4;
+            color: #059669;
+        }
+
+        .steps-container {
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 8px;
+        }
+        .step {
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .step.active .step-number {
+            background: #3b82f6;
+            color: white;
+        }
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            color: #6b7280;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            font-weight: 600;
+        }
+        .step-label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        .step-count {
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+        .step-connector {
+            flex: 1;
+            height: 2px;
+            background: #e5e7eb;
+            margin: 20px -10px 0;
+        }
+
+        .step-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        .step-badge.step1 { background: #dbeafe; color: #1d4ed8; }
+        .step-badge.step2 { background: #ecfdf5; color: #059669; }
+        .step-badge.step3 { background: #fef3c7; color: #d97706; }
+        .step-badge.rejected { background: #fef2f2; color: #dc2626; }
+
+        .modal {
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 800px;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .modal-body {
+            padding: 20px;
+        }
+        .close {
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #e5e7eb;
+            margin-bottom: 20px;
+        }
+        .tab-button {
+            padding: 10px 20px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+        .tab-button.active {
+            border-bottom-color: #3b82f6;
+            color: #3b82f6;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+
+    <script>
+        // Select all checkbox functionality
+        document.getElementById('selectAll').addEventListener('change', function() {
+            const checkboxes = document.querySelectorAll('.applicant-checkbox');
+            checkboxes.forEach(checkbox => checkbox.checked = this.checked);
+        });
+
+        // Step filtering
+        function filterByStep(step) {
+            // Implementation for filtering applicants by step
+            console.log('Filter by step:', step);
+        }
+
+        // Modal functionality
+        function openApplicantModal(name) {
+            document.getElementById('applicantModal').style.display = 'block';
+        }
+
+        document.querySelector('.close').addEventListener('click', function() {
+            document.getElementById('applicantModal').style.display = 'none';
+        });
+
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('applicantModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Tab switching
+        function switchTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName + 'Tab').classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Mobile menu toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.portal-sidebar').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
