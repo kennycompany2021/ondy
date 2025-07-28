@@ -3,385 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ONDY - 지원공고 관리</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        pretendard: ['Pretendard', 'sans-serif'],
-                    },
-                    colors: {
-                        primary: '#4f46e5',
-                        'primary-dark': '#4338ca',
-                        secondary: '#f59e0b',
-                    }
-                }
-            }
+    <title>대학 관계자 포털 - 전형 관리</title>
+    <link rel="stylesheet" href="../../css/portal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .filter-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: center;
         }
-    </script>
+        .filter-container input, .filter-container select {
+            padding: 8px 12px;
+            border: 1px solid var(--portal-border-color);
+            border-radius: 5px;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .pagination a {
+            color: var(--portal-primary-color);
+            padding: 8px 16px;
+            text-decoration: none;
+            border: 1px solid var(--portal-border-color);
+            margin: 0 4px;
+            border-radius: 5px;
+        }
+        .pagination a.active {
+            background-color: var(--portal-primary-color);
+            color: white;
+        }
+    </style>
 </head>
-<body class="font-pretendard bg-gray-100">
+<body class="portal-body">
+    <div class="portal-container">
+        <!-- Sidebar -->
+        <aside class="portal-sidebar">
+            <div class="logo"><a href="index.html">ONDY Portal</a></div>
+            <ul class="nav-menu">
+                <li class="nav-category">메인</li>
+                <li class="nav-item"><a href="index.html"><i class="fas fa-tachometer-alt"></i>대시보드</a></li>
+                <li class="nav-item"><a href="university-info.html"><i class="fas fa-university"></i>대학 정보 관리</a></li>
+                <li class="nav-category">모집 관리</li>
+                <li class="nav-item active"><a href="announcement-management.html"><i class="fas fa-bullhorn"></i>전형 관리</a></li>
+                <li class="nav-item"><a href="applicant-list.html"><i class="fas fa-users"></i>지원자 관리</a></li>
+                <li class="nav-item"><a href="#"><i class="fas fa-graduation-cap"></i>장학 관리</a></li>
+                <li class="nav-category">계정</li>
+                <li class="nav-item"><a href="messages.html"><i class="fas fa-envelope"></i>메시지</a></li>
+                <li class="nav-item"><a href="account-settings.html"><i class="fas fa-cog"></i>계정 설정</a></li>
+                <li class="nav-item"><a href="../login.html"><i class="fas fa-sign-out-alt"></i>로그아웃</a></li>
+            </ul>
+        </aside>
 
-    <div class="flex h-screen">
-        <!-- LNB (Desktop) -->
-        <nav class="hidden lg:block w-64 bg-white shadow-md">
-            <div class="h-16 px-6 border-b flex items-center">
-                <a href="./index.html" class="flex items-center gap-2">
-                    <svg class="h-10 w-auto text-amber-500" viewBox="0 0 44 54" fill="currentColor">
-                        <path d="M22 0C12.059 0 4 8.059 4 18C4 26.28 9.625 33.125 17.5 35.5V36C14.149 36 10.992 37.06 8.5 38.883V42.25C12.723 39.547 17.167 38 22 38C26.833 38 31.277 39.547 35.5 42.25V38.883C33.008 37.06 29.851 36 26.5 36V35.5C34.375 33.125 40 26.28 40 18C40 8.059 31.941 0 22 0ZM22 30C15.373 30 10 24.627 10 18C10 11.373 15.373 6 22 6C28.627 6 34 11.373 34 18C34 24.627 28.627 30 22 30Z"></path>
-                        <path d="M15.5 44.5L22 51L28.5 44.5L22 38L15.5 44.5Z"></path>
-                    </svg>
-                    <span class="text-xl font-bold text-gray-800">ONDY</span>
-                </a>
-            </div>
-            <div class="p-4">
-                <ul>
-                    <li><a href="./index.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg"><i class="fa-solid fa-chart-pie w-5"></i>대시보드</a></li>
-                    <li><a href="./applicant-list.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg"><i class="fa-solid fa-users w-5"></i>지원자 관리</a></li>
-                    <li><a href="./announcement-management.html" class="flex items-center gap-3 px-4 py-3 bg-primary/10 text-primary rounded-lg font-bold"><i class="fa-solid fa-bullhorn w-5"></i>지원공고 관리</a></li>
-                    <li><a href="./university-info.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg"><i class="fa-solid fa-building-columns w-5"></i>대학 정보 관리</a></li>
-                    <li><a href="./messages.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg"><i class="fa-solid fa-comments w-5"></i>메시지</a></li>
-                    <li><a href="./account-settings.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg"><i class="fa-solid fa-user-gear w-5"></i>계정 설정</a></li>
-                </ul>
-            </div>
-        </nav>
-
-        <div class="flex-1 flex flex-col overflow-hidden">
-            <!-- Header -->
-            <header class="bg-white shadow-sm z-10">
-                <div class="flex items-center justify-between h-16 px-6">
-                    <!-- Mobile Menu Button -->
-                    <button id="mobile-menu-button" class="lg:hidden text-gray-600">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
-                    <div class="hidden lg:block">
-                        <h1 class="text-xl font-bold text-gray-800">지원공고 관리</h1>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <span class="text-sm"><strong>대학 담당자</strong>님</span>
-                        <a href="/login.html" class="text-sm text-gray-500 hover:text-primary">로그아웃</a>
-                    </div>
+        <!-- Main Content -->
+        <main class="portal-main">
+            <header class="portal-header">
+                <div class="user-profile">
+                    <img src="https://via.placeholder.com/40" alt="User Profile">
+                    <span>한국대학교 담당자님</span>
                 </div>
             </header>
 
-            <!-- Main Content -->
-            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
-                <div class="max-w-7xl mx-auto">
-                    <div class="mb-8">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <h2 class="text-2xl font-bold text-gray-800">지원공고 관리</h2>
-                                <p class="text-gray-500 mt-1">대학의 지원공고를 등록하고 관리합니다.</p>
-                            </div>
-                            <button class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg flex items-center gap-2">
-                                <i class="fas fa-plus"></i>
-                                새 공고 등록
-                            </button>
-                        </div>
+            <div class="portal-content">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h1 class="page-title">전형 관리</h1>
+                    <button class="btn btn-primary"><i class="fas fa-plus"></i> 신규 전형 등록</button>
+                </div>
+
+                <div class="card">
+                    <div class="filter-container">
+                        <input type="text" placeholder="전형명 검색...">
+                        <select>
+                            <option value="">모집 학기 전체</option>
+                            <option value="2025-2">2025-2학기</option>
+                            <option value="2025-1">2025-1학기</option>
+                        </select>
+                        <select>
+                            <option value="">상태 전체</option>
+                            <option value="open">모집 중</option>
+                            <option value="closed">마감</option>
+                            <option value="pending">모집 전</option>
+                        </select>
+                        <button class="btn">검색</button>
                     </div>
 
-                    <!-- Stats Cards -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                        <div class="bg-white p-6 rounded-lg shadow">
-                            <h3 class="text-sm font-medium text-gray-500">전체 공고</h3>
-                            <p class="text-3xl font-bold text-primary mt-2">12</p>
-                        </div>
-                        <div class="bg-white p-6 rounded-lg shadow">
-                            <h3 class="text-sm font-medium text-gray-500">진행 중</h3>
-                            <p class="text-3xl font-bold text-green-500 mt-2">8</p>
-                        </div>
-                        <div class="bg-white p-6 rounded-lg shadow">
-                            <h3 class="text-sm font-medium text-gray-500">마감 예정</h3>
-                            <p class="text-3xl font-bold text-yellow-500 mt-2">3</p>
-                        </div>
-                        <div class="bg-white p-6 rounded-lg shadow">
-                            <h3 class="text-sm font-medium text-gray-500">마감됨</h3>
-                            <p class="text-3xl font-bold text-gray-500 mt-2">1</p>
-                        </div>
-                    </div>
+                    <table class="portal-table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>전형명</th>
+                                <th>모집 학기</th>
+                                <th>모집 기간</th>
+                                <th>모집 인원</th>
+                                <th>지원자 수</th>
+                                <th>상태</th>
+                                <th>등록일</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Sample Row 1 -->
+                            <tr style="cursor:pointer;">
+                                <td>1</td>
+                                <td>2025-2학기 컴퓨터공학부 신입생 모집</td>
+                                <td>2025-2</td>
+                                <td>2025-06-01 ~ 2025-08-03</td>
+                                <td>20</td>
+                                <td>150</td>
+                                <td><span style="color: green;">모집 중</span></td>
+                                <td>2025-05-15</td>
+                            </tr>
+                            <!-- Add more sample rows -->
+                        </tbody>
+                    </table>
 
-                    <!-- Announcements Table -->
-                    <div class="bg-white rounded-lg shadow overflow-hidden">
-                        <div class="px-6 py-4 border-b">
-                            <h3 class="text-lg font-semibold text-gray-800">지원공고 목록</h3>
-                        </div>
-                        <div class="overflow-x-auto">
-                            <table class="w-full">
-                                <thead class="bg-gray-50">
-                                    <tr>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">공고명</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">학과</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">지원기간</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">지원자 수</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">상태</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">관리</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-gray-200">
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <a href="./announcement-detail.html" class="hover:underline">
-                                                <div class="text-sm font-medium text-gray-900">2025년도 봄학기 외국인 유학생 모집</div>
-                                                <div class="text-sm text-gray-500">컴퓨터공학과</div>
-                                            </a>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">컴퓨터공학과</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2024.12.01 ~ 2025.01.31</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">45명</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">진행 중</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <button class="text-primary hover:text-primary-dark mr-3">수정</button>
-                                            <button class="text-red-600 hover:text-red-800">삭제</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <a href="./announcement-detail.html" class="hover:underline">
-                                                <div class="text-sm font-medium text-gray-900">2025년도 봄학기 외국인 유학생 모집</div>
-                                                <div class="text-sm text-gray-500">경영학과</div>
-                                            </a>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">경영학과</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2024.12.01 ~ 2025.01.31</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">32명</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">진행 중</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <button class="text-primary hover:text-primary-dark mr-3">수정</button>
-                                            <button class="text-red-600 hover:text-red-800">삭제</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <a href="./announcement-detail.html" class="hover:underline">
-                                                <div class="text-sm font-medium text-gray-900">2025년도 봄학기 외국인 유학생 모집</div>
-                                                <div class="text-sm text-gray-500">디자인학과</div>
-                                            </a>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">디자인학과</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2024.12.01 ~ 2025.01.15</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">28명</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">마감 예정</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <button class="text-primary hover:text-primary-dark mr-3">수정</button>
-                                            <button class="text-red-600 hover:text-red-800">삭제</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <a href="./announcement-detail.html" class="hover:underline">
-                                                <div class="text-sm font-medium text-gray-900">2024년도 가을학기 외국인 유학생 모집</div>
-                                                <div class="text-sm text-gray-500">전자공학과</div>
-                                            </a>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">전자공학과</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2024.06.01 ~ 2024.07.31</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">38명</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">마감됨</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <button class="text-primary hover:text-primary-dark mr-3">수정</button>
-                                            <button class="text-red-600 hover:text-red-800">삭제</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <div class="pagination">
+                        <a href="#" class="active">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
                     </div>
                 </div>
-            </main>
-        </div>
+            </div>
+        </main>
     </div>
-
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-20 hidden">
-        <nav class="w-64 bg-white h-full shadow-md">
-             <div class="h-16 px-6 border-b flex items-center">
-                <a href="./index.html" class="flex items-center gap-2">
-                    <svg class="h-10 w-auto text-amber-500" viewBox="0 0 44 54" fill="currentColor">
-                        <path d="M22 0C12.059 0 4 8.059 4 18C4 26.28 9.625 33.125 17.5 35.5V36C14.149 36 10.992 37.06 8.5 38.883V42.25C12.723 39.547 17.167 38 22 38C26.833 38 31.277 39.547 35.5 42.25V38.883C33.008 37.06 29.851 36 26.5 36V35.5C34.375 33.125 40 26.28 40 18C40 8.059 31.941 0 22 0ZM22 30C15.373 30 10 24.627 10 18C10 11.373 15.373 6 22 6C28.627 6 34 11.373 34 18C34 24.627 28.627 30 22 30Z"></path>
-                        <path d="M15.5 44.5L22 51L28.5 44.5L22 38L15.5 44.5Z"></path>
-                    </svg>
-                    <span class="text-xl font-bold text-gray-800">ONDY</span>
-                </a>
-            </div>
-            <div class="p-4">
-                <ul>
-                    <li><a href="./index.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg"><i class="fa-solid fa-chart-pie w-5"></i>대시보드</a></li>
-                    <li><a href="./applicant-list.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg"><i class="fa-solid fa-users w-5"></i>지원자 관리</a></li>
-                    <li><a href="./announcement-management.html" class="flex items-center gap-3 px-4 py-3 bg-primary/10 text-primary rounded-lg font-bold"><i class="fa-solid fa-bullhorn w-5"></i>지원공고 관리</a></li>
-                    <li><a href="./university-info.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg"><i class="fa-solid fa-building-columns w-5"></i>대학 정보 관리</a></li>
-                    <li><a href="./messages.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg"><i class="fa-solid fa-comments w-5"></i>메시지</a></li>
-                    <li><a href="./account-settings.html" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg"><i class="fa-solid fa-user-gear w-5"></i>계정 설정</a></li>
-                </ul>
-            </div>
-        </nav>
-    </div>
-    
-    <!-- Modal -->
-    <div id="new-announcement-modal" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden flex items-center justify-center">
-        <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl mx-4">
-            <div class="p-6 border-b">
-                <h3 class="text-xl font-bold text-gray-800">새 지원공고 등록</h3>
-            </div>
-            <div class="p-8 max-h-[70vh] overflow-y-auto">
-                <form>
-                    <div class="space-y-10">
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800 border-l-4 border-primary pl-4 mb-4">기본 정보</h3>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                                <div>
-                                    <label for="modal-title" class="block text-sm font-medium text-gray-700">공고명</label>
-                                    <input type="text" id="modal-title" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary" placeholder="예: 2025년도 봄학기 외국인 유학생 모집">
-                                </div>
-                                <div>
-                                    <label for="modal-department" class="block text-sm font-medium text-gray-700">학과</label>
-                                    <select id="modal-department" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
-                                        <option>컴퓨터공학과</option>
-                                        <option>경영학과</option>
-                                        <option>디자인학과</option>
-                                        <option>전자공학과</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label for="modal-start-date" class="block text-sm font-medium text-gray-700">모집 시작일</label>
-                                    <input type="date" id="modal-start-date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
-                                </div>
-                                <div>
-                                    <label for="modal-end-date" class="block text-sm font-medium text-gray-700">모집 마감일</label>
-                                    <input type="date" id="modal-end-date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
-                                </div>
-                                <div>
-                                    <label for="modal-quota" class="block text-sm font-medium text-gray-700">모집인원</label>
-                                    <input type="text" id="modal-quota" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary" placeholder="00명 또는 제한 없음">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800 border-l-4 border-primary pl-4 mb-4">전형 방법</h3>
-                            <div id="evaluation-steps-container" class="space-y-4 mt-4">
-                                <!-- Dynamic steps will be inserted here -->
-                            </div>
-                            <button type="button" id="add-step-button" class="mt-4 bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg text-sm">
-                                <i class="fas fa-plus mr-2"></i>전형 단계 추가
-                            </button>
-                        </div>
-
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800 border-l-4 border-primary pl-4 mb-4">공고 상세 내용</h3>
-                            <div class="mt-4">
-                                <textarea id="modal-content" rows="8" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary" placeholder="공고의 상세 내용을 입력하세요. 지원 자격, 제출 서류 등을 포함할 수 있습니다."></textarea>
-                            </div>
-                        </div>
-
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800 border-l-4 border-primary pl-4 mb-4">첨부파일</h3>
-                            <div class="mt-4">
-                                <div class="flex items-center justify-center w-full">
-                                    <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
-                                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                            <i class="fas fa-cloud-upload-alt fa-3x text-gray-400"></i>
-                                            <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">클릭하여 업로드</span> 또는 파일을 드래그하세요</p>
-                                            <p class="text-xs text-gray-500">PDF, DOCX, HW P (MAX. 10MB)</p>
-                                        </div>
-                                        <input id="dropzone-file" type="file" class="hidden" />
-                                    </label>
-                                </div> 
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="p-6 border-t flex justify-end gap-4">
-                <button id="modal-close-button" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2 rounded-lg">취소</button>
-                <button class="bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-lg">등록</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const newAnnouncementButton = document.querySelector('button.bg-primary');
-        const newAnnouncementModal = document.getElementById('new-announcement-modal');
-        const modalCloseButton = document.getElementById('modal-close-button');
-
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        mobileMenu.addEventListener('click', (e) => {
-            if (e.target === mobileMenu) {
-                mobileMenu.classList.add('hidden');
-            }
-        });
-
-        newAnnouncementButton.addEventListener('click', () => {
-            newAnnouncementModal.classList.remove('hidden');
-        });
-
-        modalCloseButton.addEventListener('click', () => {
-            newAnnouncementModal.classList.add('hidden');
-        });
-
-        newAnnouncementModal.addEventListener('click', (e) => {
-            if (e.target === newAnnouncementModal) {
-                newAnnouncementModal.classList.add('hidden');
-            }
-        });
-
-        // Logic for adding and removing evaluation steps
-        const stepsContainer = document.getElementById('evaluation-steps-container');
-        const addStepButton = document.getElementById('add-step-button');
-        let stepCounter = 0;
-
-        const addStep = () => {
-            stepCounter++;
-            const stepId = `step-${stepCounter}`;
-            const newStep = document.createElement('div');
-            newStep.id = stepId;
-            newStep.classList.add('flex', 'items-center', 'gap-4');
-            newStep.innerHTML = `
-                <span class="font-semibold text-gray-600">${stepCounter}차</span>
-                <input type="text" class="flex-grow block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary" placeholder="예: 서류 심사">
-                <button type="button" onclick="removeStep('${stepId}')" class="text-red-500 hover:text-red-700">
-                    <i class="fas fa-trash-alt"></i>
-                </button>
-            `;
-            stepsContainer.appendChild(newStep);
-        };
-
-        const removeStep = (stepId) => {
-            const stepToRemove = document.getElementById(stepId);
-            if (stepToRemove) {
-                stepsContainer.removeChild(stepToRemove);
-                // Re-number the remaining steps
-                const remainingSteps = stepsContainer.children;
-                stepCounter = 0;
-                for(let i = 0; i < remainingSteps.length; i++) {
-                    stepCounter++;
-                    remainingSteps[i].id = `step-${stepCounter}`;
-                    remainingSteps[i].querySelector('span').textContent = `${stepCounter}차`;
-                    remainingSteps[i].querySelector('button').setAttribute('onclick', `removeStep('step-${stepCounter}')`);
-                }
-            }
-        };
-
-        addStepButton.addEventListener('click', addStep);
-
-        // Add one step by default
-        addStep();
-    </script>
 </body>
-</html> 
+</html>
