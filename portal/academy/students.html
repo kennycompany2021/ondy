@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>학생 관리 - ONDY</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
     <style>
         * {
             margin: 0;
@@ -428,131 +429,131 @@
                             </select>
                         </div>
                     </div>
-
+                    <div class="table-responsive-wrapper">
                     <!-- Students Table -->
-                    <table class="portal-table">
-                        <thead>
-                            <tr>
-                                <th>학생명</th>
-                                <th>국적</th>
-                                <th>생년월일</th>
-                                <th>연락처</th>
-                                <th>지원 중인 전형</th>
-                                <th>최종 합격 여부</th>
-                                <th>상태</th>
-                                <th>등록일</th>
-                                <th>관리</th>
-                            </tr>
-                        </thead>
-                        <tbody id="studentsTableBody">
-                            <tr onclick="openStudentDetailModal('김민수')" style="cursor: pointer;">
-                                <td style="font-weight: 500;">김민수</td>
-                                <td>🇰🇷 한국</td>
-                                <td>1998-03-15</td>
-                                <td>+82-010-1234-5678</td>
-                                <td>2개</td>
-                                <td><span class="status-badge processing">심사 중</span></td>
-                                <td><span class="student-status active">활성</span></td>
-                                <td>2024-11-15</td>
-                                <td>
-                                    <button class="btn-icon" onclick="event.stopPropagation(); editStudent('김민수')" title="수정">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn-icon" onclick="event.stopPropagation(); confirmGraduation('김민수')" title="유학 확정">
-                                        <i class="fas fa-graduation-cap"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr onclick="openStudentDetailModal('이영희')" style="cursor: pointer;">
-                                <td style="font-weight: 500;">이영희</td>
-                                <td>🇰🇷 한국</td>
-                                <td>1999-07-22</td>
-                                <td>+82-010-2345-6789</td>
-                                <td>1개</td>
-                                <td><span class="status-badge accepted">합격</span></td>
-                                <td><span class="student-status graduated">유학 확정</span></td>
-                                <td>2024-10-20</td>
-                                <td>
-                                    <button class="btn-icon" onclick="event.stopPropagation(); viewStudent('이영희')" title="보기">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr onclick="openStudentDetailModal('박철수')" style="cursor: pointer;">
-                                <td style="font-weight: 500;">박철수</td>
-                                <td>🇰🇷 한국</td>
-                                <td>1997-11-08</td>
-                                <td>+82-010-3456-7890</td>
-                                <td>3개</td>
-                                <td><span class="status-badge processing">심사 중</span></td>
-                                <td><span class="student-status active">활성</span></td>
-                                <td>2024-11-10</td>
-                                <td>
-                                    <button class="btn-icon" onclick="event.stopPropagation(); editStudent('박철수')" title="수정">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn-icon" onclick="event.stopPropagation(); confirmGraduation('박철수')" title="유학 확정">
-                                        <i class="fas fa-graduation-cap"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr onclick="openStudentDetailModal('张伟')" style="cursor: pointer;">
-                                <td style="font-weight: 500;">张伟</td>
-                                <td>🇨🇳 중국</td>
-                                <td>1998-05-30</td>
-                                <td>+86-138-0000-0000</td>
-                                <td>1개</td>
-                                <td><span class="status-badge accepted">합격</span></td>
-                                <td><span class="student-status active">활성</span></td>
-                                <td>2024-12-01</td>
-                                <td>
-                                    <button class="btn-icon" onclick="event.stopPropagation(); editStudent('张伟')" title="수정">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn-icon" onclick="event.stopPropagation(); confirmGraduation('张伟')" title="유학 확정">
-                                        <i class="fas fa-graduation-cap"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr onclick="openStudentDetailModal('田中太郎')" style="cursor: pointer;">
-                                <td style="font-weight: 500;">田中太郎</td>
-                                <td>🇯🇵 일본</td>
-                                <td>1999-02-14</td>
-                                <td>+81-080-1234-5678</td>
-                                <td>0개</td>
-                                <td><span class="status-badge rejected">불합격</span></td>
-                                <td><span class="student-status active">활성</span></td>
-                                <td>2024-11-25</td>
-                                <td>
-                                    <button class="btn-icon" onclick="event.stopPropagation(); editStudent('田中太郎')" title="수정">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn-icon" onclick="event.stopPropagation(); confirmGraduation('田中太郎')" title="유학 확정">
-                                        <i class="fas fa-graduation-cap"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr onclick="openStudentDetailModal('Nguyen Van A')" style="cursor: pointer;">
-                                <td style="font-weight: 500;">Nguyen Van A</td>
-                                <td>🇻🇳 베트남</td>
-                                <td>1998-09-12</td>
-                                <td>+84-90-123-4567</td>
-                                <td>2개</td>
-                                <td><span class="status-badge processing">심사 중</span></td>
-                                <td><span class="student-status active">활성</span></td>
-                                <td>2024-12-05</td>
-                                <td>
-                                    <button class="btn-icon" onclick="event.stopPropagation(); editStudent('Nguyen Van A')" title="수정">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn-icon" onclick="event.stopPropagation(); confirmGraduation('Nguyen Van A')" title="유학 확정">
-                                        <i class="fas fa-graduation-cap"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
+                        <table class="portal-table">
+                            <thead>
+                                <tr>
+                                    <th>학생명</th>
+                                    <th>국적</th>
+                                    <th>생년월일</th>
+                                    <th>연락처</th>
+                                    <th>지원 중인 전형</th>
+                                    <th>최종 합격 여부</th>
+                                    <th>상태</th>
+                                    <th>등록일</th>
+                                    <th>관리</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentsTableBody">
+                                <tr onclick="openStudentDetailModal('김민수')" style="cursor: pointer;">
+                                    <td style="font-weight: 500;">김민수</td>
+                                    <td>🇰🇷 한국</td>
+                                    <td>1998-03-15</td>
+                                    <td>+82-010-1234-5678</td>
+                                    <td>2개</td>
+                                    <td><span class="status-badge processing">심사 중</span></td>
+                                    <td><span class="student-status active">활성</span></td>
+                                    <td>2024-11-15</td>
+                                    <td>
+                                        <button class="btn-icon" onclick="event.stopPropagation(); editStudent('김민수')" title="수정">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn-icon" onclick="event.stopPropagation(); confirmGraduation('김민수')" title="유학 확정">
+                                            <i class="fas fa-graduation-cap"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr onclick="openStudentDetailModal('이영희')" style="cursor: pointer;">
+                                    <td style="font-weight: 500;">이영희</td>
+                                    <td>🇰🇷 한국</td>
+                                    <td>1999-07-22</td>
+                                    <td>+82-010-2345-6789</td>
+                                    <td>1개</td>
+                                    <td><span class="status-badge accepted">합격</span></td>
+                                    <td><span class="student-status graduated">유학 확정</span></td>
+                                    <td>2024-10-20</td>
+                                    <td>
+                                        <button class="btn-icon" onclick="event.stopPropagation(); viewStudent('이영희')" title="보기">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr onclick="openStudentDetailModal('박철수')" style="cursor: pointer;">
+                                    <td style="font-weight: 500;">박철수</td>
+                                    <td>🇰🇷 한국</td>
+                                    <td>1997-11-08</td>
+                                    <td>+82-010-3456-7890</td>
+                                    <td>3개</td>
+                                    <td><span class="status-badge processing">심사 중</span></td>
+                                    <td><span class="student-status active">활성</span></td>
+                                    <td>2024-11-10</td>
+                                    <td>
+                                        <button class="btn-icon" onclick="event.stopPropagation(); editStudent('박철수')" title="수정">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn-icon" onclick="event.stopPropagation(); confirmGraduation('박철수')" title="유학 확정">
+                                            <i class="fas fa-graduation-cap"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr onclick="openStudentDetailModal('张伟')" style="cursor: pointer;">
+                                    <td style="font-weight: 500;">张伟</td>
+                                    <td>🇨🇳 중국</td>
+                                    <td>1998-05-30</td>
+                                    <td>+86-138-0000-0000</td>
+                                    <td>1개</td>
+                                    <td><span class="status-badge accepted">합격</span></td>
+                                    <td><span class="student-status active">활성</span></td>
+                                    <td>2024-12-01</td>
+                                    <td>
+                                        <button class="btn-icon" onclick="event.stopPropagation(); editStudent('张伟')" title="수정">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn-icon" onclick="event.stopPropagation(); confirmGraduation('张伟')" title="유학 확정">
+                                            <i class="fas fa-graduation-cap"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr onclick="openStudentDetailModal('田中太郎')" style="cursor: pointer;">
+                                    <td style="font-weight: 500;">田中太郎</td>
+                                    <td>🇯🇵 일본</td>
+                                    <td>1999-02-14</td>
+                                    <td>+81-080-1234-5678</td>
+                                    <td>0개</td>
+                                    <td><span class="status-badge rejected">불합격</span></td>
+                                    <td><span class="student-status active">활성</span></td>
+                                    <td>2024-11-25</td>
+                                    <td>
+                                        <button class="btn-icon" onclick="event.stopPropagation(); editStudent('田中太郎')" title="수정">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn-icon" onclick="event.stopPropagation(); confirmGraduation('田中太郎')" title="유학 확정">
+                                            <i class="fas fa-graduation-cap"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr onclick="openStudentDetailModal('Nguyen Van A')" style="cursor: pointer;">
+                                    <td style="font-weight: 500;">Nguyen Van A</td>
+                                    <td>🇻🇳 베트남</td>
+                                    <td>1998-09-12</td>
+                                    <td>+84-90-123-4567</td>
+                                    <td>2개</td>
+                                    <td><span class="status-badge processing">심사 중</span></td>
+                                    <td><span class="student-status active">활성</span></td>
+                                    <td>2024-12-05</td>
+                                    <td>
+                                        <button class="btn-icon" onclick="event.stopPropagation(); editStudent('Nguyen Van A')" title="수정">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn-icon" onclick="event.stopPropagation(); confirmGraduation('Nguyen Van A')" title="유학 확정">
+                                            <i class="fas fa-graduation-cap"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <!-- Pagination -->
                     <div style="display: flex; justify-content: center; align-items: center; margin-top: 30px; gap: 10px;">
                         <button class="btn" style="background: #6b7280; color: white; padding: 8px 12px;">

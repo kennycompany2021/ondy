@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>대학 지원 관리 - ONDY</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
     <style>
         * {
             margin: 0;
@@ -439,75 +440,76 @@
                                 </select>
                             </div>
                         </div>
-
+                        <div class="table-responsive-wrapper">
                         <!-- Programs Table -->
-                        <table class="portal-table">
-                            <thead>
-                                <tr>
-                                    <th>대학명</th>
-                                    <th>전형명</th>
-                                    <th>모집 기간</th>
-                                    <th>지원 자격 요약</th>
-                                    <th>모집 인원</th>
-                                    <th>현재 지원자</th>
-                                    <th>상세 보기</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr onclick="openProgramDetailModal('서울국제대', '2025-1학기 일반전형')" style="cursor: pointer;">
-                                    <td style="font-weight: 500;">서울국제대학교</td>
-                                    <td>2025-1학기 일반전형</td>
-                                    <td>2024-12-01 ~ 2024-12-30</td>
-                                    <td>외국인, TOPIK 3급 이상</td>
-                                    <td>200명</td>
-                                    <td>156명</td>
-                                    <td>
-                                        <button class="btn-small btn-primary" onclick="event.stopPropagation(); openProgramDetailModal('서울국제대', '2025-1학기 일반전형')">
-                                            상세 보기
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr onclick="openProgramDetailModal('부산대학교', '2025-1학기 특별전형')" style="cursor: pointer;">
-                                    <td style="font-weight: 500;">부산대학교</td>
-                                    <td>2025-1학기 특별전형</td>
-                                    <td>2024-11-15 ~ 2024-12-20</td>
-                                    <td>외국인, TOPIK 4급 이상</td>
-                                    <td>30명</td>
-                                    <td>22명</td>
-                                    <td>
-                                        <button class="btn-small btn-primary" onclick="event.stopPropagation(); openProgramDetailModal('부산대학교', '2025-1학기 특별전형')">
-                                            상세 보기
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr onclick="openProgramDetailModal('경기대학교', '2025-1학기 편입전형')" style="cursor: pointer;">
-                                    <td style="font-weight: 500;">경기대학교</td>
-                                    <td>2025-1학기 편입전형</td>
-                                    <td>2024-12-05 ~ 2024-12-25</td>
-                                    <td>전문대 졸업, TOPIK 3급</td>
-                                    <td>25명</td>
-                                    <td>18명</td>
-                                    <td>
-                                        <button class="btn-small btn-primary" onclick="event.stopPropagation(); openProgramDetailModal('경기대학교', '2025-1학기 편입전형')">
-                                            상세 보기
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr onclick="openProgramDetailModal('인천대학교', '2025-1학기 우수자전형')" style="cursor: pointer;">
-                                    <td style="font-weight: 500;">인천대학교</td>
-                                    <td>2025-1학기 우수자전형</td>
-                                    <td>2024-11-20 ~ 2024-12-22</td>
-                                    <td>외국인, TOPIK 5급 이상</td>
-                                    <td>15명</td>
-                                    <td>12명</td>
-                                    <td>
-                                        <button class="btn-small btn-primary" onclick="event.stopPropagation(); openProgramDetailModal('인천대학교', '2025-1학기 우수자전형')">
-                                            상세 보기
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                            <table class="portal-table">
+                                <thead>
+                                    <tr>
+                                        <th>대학명</th>
+                                        <th>전형명</th>
+                                        <th>모집 기간</th>
+                                        <th>지원 자격 요약</th>
+                                        <th>모집 인원</th>
+                                        <th>현재 지원자</th>
+                                        <th>상세 보기</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr onclick="openProgramDetailModal('서울국제대', '2025-1학기 일반전형')" style="cursor: pointer;">
+                                        <td style="font-weight: 500;">서울국제대학교</td>
+                                        <td>2025-1학기 일반전형</td>
+                                        <td>2024-12-01 ~ 2024-12-30</td>
+                                        <td>외국인, TOPIK 3급 이상</td>
+                                        <td>200명</td>
+                                        <td>156명</td>
+                                        <td>
+                                            <button class="btn-small btn-primary" onclick="event.stopPropagation(); openProgramDetailModal('서울국제대', '2025-1학기 일반전형')">
+                                                상세 보기
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr onclick="openProgramDetailModal('부산대학교', '2025-1학기 특별전형')" style="cursor: pointer;">
+                                        <td style="font-weight: 500;">부산대학교</td>
+                                        <td>2025-1학기 특별전형</td>
+                                        <td>2024-11-15 ~ 2024-12-20</td>
+                                        <td>외국인, TOPIK 4급 이상</td>
+                                        <td>30명</td>
+                                        <td>22명</td>
+                                        <td>
+                                            <button class="btn-small btn-primary" onclick="event.stopPropagation(); openProgramDetailModal('부산대학교', '2025-1학기 특별전형')">
+                                                상세 보기
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr onclick="openProgramDetailModal('경기대학교', '2025-1학기 편입전형')" style="cursor: pointer;">
+                                        <td style="font-weight: 500;">경기대학교</td>
+                                        <td>2025-1학기 편입전형</td>
+                                        <td>2024-12-05 ~ 2024-12-25</td>
+                                        <td>전문대 졸업, TOPIK 3급</td>
+                                        <td>25명</td>
+                                        <td>18명</td>
+                                        <td>
+                                            <button class="btn-small btn-primary" onclick="event.stopPropagation(); openProgramDetailModal('경기대학교', '2025-1학기 편입전형')">
+                                                상세 보기
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr onclick="openProgramDetailModal('인천대학교', '2025-1학기 우수자전형')" style="cursor: pointer;">
+                                        <td style="font-weight: 500;">인천대학교</td>
+                                        <td>2025-1학기 우수자전형</td>
+                                        <td>2024-11-20 ~ 2024-12-22</td>
+                                        <td>외국인, TOPIK 5급 이상</td>
+                                        <td>15명</td>
+                                        <td>12명</td>
+                                        <td>
+                                            <button class="btn-small btn-primary" onclick="event.stopPropagation(); openProgramDetailModal('인천대학교', '2025-1학기 우수자전형')">
+                                                상세 보기
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
