@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>장학 관리 - ONDY</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
     <style>
         * {
             margin: 0;
@@ -451,81 +452,82 @@
                 <!-- Scholarship Programs -->
                 <div class="card">
                     <div class="card-header">장학 제도 목록</div>
-                    
-                    <table class="portal-table">
-                        <thead>
-                            <tr>
-                                <th>장학명</th>
-                                <th>장학 유형</th>
-                                <th>지급액</th>
-                                <th>지급 조건</th>
-                                <th>등록일</th>
-                                <th>관리</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style="font-weight: 500;">신입생 우수장학금</td>
-                                <td><span class="type-badge academic">성적우수</span></td>
-                                <td>전액 (4,000,000원)</td>
-                                <td>입학성적 상위 5%</td>
-                                <td>2024-01-15</td>
-                                <td>
-                                    <button class="btn-icon" onclick="editScholarship(1)" title="수정">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn-icon" onclick="deleteScholarship(1)" title="삭제">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight: 500;">성적우수장학금</td>
-                                <td><span class="type-badge academic">성적우수</span></td>
-                                <td>50% (2,000,000원)</td>
-                                <td>직전 학기 GPA 3.5 이상</td>
-                                <td>2024-01-15</td>
-                                <td>
-                                    <button class="btn-icon" onclick="editScholarship(2)" title="수정">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn-icon" onclick="deleteScholarship(2)" title="삭제">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight: 500;">생활비지원장학금</td>
-                                <td><span class="type-badge financial">생활지원</span></td>
-                                <td>월 500,000원</td>
-                                <td>가계소득 하위 30%</td>
-                                <td>2024-01-15</td>
-                                <td>
-                                    <button class="btn-icon" onclick="editScholarship(3)" title="수정">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn-icon" onclick="deleteScholarship(3)" title="삭제">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight: 500;">외국인특별장학금</td>
-                                <td><span class="type-badge special">특별장학</span></td>
-                                <td>30% (1,200,000원)</td>
-                                <td>외국인 재학생 전체</td>
-                                <td>2024-01-15</td>
-                                <td>
-                                    <button class="btn-icon" onclick="editScholarship(4)" title="수정">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn-icon" onclick="deleteScholarship(4)" title="삭제">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive-wrapper">
+                        <table class="portal-table">
+                            <thead>
+                                <tr>
+                                    <th>장학명</th>
+                                    <th>장학 유형</th>
+                                    <th>지급액</th>
+                                    <th>지급 조건</th>
+                                    <th>등록일</th>
+                                    <th>관리</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="font-weight: 500;">신입생 우수장학금</td>
+                                    <td><span class="type-badge academic">성적우수</span></td>
+                                    <td>전액 (4,000,000원)</td>
+                                    <td>입학성적 상위 5%</td>
+                                    <td>2024-01-15</td>
+                                    <td>
+                                        <button class="btn-icon" onclick="editScholarship(1)" title="수정">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn-icon" onclick="deleteScholarship(1)" title="삭제">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 500;">성적우수장학금</td>
+                                    <td><span class="type-badge academic">성적우수</span></td>
+                                    <td>50% (2,000,000원)</td>
+                                    <td>직전 학기 GPA 3.5 이상</td>
+                                    <td>2024-01-15</td>
+                                    <td>
+                                        <button class="btn-icon" onclick="editScholarship(2)" title="수정">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn-icon" onclick="deleteScholarship(2)" title="삭제">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 500;">생활비지원장학금</td>
+                                    <td><span class="type-badge financial">생활지원</span></td>
+                                    <td>월 500,000원</td>
+                                    <td>가계소득 하위 30%</td>
+                                    <td>2024-01-15</td>
+                                    <td>
+                                        <button class="btn-icon" onclick="editScholarship(3)" title="수정">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn-icon" onclick="deleteScholarship(3)" title="삭제">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 500;">외국인특별장학금</td>
+                                    <td><span class="type-badge special">특별장학</span></td>
+                                    <td>30% (1,200,000원)</td>
+                                    <td>외국인 재학생 전체</td>
+                                    <td>2024-01-15</td>
+                                    <td>
+                                        <button class="btn-icon" onclick="editScholarship(4)" title="수정">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn-icon" onclick="deleteScholarship(4)" title="삭제">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <!-- Semester Operations -->
@@ -546,74 +548,75 @@
                             <option value="completed">완료</option>
                         </select>
                     </div>
-                    
-                    <table class="portal-table">
-                        <thead>
-                            <tr>
-                                <th>장학명</th>
-                                <th>운영 학기</th>
-                                <th>선발 인원</th>
-                                <th>신청 기간</th>
-                                <th>현재 상태</th>
-                                <th>선발된 인원</th>
-                                <th>관리</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr onclick="location.href='scholarship-detail.html?id=1'" style="cursor: pointer;">
-                                <td style="font-weight: 500;">신입생 우수장학금</td>
-                                <td>2025-1학기</td>
-                                <td>10명</td>
-                                <td>2024-12-01 ~ 2024-12-20</td>
-                                <td><span class="status-badge recruiting">모집 중</span></td>
-                                <td>0 / 10</td>
-                                <td>
-                                    <button class="btn-icon" onclick="event.stopPropagation(); manageScholarship(1)" title="관리">
-                                        <i class="fas fa-cog"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr onclick="location.href='scholarship-detail.html?id=2'" style="cursor: pointer;">
-                                <td style="font-weight: 500;">성적우수장학금</td>
-                                <td>2025-1학기</td>
-                                <td>20명</td>
-                                <td>2024-11-15 ~ 2024-12-15</td>
-                                <td><span class="status-badge selecting">선발 중</span></td>
-                                <td>15 / 20</td>
-                                <td>
-                                    <button class="btn-icon" onclick="event.stopPropagation(); manageScholarship(2)" title="관리">
-                                        <i class="fas fa-cog"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr onclick="location.href='scholarship-detail.html?id=3'" style="cursor: pointer;">
-                                <td style="font-weight: 500;">생활비지원장학금</td>
-                                <td>2024-2학기</td>
-                                <td>30명</td>
-                                <td>2024-08-01 ~ 2024-08-20</td>
-                                <td><span class="status-badge completed">완료</span></td>
-                                <td>30 / 30</td>
-                                <td>
-                                    <button class="btn-icon" onclick="event.stopPropagation(); viewScholarship(3)" title="보기">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr onclick="location.href='scholarship-detail.html?id=4'" style="cursor: pointer;">
-                                <td style="font-weight: 500;">외국인특별장학금</td>
-                                <td>2024-2학기</td>
-                                <td>50명</td>
-                                <td>2024-08-01 ~ 2024-08-25</td>
-                                <td><span class="status-badge completed">완료</span></td>
-                                <td>43 / 50</td>
-                                <td>
-                                    <button class="btn-icon" onclick="event.stopPropagation(); viewScholarship(4)" title="보기">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive-wrapper">
+                        <table class="portal-table">
+                            <thead>
+                                <tr>
+                                    <th>장학명</th>
+                                    <th>운영 학기</th>
+                                    <th>선발 인원</th>
+                                    <th>신청 기간</th>
+                                    <th>현재 상태</th>
+                                    <th>선발된 인원</th>
+                                    <th>관리</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr onclick="location.href='scholarship-detail.html?id=1'" style="cursor: pointer;">
+                                    <td style="font-weight: 500;">신입생 우수장학금</td>
+                                    <td>2025-1학기</td>
+                                    <td>10명</td>
+                                    <td>2024-12-01 ~ 2024-12-20</td>
+                                    <td><span class="status-badge recruiting">모집 중</span></td>
+                                    <td>0 / 10</td>
+                                    <td>
+                                        <button class="btn-icon" onclick="event.stopPropagation(); manageScholarship(1)" title="관리">
+                                            <i class="fas fa-cog"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr onclick="location.href='scholarship-detail.html?id=2'" style="cursor: pointer;">
+                                    <td style="font-weight: 500;">성적우수장학금</td>
+                                    <td>2025-1학기</td>
+                                    <td>20명</td>
+                                    <td>2024-11-15 ~ 2024-12-15</td>
+                                    <td><span class="status-badge selecting">선발 중</span></td>
+                                    <td>15 / 20</td>
+                                    <td>
+                                        <button class="btn-icon" onclick="event.stopPropagation(); manageScholarship(2)" title="관리">
+                                            <i class="fas fa-cog"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr onclick="location.href='scholarship-detail.html?id=3'" style="cursor: pointer;">
+                                    <td style="font-weight: 500;">생활비지원장학금</td>
+                                    <td>2024-2학기</td>
+                                    <td>30명</td>
+                                    <td>2024-08-01 ~ 2024-08-20</td>
+                                    <td><span class="status-badge completed">완료</span></td>
+                                    <td>30 / 30</td>
+                                    <td>
+                                        <button class="btn-icon" onclick="event.stopPropagation(); viewScholarship(3)" title="보기">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr onclick="location.href='scholarship-detail.html?id=4'" style="cursor: pointer;">
+                                    <td style="font-weight: 500;">외국인특별장학금</td>
+                                    <td>2024-2학기</td>
+                                    <td>50명</td>
+                                    <td>2024-08-01 ~ 2024-08-25</td>
+                                    <td><span class="status-badge completed">완료</span></td>
+                                    <td>43 / 50</td>
+                                    <td>
+                                        <button class="btn-icon" onclick="event.stopPropagation(); viewScholarship(4)" title="보기">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </main>

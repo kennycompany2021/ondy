@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>대학 관계자 대시보드 - ONDY</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         * {
@@ -442,88 +443,92 @@
                     <div>
                         <div class="card">
                             <div class="card-header">신규 지원자 (최근 5명)</div>
-                            <table class="portal-table">
-                                <thead>
-                                    <tr>
-                                        <th>지원자명</th>
-                                        <th>국적</th>
-                                        <th>지원 전형</th>
-                                        <th>지원일</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>김민준</td>
-                                        <td>🇰🇷 한국</td>
-                                        <td>2025-1학기 일반전형</td>
-                                        <td>2024-12-15</td>
-                                    </tr>
-                                    <tr>
-                                        <td>田中太郎</td>
-                                        <td>🇯🇵 일본</td>
-                                        <td>2025-1학기 특별전형</td>
-                                        <td>2024-12-14</td>
-                                    </tr>
-                                    <tr>
-                                        <td>张伟</td>
-                                        <td>🇨🇳 중국</td>
-                                        <td>2025-1학기 일반전형</td>
-                                        <td>2024-12-14</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nguyen Van A</td>
-                                        <td>🇻🇳 베트남</td>
-                                        <td>2025-1학기 우수자전형</td>
-                                        <td>2024-12-13</td>
-                                    </tr>
-                                    <tr>
-                                        <td>สมชาย</td>
-                                        <td>🇹🇭 태국</td>
-                                        <td>2025-1학기 일반전형</td>
-                                        <td>2024-12-13</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="table-responsive-wrapper">
+                                <table class="portal-table">
+                                    <thead>
+                                        <tr>
+                                            <th>지원자명</th>
+                                            <th>국적</th>
+                                            <th>지원 전형</th>
+                                            <th>지원일</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>김민준</td>
+                                            <td>🇰🇷 한국</td>
+                                            <td>2025-1학기 일반전형</td>
+                                            <td>2024-12-15</td>
+                                        </tr>
+                                        <tr>
+                                            <td>田中太郎</td>
+                                            <td>🇯🇵 일본</td>
+                                            <td>2025-1학기 특별전형</td>
+                                            <td>2024-12-14</td>
+                                        </tr>
+                                        <tr>
+                                            <td>张伟</td>
+                                            <td>🇨🇳 중국</td>
+                                            <td>2025-1학기 일반전형</td>
+                                            <td>2024-12-14</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Nguyen Van A</td>
+                                            <td>🇻🇳 베트남</td>
+                                            <td>2025-1학기 우수자전형</td>
+                                            <td>2024-12-13</td>
+                                        </tr>
+                                        <tr>
+                                            <td>สมชาย</td>
+                                            <td>🇹🇭 태국</td>
+                                            <td>2025-1학기 일반전형</td>
+                                            <td>2024-12-13</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
 
                         <div class="card">
                             <div class="card-header">마감 임박 전형 (7일 이내)</div>
-                            <table class="portal-table">
-                                <thead>
-                                    <tr>
-                                        <th>전형명</th>
-                                        <th>마감일</th>
-                                        <th>지원자/정원</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>2025-1학기 특별전형</td>
-                                        <td style="color: #ef4444;">2024-12-20</td>
-                                        <td>15/20</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2025-1학기 우수자전형</td>
-                                        <td style="color: #f59e0b;">2024-12-22</td>
-                                        <td>28/30</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2025-1학기 편입전형</td>
-                                        <td style="color: #f59e0b;">2024-12-25</td>
-                                        <td>8/15</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2025-1학기 외국인전형</td>
-                                        <td>2024-12-28</td>
-                                        <td>42/50</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2025-1학기 일반전형</td>
-                                        <td>2024-12-30</td>
-                                        <td>156/200</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="table-responsive-wrapper">
+                                <table class="portal-table">
+                                    <thead>
+                                        <tr>
+                                            <th>전형명</th>
+                                            <th>마감일</th>
+                                            <th>지원자/정원</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>2025-1학기 특별전형</td>
+                                            <td style="color: #ef4444;">2024-12-20</td>
+                                            <td>15/20</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2025-1학기 우수자전형</td>
+                                            <td style="color: #f59e0b;">2024-12-22</td>
+                                            <td>28/30</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2025-1학기 편입전형</td>
+                                            <td style="color: #f59e0b;">2024-12-25</td>
+                                            <td>8/15</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2025-1학기 외국인전형</td>
+                                            <td>2024-12-28</td>
+                                            <td>42/50</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2025-1학기 일반전형</td>
+                                            <td>2024-12-30</td>
+                                            <td>156/200</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

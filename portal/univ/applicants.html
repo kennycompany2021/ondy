@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>지원자 관리 - ONDY</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
     <style>
         * {
             margin: 0;
@@ -431,132 +432,133 @@
                             </select>
                         </div>
                     </div>
-
-                    <!-- Applicants Table -->
-                    <table class="portal-table">
-                        <thead>
-                            <tr>
-                                <th>지원자명</th>
-                                <th>국적</th>
-                                <th>생년월일</th>
-                                <th>연락처</th>
-                                <th>지원 전형 수</th>
-                                <th>최종 상태</th>
-                                <th>최근 지원일</th>
-                                <th>관리</th>
-                            </tr>
-                        </thead>
-                        <tbody id="applicantsTableBody">
-                            <tr>
-                                <td>
-                                    <a href="#" onclick="openApplicantModal('김민준')" style="color: #3b82f6; text-decoration: none; font-weight: 500;">
-                                        김민준
-                                    </a>
-                                </td>
-                                <td>🇰🇷 한국</td>
-                                <td>1998-03-15</td>
-                                <td>+82-010-1234-5678</td>
-                                <td>3</td>
-                                <td><span class="status-badge applying">지원 중</span></td>
-                                <td>2024-12-15</td>
-                                <td>
-                                    <button class="btn-icon" onclick="openApplicantModal('김민준')" title="상세 보기">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#" onclick="openApplicantModal('田中太郎')" style="color: #3b82f6; text-decoration: none; font-weight: 500;">
-                                        田中太郎
-                                    </a>
-                                </td>
-                                <td>🇯🇵 일본</td>
-                                <td>1999-07-22</td>
-                                <td>+81-080-1234-5678</td>
-                                <td>2</td>
-                                <td><span class="status-badge accepted">합격</span></td>
-                                <td>2024-12-14</td>
-                                <td>
-                                    <button class="btn-icon" onclick="openApplicantModal('田中太郎')" title="상세 보기">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#" onclick="openApplicantModal('张伟')" style="color: #3b82f6; text-decoration: none; font-weight: 500;">
-                                        张伟
-                                    </a>
-                                </td>
-                                <td>🇨🇳 중국</td>
-                                <td>1997-11-08</td>
-                                <td>+86-138-0000-0000</td>
-                                <td>4</td>
-                                <td><span class="status-badge accepted">합격</span></td>
-                                <td>2024-12-14</td>
-                                <td>
-                                    <button class="btn-icon" onclick="openApplicantModal('张伟')" title="상세 보기">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#" onclick="openApplicantModal('Nguyen Van A')" style="color: #3b82f6; text-decoration: none; font-weight: 500;">
-                                        Nguyen Van A
-                                    </a>
-                                </td>
-                                <td>🇻🇳 베트남</td>
-                                <td>1998-05-30</td>
-                                <td>+84-90-123-4567</td>
-                                <td>1</td>
-                                <td><span class="status-badge applying">지원 중</span></td>
-                                <td>2024-12-13</td>
-                                <td>
-                                    <button class="btn-icon" onclick="openApplicantModal('Nguyen Van A')" title="상세 보기">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#" onclick="openApplicantModal('สมชาย')" style="color: #3b82f6; text-decoration: none; font-weight: 500;">
-                                        สมชาย
-                                    </a>
-                                </td>
-                                <td>🇹🇭 태국</td>
-                                <td>1999-02-14</td>
-                                <td>+66-81-123-4567</td>
-                                <td>2</td>
-                                <td><span class="status-badge rejected">불합격</span></td>
-                                <td>2024-12-13</td>
-                                <td>
-                                    <button class="btn-icon" onclick="openApplicantModal('สมชาย')" title="상세 보기">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#" onclick="openApplicantModal('Maria Santos')" style="color: #3b82f6; text-decoration: none; font-weight: 500;">
-                                        Maria Santos
-                                    </a>
-                                </td>
-                                <td>🇵🇭 필리핀</td>
-                                <td>1998-09-12</td>
-                                <td>+63-917-123-4567</td>
-                                <td>1</td>
-                                <td><span class="status-badge applying">지원 중</span></td>
-                                <td>2024-12-12</td>
-                                <td>
-                                    <button class="btn-icon" onclick="openApplicantModal('Maria Santos')" title="상세 보기">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive-wrapper">
+                        <!-- Applicants Table -->
+                        <table class="portal-table">
+                            <thead>
+                                <tr>
+                                    <th>지원자명</th>
+                                    <th>국적</th>
+                                    <th>생년월일</th>
+                                    <th>연락처</th>
+                                    <th>지원 전형 수</th>
+                                    <th>최종 상태</th>
+                                    <th>최근 지원일</th>
+                                    <th>관리</th>
+                                </tr>
+                            </thead>
+                            <tbody id="applicantsTableBody">
+                                <tr>
+                                    <td>
+                                        <a href="#" onclick="openApplicantModal('김민준')" style="color: #3b82f6; text-decoration: none; font-weight: 500;">
+                                            김민준
+                                        </a>
+                                    </td>
+                                    <td>🇰🇷 한국</td>
+                                    <td>1998-03-15</td>
+                                    <td>+82-010-1234-5678</td>
+                                    <td>3</td>
+                                    <td><span class="status-badge applying">지원 중</span></td>
+                                    <td>2024-12-15</td>
+                                    <td>
+                                        <button class="btn-icon" onclick="openApplicantModal('김민준')" title="상세 보기">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#" onclick="openApplicantModal('田中太郎')" style="color: #3b82f6; text-decoration: none; font-weight: 500;">
+                                            田中太郎
+                                        </a>
+                                    </td>
+                                    <td>🇯🇵 일본</td>
+                                    <td>1999-07-22</td>
+                                    <td>+81-080-1234-5678</td>
+                                    <td>2</td>
+                                    <td><span class="status-badge accepted">합격</span></td>
+                                    <td>2024-12-14</td>
+                                    <td>
+                                        <button class="btn-icon" onclick="openApplicantModal('田中太郎')" title="상세 보기">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#" onclick="openApplicantModal('张伟')" style="color: #3b82f6; text-decoration: none; font-weight: 500;">
+                                            张伟
+                                        </a>
+                                    </td>
+                                    <td>🇨🇳 중국</td>
+                                    <td>1997-11-08</td>
+                                    <td>+86-138-0000-0000</td>
+                                    <td>4</td>
+                                    <td><span class="status-badge accepted">합격</span></td>
+                                    <td>2024-12-14</td>
+                                    <td>
+                                        <button class="btn-icon" onclick="openApplicantModal('张伟')" title="상세 보기">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#" onclick="openApplicantModal('Nguyen Van A')" style="color: #3b82f6; text-decoration: none; font-weight: 500;">
+                                            Nguyen Van A
+                                        </a>
+                                    </td>
+                                    <td>🇻🇳 베트남</td>
+                                    <td>1998-05-30</td>
+                                    <td>+84-90-123-4567</td>
+                                    <td>1</td>
+                                    <td><span class="status-badge applying">지원 중</span></td>
+                                    <td>2024-12-13</td>
+                                    <td>
+                                        <button class="btn-icon" onclick="openApplicantModal('Nguyen Van A')" title="상세 보기">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#" onclick="openApplicantModal('สมชาย')" style="color: #3b82f6; text-decoration: none; font-weight: 500;">
+                                            สมชาย
+                                        </a>
+                                    </td>
+                                    <td>🇹🇭 태국</td>
+                                    <td>1999-02-14</td>
+                                    <td>+66-81-123-4567</td>
+                                    <td>2</td>
+                                    <td><span class="status-badge rejected">불합격</span></td>
+                                    <td>2024-12-13</td>
+                                    <td>
+                                        <button class="btn-icon" onclick="openApplicantModal('สมชาย')" title="상세 보기">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#" onclick="openApplicantModal('Maria Santos')" style="color: #3b82f6; text-decoration: none; font-weight: 500;">
+                                            Maria Santos
+                                        </a>
+                                    </td>
+                                    <td>🇵🇭 필리핀</td>
+                                    <td>1998-09-12</td>
+                                    <td>+63-917-123-4567</td>
+                                    <td>1</td>
+                                    <td><span class="status-badge applying">지원 중</span></td>
+                                    <td>2024-12-12</td>
+                                    <td>
+                                        <button class="btn-icon" onclick="openApplicantModal('Maria Santos')" title="상세 보기">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
                     <!-- Pagination -->
                     <div style="display: flex; justify-content: center; align-items: center; margin-top: 30px; gap: 10px;">

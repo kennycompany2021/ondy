@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>전형 상세 - ONDY</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
     <style>
         * {
             margin: 0;
@@ -509,94 +510,95 @@
                             </button>
                         </div>
                     </div>
-
-                    <table class="portal-table">
-                        <thead>
-                            <tr>
-                                <th style="width: 40px;">
-                                    <input type="checkbox" id="selectAll">
-                                </th>
-                                <th>수험번호</th>
-                                <th>지원자명</th>
-                                <th>국적</th>
-                                <th>지원 유학원</th>
-                                <th>현재 단계</th>
-                                <th>합격 여부</th>
-                                <th>지원일</th>
-                                <th>관리</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><input type="checkbox" class="applicant-checkbox"></td>
-                                <td>2025010001</td>
-                                <td><a href="#" onclick="openApplicantModal('김민준')" style="color: #3b82f6; text-decoration: none;">김민준</a></td>
-                                <td>🇰🇷 한국</td>
-                                <td>글로벌유학원</td>
-                                <td><span class="step-badge step1">서류 심사</span></td>
-                                <td>심사중</td>
-                                <td>2024-12-15</td>
-                                <td>
-                                    <button class="btn" style="background: #10b981; color: white; padding: 5px 10px; font-size: 0.8rem;">합격</button>
-                                    <button class="btn" style="background: #ef4444; color: white; padding: 5px 10px; font-size: 0.8rem;">불합격</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" class="applicant-checkbox"></td>
-                                <td>2025010002</td>
-                                <td><a href="#" onclick="openApplicantModal('田中太郎')" style="color: #3b82f6; text-decoration: none;">田中太郎</a></td>
-                                <td>🇯🇵 일본</td>
-                                <td>아시아유학원</td>
-                                <td><span class="step-badge step2">1차 면접</span></td>
-                                <td>서류 합격</td>
-                                <td>2024-12-14</td>
-                                <td>
-                                    <button class="btn" style="background: #10b981; color: white; padding: 5px 10px; font-size: 0.8rem;">합격</button>
-                                    <button class="btn" style="background: #ef4444; color: white; padding: 5px 10px; font-size: 0.8rem;">불합격</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" class="applicant-checkbox"></td>
-                                <td>2025010003</td>
-                                <td><a href="#" onclick="openApplicantModal('张伟')" style="color: #3b82f6; text-decoration: none;">张伟</a></td>
-                                <td>🇨🇳 중국</td>
-                                <td>코리아유학원</td>
-                                <td><span class="step-badge step3">최종 합격</span></td>
-                                <td>최종 합격</td>
-                                <td>2024-12-14</td>
-                                <td>
-                                    <span style="color: #10b981; font-weight: 600;">합격 완료</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" class="applicant-checkbox"></td>
-                                <td>2025010004</td>
-                                <td><a href="#" onclick="openApplicantModal('Nguyen Van A')" style="color: #3b82f6; text-decoration: none;">Nguyen Van A</a></td>
-                                <td>🇻🇳 베트남</td>
-                                <td>베트남유학원</td>
-                                <td><span class="step-badge step1">서류 심사</span></td>
-                                <td>심사중</td>
-                                <td>2024-12-13</td>
-                                <td>
-                                    <button class="btn" style="background: #10b981; color: white; padding: 5px 10px; font-size: 0.8rem;">합격</button>
-                                    <button class="btn" style="background: #ef4444; color: white; padding: 5px 10px; font-size: 0.8rem;">불합격</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" class="applicant-checkbox"></td>
-                                <td>2025010005</td>
-                                <td><a href="#" onclick="openApplicantModal('สมชาย')" style="color: #3b82f6; text-decoration: none;">สมชาย</a></td>
-                                <td>🇹🇭 태국</td>
-                                <td>태국유학원</td>
-                                <td><span class="step-badge rejected">불합격</span></td>
-                                <td>불합격</td>
-                                <td>2024-12-13</td>
-                                <td>
-                                    <span style="color: #ef4444; font-weight: 600;">불합격</span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive-wrapper">
+                        <table class="portal-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 40px;">
+                                        <input type="checkbox" id="selectAll">
+                                    </th>
+                                    <th>수험번호</th>
+                                    <th>지원자명</th>
+                                    <th>국적</th>
+                                    <th>지원 유학원</th>
+                                    <th>현재 단계</th>
+                                    <th>합격 여부</th>
+                                    <th>지원일</th>
+                                    <th>관리</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="checkbox" class="applicant-checkbox"></td>
+                                    <td>2025010001</td>
+                                    <td><a href="#" onclick="openApplicantModal('김민준')" style="color: #3b82f6; text-decoration: none;">김민준</a></td>
+                                    <td>🇰🇷 한국</td>
+                                    <td>글로벌유학원</td>
+                                    <td><span class="step-badge step1">서류 심사</span></td>
+                                    <td>심사중</td>
+                                    <td>2024-12-15</td>
+                                    <td>
+                                        <button class="btn" style="background: #10b981; color: white; padding: 5px 10px; font-size: 0.8rem;">합격</button>
+                                        <button class="btn" style="background: #ef4444; color: white; padding: 5px 10px; font-size: 0.8rem;">불합격</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="applicant-checkbox"></td>
+                                    <td>2025010002</td>
+                                    <td><a href="#" onclick="openApplicantModal('田中太郎')" style="color: #3b82f6; text-decoration: none;">田中太郎</a></td>
+                                    <td>🇯🇵 일본</td>
+                                    <td>아시아유학원</td>
+                                    <td><span class="step-badge step2">1차 면접</span></td>
+                                    <td>서류 합격</td>
+                                    <td>2024-12-14</td>
+                                    <td>
+                                        <button class="btn" style="background: #10b981; color: white; padding: 5px 10px; font-size: 0.8rem;">합격</button>
+                                        <button class="btn" style="background: #ef4444; color: white; padding: 5px 10px; font-size: 0.8rem;">불합격</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="applicant-checkbox"></td>
+                                    <td>2025010003</td>
+                                    <td><a href="#" onclick="openApplicantModal('张伟')" style="color: #3b82f6; text-decoration: none;">张伟</a></td>
+                                    <td>🇨🇳 중국</td>
+                                    <td>코리아유학원</td>
+                                    <td><span class="step-badge step3">최종 합격</span></td>
+                                    <td>최종 합격</td>
+                                    <td>2024-12-14</td>
+                                    <td>
+                                        <span style="color: #10b981; font-weight: 600;">합격 완료</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="applicant-checkbox"></td>
+                                    <td>2025010004</td>
+                                    <td><a href="#" onclick="openApplicantModal('Nguyen Van A')" style="color: #3b82f6; text-decoration: none;">Nguyen Van A</a></td>
+                                    <td>🇻🇳 베트남</td>
+                                    <td>베트남유학원</td>
+                                    <td><span class="step-badge step1">서류 심사</span></td>
+                                    <td>심사중</td>
+                                    <td>2024-12-13</td>
+                                    <td>
+                                        <button class="btn" style="background: #10b981; color: white; padding: 5px 10px; font-size: 0.8rem;">합격</button>
+                                        <button class="btn" style="background: #ef4444; color: white; padding: 5px 10px; font-size: 0.8rem;">불합격</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="applicant-checkbox"></td>
+                                    <td>2025010005</td>
+                                    <td><a href="#" onclick="openApplicantModal('สมชาย')" style="color: #3b82f6; text-decoration: none;">สมชาย</a></td>
+                                    <td>🇹🇭 태국</td>
+                                    <td>태국유학원</td>
+                                    <td><span class="step-badge rejected">불합격</span></td>
+                                    <td>불합격</td>
+                                    <td>2024-12-13</td>
+                                    <td>
+                                        <span style="color: #ef4444; font-weight: 600;">불합격</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </main>
