@@ -34,7 +34,7 @@
 
         /* 개선된 로고 스타일 */
         .logo {
-            padding: 24px 20px;
+            padding: 22px 20px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
             background: rgba(255,255,255,0.05);
         }
@@ -141,16 +141,23 @@
             flex: 1;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
         }
 
+        /* Header 높이 및 정렬 수정 */
         .portal-header {
             background: white;
-            padding: 16px 24px;
             border-bottom: 1px solid #e5e7eb;
             display: flex;
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            /* 로고 영역 높이와 통일 (padding 24*2 + 아이콘 40px + border 1px) */
+            height: 89px; 
+            padding: 0 24px;
+            position: sticky;
+            top: 0;
+            z-index: 900;
         }
 
         .menu-toggle {
@@ -164,18 +171,47 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: background-color 0.2s ease;
+        }
+
+        .user-profile:hover {
+            background-color: #f8fafc;
         }
 
         .user-profile img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 2px solid #e5e7eb;
+            display: none; /* 기존 img 태그 숨김 */
         }
 
         .user-profile span {
             font-weight: 500;
             color: #374151;
+        }
+
+        .user-profile .fa-chevron-down {
+            font-size: 12px;
+            color: #6b7280;
+            transition: transform 0.2s ease;
+        }
+
+        .user-profile:hover .fa-chevron-down {
+            transform: translateY(2px);
+        }
+        
+        /* 새로운 사용자 아바타 스타일 */
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #667eea; /* 사이드바와 유사한 색상 */
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
         }
 
         .portal-content {
@@ -348,8 +384,11 @@
                     <i class="fas fa-bars"></i>
                 </div>
                 <div class="user-profile">
-                    <img src="https://via.placeholder.com/40" alt="User Profile">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
                     <span>대학 관계자님</span>
+                    <i class="fas fa-chevron-down"></i>
                 </div>
             </header>
 
