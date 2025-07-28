@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>계정 설정 - ONDY</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+            color: #374151;
+        }
+
+        .portal-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .portal-sidebar {
+            width: 280px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+
+        /* 로고 스타일 */
+        .logo {
+            padding: 22px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .logo-link:hover {
+            transform: translateY(-1px);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 12px;
+            color: #fbbf24;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+            flex-shrink: 0;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .logo-text .brand-name {
+            display: block;
+            color: white;
+        }
+
+        .logo-text .brand-subtitle {
+            display: block;
+            font-size: 12px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.8);
+            margin-top: 2px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* 네비게이션 메뉴 스타일 */
+        .nav-menu {
+            list-style: none;
+            padding: 20px 0;
+        }
+
+        .nav-category {
+            padding: 12px 20px 8px 20px;
+            font-size: 11px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 20px;
+        }
+
+        .nav-category:first-child {
+            margin-top: 0;
+        }
+
+        .nav-item {
+            margin: 2px 12px;
+        }
+
+        .nav-item a {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .nav-item a:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            transform: translateX(4px);
+        }
+
+        .nav-item.active a {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .nav-item a i {
+            margin-right: 12px;
+            width: 16px;
+            text-align: center;
+            opacity: 0.8;
+        }
+
+        /* 메인 콘텐츠 */
+        .portal-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .portal-header {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            height: 89px; 
+            padding: 0 24px;
+            position: sticky;
+            top: 0;
+            z-index: 900;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #6b7280;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: background-color 0.2s ease;
+        }
+
+        .user-profile:hover {
+            background-color: #f8fafc;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #667eea;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .user-profile span {
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .user-profile .fa-chevron-down {
+            font-size: 12px;
+            color: #6b7280;
+            transition: transform 0.2s ease;
+        }
+
+        .user-profile:hover .fa-chevron-down {
+            transform: translateY(2px);
+        }
+
+        .portal-content {
+            flex: 1;
+            padding: 24px;
+        }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 24px;
+        }
+
+        .card {
+            background: white;
+            padding: 32px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid #e5e7eb;
+            max-width: 900px; /* 콘텐츠 최대 너비 설정 */
+            margin: 0 auto;
+        }
+        
+        .form-section {
+            padding-bottom: 24px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .form-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .form-section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #1f2937;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+        }
+        
+        .btn-secondary {
+            background: #e5e7eb;
+            color: #374151;
+        }
+        
+        .btn-secondary:hover {
+            background: #d1d5db;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .form-control[readonly] {
+            background-color: #f3f4f6;
+            cursor: not-allowed;
+        }
+        
+        .profile-pic-group {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .profile-pic-preview {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .profile-pic-preview .fas {
+            font-size: 32px;
+            color: #9ca3af;
+        }
+        
+        .profile-pic-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .notification-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .notification-group input {
+            margin-right: 12px;
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .portal-sidebar {
+                width: 280px;
+                position: fixed;
+                left: -280px;
+                z-index: 1000;
+                height: 100vh;
+            }
+
+            .portal-sidebar.active {
+                left: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .portal-main {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .portal-content {
+                padding: 16px;
+            }
+            .card {
+                padding: 20px;
+            }
+            .profile-pic-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body class="portal-body">
+    <div class="portal-container">
+        <aside class="portal-sidebar">
+            <div class="logo">
+                <a href="index.html" class="logo-link">
+                     <svg class="logo-icon" viewBox="0 0 167 278" xmlns="http://www.w3.org/2000/svg">
+                        <defs><filter id="thicken-filter"><feMorphology operator="dilate" radius="3.5" in="SourceGraphic" /></filter></defs>
+                        <g filter="url(#thicken-filter)">
+                            <path d="M59.8281 4.37158C82.6884 -0.945278 105.066 0.39571 125.883 11.8247C150.893 25.5561 162.68 48.1289 165.386 75.4839C167.702 98.8976 161.867 120.129 144.564 137.359C137.114 144.778 132.705 153.435 134.067 164.707C134.953 172.034 134.387 179.585 133.983 187.083C133.455 196.892 126.208 204.769 116.848 206.471C115.11 206.787 113.9 206.75 113.171 206.274C112.503 205.838 112.066 204.898 112.259 202.869C112.38 201.591 112.317 200.292 112.279 199.051C112.241 197.796 112.227 196.591 112.425 195.43C112.54 194.752 112.883 194.083 113.336 193.374C113.562 193.02 113.805 192.67 114.054 192.306C114.3 191.946 114.549 191.575 114.772 191.197C115.093 190.655 115.478 190.113 115.888 189.557C116.292 189.008 116.727 188.438 117.12 187.872C117.903 186.745 118.605 185.521 118.699 184.208C119.234 176.741 119.516 169.146 118.859 161.672C117.983 151.7 121.252 143.275 126.856 135.378C128.677 132.813 130.649 130.324 132.818 128.067C151.289 108.853 154.621 86.1965 147.216 61.7251C142.636 46.5893 134.38 35.0605 123.091 27.4614C111.804 19.8645 97.5228 16.2203 80.9277 16.7827C60.02 17.4913 41.5696 23.8963 29.0303 41.4917C12.9299 64.0841 11.4907 88.4694 22.8389 113.501C24.7528 117.723 27.8545 121.617 31.1191 124.913C42.9579 136.862 49.8253 150.341 47.5469 167.592C46.8475 172.887 47.3024 178.363 47.5479 183.654C47.5926 184.619 47.7511 185.869 48.0576 186.958C48.2107 187.501 48.4054 188.023 48.6533 188.455C48.8968 188.878 49.2228 189.268 49.6621 189.464C51.5373 190.302 52.7086 191.313 53.4395 192.417C54.1715 193.524 54.4887 194.763 54.5879 196.102C54.6877 197.449 54.5655 198.867 54.4385 200.33C54.3286 201.595 54.2152 202.896 54.2607 204.158L54.29 204.697C54.2916 204.72 54.2844 204.801 54.166 204.961C54.0499 205.118 53.8653 205.298 53.6191 205.499C53.168 205.866 52.6068 206.23 52.0508 206.612C45.2444 205.25 40.4711 202.934 37.3428 199.373C34.1865 195.779 32.6407 190.847 32.4609 184.148C32.2728 177.135 31.8774 170.121 32.5771 163.236C33.5757 153.411 30.1862 145.242 23.4111 138.902C6.82299 123.38 1.28421 103.851 0.541992 81.9966C-0.674644 46.1712 24.6771 12.5471 59.8281 4.37158Z" fill="#F0A43E"/>
+                            <path d="M124.176 265.426L123.426 267.676L122.676 269.926L87.2454 250.354C84.4301 248.119 82.4507 248 79.4929 250.261C41.7484 277.767 90.4982 242.178 79.4929 250.261C78.2107 251.203 43.8994 276.371 41.7484 277.767C41.7484 256.565 41.7484 236.309 41.7484 215.033C43.9453 216.501 45.4291 217.412 46.8276 218.439C57.832 226.523 68.8819 234.548 79.768 242.788C82.3468 244.741 84.1661 244.809 86.7475 242.856C96.9698 235.122 107.338 227.58 117.66 219.978C119.643 218.517 121.663 217.107 124.608 215C124.608 236.211 124.608 256.412 124.608 277.999C115.99 271.57 124.608 277.999 87.2454 250.354L110.863 263.427L116.957 265.523L123.051 267.618C123.051 267.618 120.866 255.77 120.608 249.499C120.565 248.451 120.167 245.918 120.167 245.918L119.63 243.246L119.092 240.573L120.741 238.485L122.389 236.397L118.736 233.507L103.608 241.999L116.108 225.499L111.608 233.926L109.176 237.426L113.176 233.926L116.176 234.426L117.426 235.176L118.051 235.551L118.676 235.926L118.176 237.426L116.176 237.926L111.608 229.999L123.108 232.999L124.108 231.499L123.608 235.551L124.176 265.426Z" fill="#EEA33F"/>
+                        </g>
+                    </svg>
+                    <div class="logo-text">
+                        <span class="brand-name">ONDY</span>
+                        <span class="brand-subtitle">Global</span>
+                    </div>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-category">메인</li>
+                <li class="nav-item"><a href="index.html"><i class="fas fa-tachometer-alt"></i>대시보드</a></li>
+                <li class="nav-item"><a href="university-info.html"><i class="fas fa-building"></i>대학 정보 관리</a></li>
+                <li class="nav-category">입학 관리</li>
+                <li class="nav-item"><a href="programs.html"><i class="fas fa-graduation-cap"></i>전형 관리</a></li>
+                <li class="nav-item"><a href="applicants.html"><i class="fas fa-users"></i>지원자 관리</a></li>
+                <li class="nav-item"><a href="scholarships.html"><i class="fas fa-award"></i>장학 관리</a></li>
+                <li class="nav-category">계정</li>
+                <li class="nav-item active"><a href="account-settings.html"><i class="fas fa-cog"></i>계정 설정</a></li>
+                <li class="nav-item"><a href="../login.html"><i class="fas fa-sign-out-alt"></i>로그아웃</a></li>
+            </ul>
+        </aside>
+        
+        <main class="portal-main">
+            <header class="portal-header">
+                <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+                <div class="user-profile">
+                    <div class="user-avatar"><i class="fas fa-user"></i></div>
+                    <span>대학 관계자님</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </header>
+
+            <div class="portal-content">
+                <h1 class="page-title">계정 설정</h1>
+
+                <div class="card">
+                    <form id="accountForm">
+                        <div class="form-section">
+                            <h2 class="form-section-title">프로필 정보</h2>
+                            <div class="form-group profile-pic-group">
+                                <div class="profile-pic-preview">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div>
+                                    <label for="profilePicUpload">프로필 사진 변경</label>
+                                    <input type="file" id="profilePicUpload" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="accountName">이름</label>
+                                <input type="text" id="accountName" class="form-control" value="대학 관계자">
+                            </div>
+                            <div class="form-group">
+                                <label for="accountEmail">이메일 주소</label>
+                                <input type="email" id="accountEmail" class="form-control" value="university@ondy.com" readonly>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h2 class="form-section-title">비밀번호 변경</h2>
+                            <div class="form-group">
+                                <label for="currentPassword">현재 비밀번호</label>
+                                <input type="password" id="currentPassword" class="form-control" placeholder="현재 비밀번호를 입력하세요">
+                            </div>
+                            <div class="form-group">
+                                <label for="newPassword">새 비밀번호</label>
+                                <input type="password" id="newPassword" class="form-control" placeholder="새 비밀번호 (8자 이상)">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword">새 비밀번호 확인</label>
+                                <input type="password" id="confirmPassword" class="form-control" placeholder="새 비밀번호를 다시 입력하세요">
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                             <h2 class="form-section-title">알림 설정</h2>
+                             <div class="notification-group">
+                                <input type="checkbox" id="emailNotifications" checked>
+                                <label for="emailNotifications">새 지원자 발생 시 이메일 알림</label>
+                             </div>
+                             <div class="notification-group">
+                                <input type="checkbox" id="platformNotifications" checked>
+                                <label for="platformNotifications">플랫폼 내 주요 활동 알림</label>
+                             </div>
+                             <div class="notification-group">
+                                <input type="checkbox" id="newsletter">
+                                <label for="newsletter">ONDY 소식 및 업데이트 뉴스레터 구독</label>
+                             </div>
+                        </div>
+                        
+                        <div style="text-align: right; margin-top: 20px;">
+                            <button type="button" class="btn btn-secondary" style="margin-right: 10px;">취소</button>
+                            <button type="submit" class="btn btn-primary">변경사항 저장</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.portal-sidebar').classList.toggle('active');
+        });
+
+        // Account form submission
+        document.getElementById('accountForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // In a real application, you would send the data to a server here.
+            alert('계정 정보가 성공적으로 저장되었습니다.');
+        });
+    </script>
+</body>
+</html>
